@@ -1,0 +1,715 @@
+\chapter{Endliche Körper und Codierungstheorie}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Restklassenarithmetik
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Restklassenarithmetik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{...}
+
+\begin{center}
+   ... Vorlesung vom 21.02.2002 (fehlt)
+\end{center} \pagebreak
+
+\begin{eqnarray*}
+    252 &=& 1 \cdot 138 + 54 \\
+    158 &=& 3 \cdot 53 + 36 \\
+    54 &=& 1 \cdot 36 + 18 \\
+    36 &=& 2 \cdot 18 + 0
+\end{eqnarray*}
+
+Die Umkehrung des Euklidischen Algorithmus  liefert eine Darstellung des $\text{ggT}(a, b)$ als Linearkombination aus $a$ und $b$ mit ganzzahligen Koeffizienten.
+
+\begin{eqnarray*}
+    18 &=& 54 - 1 \cdot 36 \platz (36 = 198 - 3 \cdot 54) \\
+       &=& 54 - (198 - 3 \cdot 54) \\
+       &=& 4 \cdot 54 - 198 \platz (54 = 252 - 198) \\
+       &=& 4 \cdot (252 - 198) - 198 \\
+       &=& 4 \cdot 252 - 5 \cdot 198
+\end{eqnarray*}
+
+\paragraph{Satz:} Sind $a, b \in \ganz^+$, dann existieren $r, s \in \ganz$, so dass $\text{ggT}(a, b) = r \cdot a + s \cdot b$.
+
+\paragraph{Satz:} Seien $m$ und $a$ zwei positive, teilerfremnde Zahlen, dasnn gibt es genau ein $b \in \{ 1, 2, \ldots m-1 \}$, so dass $a \cdot b \equiv 1 (\text{mod} m)$.
+
+\paragraph{Beweis:} $\text{ggT}(a, m) = 1 = r \cdot a + s \cdot m$ für geeignete $r, s \in \ganz$. Setzen $b := r \mod m \in \{ \not 0, 1, \ldots m-1 \}$.
+\begin{itemize}
+    \item $b \equiv r (\text{mod} m)$
+    \item $a \equiv a (\text{mod} m)$
+    \item $0 \equiv s \cdot m (\text{mod} m)$
+    \item %\hline
+    \item $a \cdot b \equiv r \cdot a (\text{mod} m)$
+    \item $a \cdot b + 0 \equiv r \cdot a + s \cdot m (\text{mod} m) \equiv 1 (\text{mod} m)$
+\end{itemize}
+Eindeutigkeit: Angenommen $a \cdot b \equiv a \cdot c \equiv 1 (\text{mod} m)$ und $0 < c \leq b \leq m - 1$
+$$ a \cdot (b-c) \equiv \underbrace{1-1}_{=0} (\text{mod} m) $$
+$a \cdot (b-c)$ ist durch $m$ teilbar $\Rightarrow$ $(b-c)$ is durch $m$ teilbar und $0 \leq b-c < m-1$ $\Rightarrow$ $b-c = 0$ $\Rightarrow$ $b=c$ $\Rightarrow$ Eindeutigkeit
+
+\paragraph{Folgerung:} Ist $p$ eine Primzahl und $a \in \{ 1, 2, \ldots p-1 \}$, dann gibt es ein eindeutiges $b \in \{ 1, 2, \ldots p-1 \}$, so dass $a \cdot b \equiv 1 (\text{mod} p)$. $b$ wird die zu $a$ inverse Zahl bezüglich $p$ genannt.
+
+\paragraph{Folgerung:} Die Zahlen $\{ 0, 1, \ldots p-1 \}$, wobei $p$ Primzahl, bilden mit der Addition und Multiplikation modulo $p$ einen Körper. Dieser Körper wird mit $\ganz_p$ oder mit $\text{GF}(p)$ bezeichnet.
+
+\paragraph{Beispiel:} $\ganz_7 = \{ 0, 1, 2, 3, 4, 5, 6 \}$:
+\begin{eqnarray*}
+    4 + 5 &=& 2 \\
+    4 \cdot 4 &=& 2 \\ \\
+    1 \cdot 1 &=& 1 \\
+    6 \cdot 6 &=& 1 \\
+    2 \cdot 8 &=& 1 \\
+    3 \cdot 5 &=& 1 \\ \\
+    3 \cdot x &=& 4 \platz | \cdot 3^{-1} \\
+    \underbrace{5 \cdot 3}_{=1} \cdot x &=& 5 \cdot 4 = 6
+\end{eqnarray*}
+
+\paragraph{Beispiel:} Löse $7 \cdot x = 5$ in $\ganz_{17}$. \par
+Inverses zu $7 \mod 17$:
+\begin{eqnarray*}
+    17 &=& 2 \cdot 7 + 3 \\
+    3 &=& 17 - 2 \cdot 7 \\
+    7 &=& 2 \cdot 3 + 1 \\
+    1 &=& 7 - 2 \cdot 3 = 7 - 2 \cdot (17 - 2 \cdot 7) = \textbf{5} \cdot 7 - 2 \cdot 17 \\
+    7^{-1} &=& (5 \mod 17) = 5 \\ \\
+    7 \cdot x &=& 5 \platz | \cdot 5 \\
+    1 \cdot x &=& 5 \cdot 5 = 8
+\end{eqnarray*}
+
+\paragraph{Chinesischer Restklassensatz:} Seien $m_1, m_2, \ldots m_n \in \ganz^+$ paarweise teilerfremd und $m = m_1 \cdot m_2 \cdot m_n$, dann gibt es für beliebige $a_1, a_2, \ldots a_n \in \ganz$ eine Zahl $x \in \{ 0, 1, \ldots m-1 \}$, so dass die folgenden Komvergenzen erfüllt sind:
+\begin{eqnarray*}
+    x &\equiv& a_1 (\text{mod} m_1) \\
+    x &\equiv& a_2 (\text{mod} m_2) \\
+      &\vdots& \\
+    x &\equiv& a_n (\text{mod} m_n)
+\end{eqnarray*}
+
+\paragraph{Beispiel:} $m_1 = 99$, $m_2 = 100$, $m_3 = 101$, $a_1 = 80$, $a_2 = 63$, $a_3 = 27$
+
+\paragraph{Beweis:}
+\begin{enumerate}
+    \item Finde Zahlen, die $\equiv 1 (\text{mod} m_i)$ und $\equiv 0 (\text{mod} m_j)$ mit $j \neq i$ sind
+    \begin{eqnarray*}
+        M_1 &=& \frac{m}{m_1} = m_2 \cdot m_3 \cdot \ldots \cdot m_n \\
+        M_2 &=& \frac{m}{m_2} = \ldots \\
+            &\vdots& \\
+        M_n &=& \frac{m}{m_n} = \ldots \\
+        \text{ggT}(m_k, M_k) = 1 \platz \text{d.h. } \exists y_k \equiv 1 (\text{mod} m_k)
+    \end{eqnarray*}
+    $$ M_k \cdot y_k \equiv 1 \modulo{m_k} $$
+    Das sind diese Zahlen, denn $M_k \cdot y_k$ is duch jedes $m_l$ ($l \neq k$) teilbar, d.h. $M_k \cdot y_k \equiv 0 (\text{mod} m_l)$. \par
+    Setze
+    $$ x = (a_1 \cdot y_1 \cdot M_1 + \ldots + a_n \cdot y_n \cdot M_n) \mod m $$
+    Prüfe, dass alle Kongruenzen erfüllt sind.
+
+\end{enumerate}
+
+\paragraph{Kleiner Satz von Fermat:} Ist $p$ eine Primzahl, dann gilt für jede nicht durch $p$ teilbare Zahl $a \in \ganz$:
+$$ a^{p-1} \equiv 1 \modulo{p} $$
+
+\paragraph{Beispiele:}
+\begin{itemize}
+    \item Wähle $p = 7$ und $a = 2$:
+    \begin{eqnarray*}
+        a^6 &=& 64 \\
+        64 &\equiv& 1 \modulo{7}
+    \end{eqnarray*}
+    \item Wähle $p = 7$ und $a = 3$:
+    \begin{eqnarray*}
+        a^6 &=& 729 \\
+        729 &\equiv& 1 \modulo{7}
+    \end{eqnarray*}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{RSA-Kryptosysteme}
+Teilnehmen (party) verschicken Nachrichten $m \in \{ 0, 1 \}^n$:
+\begin{center} \begin{tabular}{ccc}
+Alice & & Bob \\
+$m$ & & $D(E(m)) = m$ \\
+$\downarrow$ & & $\downarrow$ \\
+$E(m) \in \{ 0,1 \}^{l(n)}$ & $\rightsquigarrow$ & $E(m)$ \\
+& $\downarrow$ & \\
+Gegener (adversary) Eve & $E(m)$ & \\
+& $\downarrow$ & ? \\
+& $m$ &
+\end{tabular} \end{center}
+
+Rivers, Shamir, Adlerman 78
+\begin{itemize}
+    \item $p$, $q$ zwei große Primzahlen
+    \item $n = p \cdot q$
+    \item $e \in \ganz$: $\text{ggT}(e, (p-1)(q-1)) = 1$
+    \item $d \in \ganz$: $d \cdot e \equiv 1 \modulo{(p-1)(q-1)}$
+\end{itemize}
+
+\begin{enumerate}
+    \item Bob gibt $n, e$ bekannt ($p, q, d$ geheim)
+    \item Alice verschlüsselt Nachricht $m$ ($|m| < \log n$):
+    $$ m' = E(m) := m^e \mod n $$
+    \item Bob entschlüsselt $m'$:
+    $$ D(m') := m'^d \mod n $$
+\end{enumerate}
+Behauptung:
+$$ D(E(m)) = m $$
+
+\paragraph{Beweis:}
+$$ d \cdot e = 1 + k \cdot (p-1)(q-1) $$
+Zu zeigen:
+$$ (m^e)^d = m^{1 + k(p-1)(q-1)} \equiv m \modulo{n} $$
+genügt zu zeigen (Chinesicher Restsatz):
+\begin{eqnarray*}
+    (m^e)^d &\equiv& m \modulo{p} \\
+    \text{und} \platz (m^e)^d &\equiv& m \modulo{q}
+\end{eqnarray*}
+\begin{enumerate}
+    \item Fall 1:
+    \begin{eqnarray*}
+        m &\equiv& 0 \modulo{p}
+    \end{eqnarray*}
+    (trivial)
+    \item Fall 2:
+    \begin{eqnarray*}
+        (m^e)^d &\equiv& m \cdot (m^{p-1})^{(q-1) \cdot k} \\
+                &\equiv& m \cdot 1^{(p-1) \cdot k} \modulo{p} \\ \\
+        (m^d)^d &\equiv& m \modulo{p}
+    \end{eqnarray*}
+\end{enumerate}
+
+Authetisierung mit RSA:
+\begin{itemize}
+    \item 2'): Alice schickt Zufallsstring $m$
+    \item 3'): Bob schickt $m' = D(m)$ zurück
+    \item 4'): Alice überprüft $E(m') = m$ ?
+\end{itemize}
+
+Vorteile:
+\begin{itemize}
+    \item Parameter leicht zu erzeugen (randomisierter Primzahltest)
+    \item Ver- und Entschlüsselung leicht zu berechnen (Spezialchip)
+    \item sicher in der Praxis (unter Einhaltung bestimmter Regeln)
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+    \item nur sicher, wenn es \emph{keine} effiziente Algorithmen zur Faktorisierung gibt
+    \item möglicherweise auch ohne Faktorisierungsalgorithmus zu brechen
+    \item mit \emph{Quantencomputern} ist Faktorisierung in Polynomialzeit möglich (P. Shor)
+\end{itemize}
+
+Aufgabe: Kryptographie auf Grundlage $NP$-schwerer Probleme.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grundbegriffe der Codierungstheorie
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Grundbegriffe der Codierungstheorie}\label{grundcode}
+
+Corierungstheorie -- Verschlüsselung von Informationen unter den folgenden Aspekten:
+\begin{enumerate}
+    \item Codierung soll helfen, eine Information geheim zu halten.
+    \item Codierung soll so kurz wie möglich sein
+    \item Fehler in der Übertragung sollten erkanntund korrigiert werden.
+\end{enumerate}
+$\rightsquigarrow$ Teilgebiete:
+\begin{enumerate}
+    \item Kryptographie (RSA, Einwegfunktionen, Pseudozufallsgeneratoren, ...)
+    \item Datenkompression (Hufman, ...)
+    \item Fehlerkorrigierende Codes (Hamming Code, linearer Code, ...)
+\end{enumerate}
+
+\paragraph{Modell:}
+\begin{center} \begin{tabular}{rcccl}
+& Reininformation & & Reininformation &\\
+Quellencodierung & $\downarrow$ & & $\uparrow$ & Quellencodierung \\
+& Verschlüsselte Information & & Verschlüsselte Information & \\
+Kanalcodierung & $\downarrow$ & & $\uparrow$ & Kanalcodierung (Fehler korrigieren) \\
+& Sender & $\rightsquigarrow$ & Empfänger & \\
+& & Kanal & & \\
+& & $\Uparrow$ & & \\
+& & Störung & &
+\end{tabular} \end{center}
+Kanalalphanet: $Q$, $|Q| = q$, häufig $Q = \{ 0, 1 \}$, $q = 2$
+
+\paragraph{Definition:} Eine (Kanal-)Codierung ist eine injektive Funktion $c : I \rightarrow Q^n$, wobei $I$ eine Informationsmenge ist (z.B. Alphabet oder bereits Menge der Codewörter aus einer Quellcodierung). Das Bild $C = \text{Im } c$ wird ein Code genannt. \par
+Hier besteht der Code nur aus Wörtern gleicher Länge, das nennt man einen Blockcode.
+
+\paragraph{Definition:} Seinen $v = (v_1, v_2, \ldots v_n)$ und $w = (w_1, w_2, \ldots w_n) \in Q^n$. Wir definieren den Hamming-Abstand der Worte $v$ und $w$ als Anzahl der Stellen, an denen sie sich unterscheiden:
+$$ d(v, w) = |\{ i \; | \; 1 \leq i \leq n \text{ und } v_i \neq w_i \}| $$
+
+\paragraph{Beispiel:}
+$$ d((0,1,\textbf{0},\textbf{1},\textbf{0},\textbf{0},1), (0,1,\textbf{1},\textbf{0},\textbf{1},\textbf{1},1)) = 4 $$
+
+\paragraph{Beobachtung:} Der Hamming-Abstand hat alle Eigenschaften einer Abstandsfunktion, d.h. für alle $u, v, w \in Q^n$ gilt:
+\begin{enumerate}
+    \item $d(u, v) \geq 0$ und $d(u, v) = 0 \Leftrightarrow u = v$
+    \item $d(u, v) = d(v, u)$
+    \item $d(u, v) + d(v, w) \geq d(u, w)$ (Dreiecksungleichung)
+\end{enumerate}
+
+\paragraph{Definition:} Die Minimalabstand eines Codes $C \subseteq Q^n$ ist
+$$ d(C) := \min(\{ d(c, c') \; | \; c \neq c', c, c' \in C \}) $$
+
+Wir verwenden $c$, $c'$, $c_1$, $c_2$ für Codewörter und allgemein $u, w, v$ für Wörter aus $Q^n$.
+
+\paragraph{Beispiel:}
+\begin{eqnarray*}
+    c : \{ a, b, c, d \} &\rightarrow& Q^3 \\
+    a &\mapsto& (0, 0, 0) \\
+    b &\mapsto& (0, 1, 1) \\
+    c &\mapsto& (1, 0, 1) \\
+    d &\mapsto& (1, 1, 0) \\
+\end{eqnarray*}
+$$ C = \{ (0, 0, 0), (0, 1, 1), (1, 0, 1), (1, 1, 0) \} $$
+$$ d(C) = 2 $$
+
+\paragraph{Prinzip:} Wird ein Wort $w \in Q^n$ empfangen, so sucht man ein (oder besser das) Codewort $c$ mit minimalem Abstand zu $w$. \par
+Wann ist $c$ richtig? \par
+
+Empfangen $w \in Q^n$:
+\begin{enumerate}
+    \item $w \notin C$, dann ist ein Fehler aufgetreten
+    \item Wenn wir wissen, dass höchstens 1 Fehler aufgetreten ist, und $c \in C$ ist das einzige Codewort mit $d(w, c) = 1$, dann ist $c$ das ursprüngliche Codewort.
+\end{enumerate}
+
+\paragraph{Definition:} Ein Code $C$ ist $k$-fehlererkennend, wenn bei jedem empfangengenen Wort $w$, das $\leq k$ Fehler, enthält, erkannt wird, \emph{ob} Übertragungsfehler aufgetreten sind.
+
+\paragraph{Definition:} Ein Code $C$ ist $k$-fehlerkorrigierend, wenn bei jedem empfangenen Wort, das $\leq k$ Fehler erhält, die Fehler korrigiert werden könnn, d.h. dass das ursprüngliche Codewort bestimmt werden kann.
+
+\paragraph{Definition:} Für $v \in Q^n$ definieren wir die Kugel mit Radius $t$ um $v$ durch
+$$ B_t (v) = \{ w \in Q^n \; | \; d(v, w) \leq t \} $$
+
+\begin{center}
+    GRAFIK: von Henning übertragen
+\end{center}
+
+\paragraph{Satz:} $C$ ist $k$-fehlerkorrigierend genau dann, wenn $\forall c \neq c' \in C \; B_k(c) \cap B_k(c') = \emptyset$ genau dann, wenn $d(C) \geq 2k+1$ (Minimalabstand von $C$)
+
+\paragraph{Beweis:}
+\begin{itemize}
+    \item Erste Äquivalenz: bei der Üertragung von $c$ treten $\leq k$ Fehler auf, dann liegt empfangenes Wort $w \in B_k(c)$, d.h. $w$ gehört eindeutig zu $c$.
+    \item Zweite Äquivalenz:
+    \begin{center}
+        GRAFIK: von Henning übertragen
+    \end{center}
+\end{itemize}
+
+\paragraph{Satz:} $C$ ist $k$-fehlererkennend genau dann, wenn $\forall c \in C \; B_k(c) \cap (C \backslash \{ c \}) = \emptyset$ genau dann, wenn $d(C) \geq k+1$.
+
+\paragraph{Beweis:} wie oben
+
+\paragraph{Beispiele:} Einfache Konstruktion mit Paritätsbits und Mehrfachcodierung:
+$$ I = Q^m \platz \text{mit} \platz Q = \{ 0, 1 \} $$
+\begin{enumerate}
+    \item Paritätsbit: $c_{\text{par}} : Q^m \rightarrow Q^{m+1}$
+    $$ c_{\text{par}}(v_1, v_2, \ldots v_m) = (\underbrace{v_1, v_2, \ldots v_m, p}_{\text{gerade Anzahl von 1}}) \platz \text{mit} \platz p = v_1 + v_2 + \ldots + v_m \modulo{2} $$
+    Daraus folgt: $C_{\text{par}} = \text{Im } c_{\text{par}}$ hat den Minimalabstand $2$, d.h. $C_{\text{par}}$ ist $1$-fehlererkennend.
+    \item Doppelcodierung: $c_2 : Q^m \rightarrow Q^{2m}$
+    $$ c_2(v_1, v_2, \ldots v_m) = (v_1, v_2, \ldots v_m, v_1, v_2, \ldots v_m) $$
+    Daraus folgt: $C_2 = \text{Im } c_2$ hat den Minimalsbstand $2$, d.h. $C_2$ ist $1$-fehlererkennend.
+    \item Dreifachcodierung: $c_3 : Q^m \rightarrow Q^{3m}$
+    $$ c_3(v_1, v_2, \ldots v_m) = (v_1, v_2, \ldots v_m, v_1, v_2, \ldots v_m, v_1, v_2, \ldots v_m) $$
+    Daraus folgt: $C_3 = \text{Im } c_3$ hat den Minimalsbstand $3$, d.h. $C_3$ ist $1$-fehlerkorrigierend.
+    \item Doppelcodierung mit Paritätsbit: $c_{2 + \text{par}} : Q^m \rightarrow Q^{2m+1}$
+    $$ c_{2 + \text{par}}(v_1, v_2, \ldots v_m) = (v_1, v_2, \ldots v_m, v_1, v_2, \ldots v_m, p) \platz \text{mit} \platz p = v_1 + v_2 + \ldots v_m \modulo{2} $$
+    Daraus folgt: $C_{2 + \text{par}} = \text{Im } c_{2 + \text{par}}$ hat den Minimalabstand $3$:
+    \begin{itemize}
+        \item Fall 1: $d(v, w) = 1 \platz (v, w \in Q^m) \Rightarrow d(c_{2 + \text{par}}(v), c_{2 + \text{par}}(w)) = \underbrace{1 + 1}_{d(v, w)} + \underbrace{1}_{p}$
+        \item Fall 2: $d(v, w) \geq 2 \platz (v, w \in Q^m) \Rightarrow d(c_{2 + \text{par}}(v), c_{2 + \text{par}}(w)) \geq 2 + 2 = 4$
+    \end{itemize}
+    d.h. $C_{2 + \text{par}}$ ist $1$-fehlerkorrigierend.
+    \item Kreuzsicherungscode $m = l^2$: $c_{\text{kr}} : Q^{m} \rightarrow Q^{m + 2l}$ \par
+    Stelle Elemente von $Q^m$ in einer quadratischen Matrix dar und gib für jede Spalte und für jede Zeile das Paritätsbit dazu:
+    $$ \begin{pmatrix}
+      v_1 & v_2 & \cdots & v_l \\
+      v_{l+1} & v_{l+2} & \cdots & v_{2l} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      v_{(l-1)+l+1} & v_{(l-1)+l+2} & \ldots & v_{l^2} \\
+    \end{pmatrix} $$
+    (Bemerkung: Um Paritätsbits in den Zeilen und Spalten erweitern (Zeilen: $p_i$, Spalten $\bar{p}_j$)) \par
+    $C_{\text{kr}} = \text{Im } c_{\text{kr}}$ hat Minimalabstand $3$, d.h. ist $1$-fehlerkorrigierend. \par
+    $v, w \in Q^m$
+    \begin{itemize}
+        \item $d(v, w) \geq 3 \Rightarrow d(c_{\text{cr}}(v), c_{\text{cr}}(w)) \geq 3$
+        \item $d(v, w) = 2$ dann liegen die zwei Unterschiede in verschiedenen Zeilen $i$ und $j$ oder in verschiedenen Spalten $k, k'$
+        $$ d(\ldots) \geq 2 + \underbrace{1}_{p_i} + \underbrace{1}_{p_j} $$
+        \item $d(v, w)  1$, sei Unterschied in Zeile $i$ und Spalte $j$
+        $$ d(\ldots) = \underbrace{1}_{d(u, v)} + \underbrace{1}_{\bar{p}_i} + \underbrace{1}_{p_j} = 3 $$
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Definition:} Die Informationsrate eines Codes $C \subseteq Q^n$ ist der Quotient
+$$ \frac{\log_q |C|}{n} $$
+Das beschreibt das Verhältnis der Längen des Infomationsworts und des Codeworts.
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Für $C_{2 + \text{par}}$:
+    $$ \frac{m}{2m+1} \lesssim \frac{1}{2} $$
+    \item Für $C_{\text{kr}}$:
+    $$ \frac{m + 2 \cdot \sqrt{m} - 2 \sqrt{m}}{m + 2 \cdot \sqrt{m}} = 1 - \frac{2 \cdot \sqrt{m}}{m + 2 \cdot \sqrt{m}} \approx 1 - \frac{2}{\sqrt{m}} $$
+\end{enumerate}
+
+\paragraph{Fragen:}
+\begin{enumerate}
+    \item Geht es noch besser?
+    \item Wie korrigiert man 2 und noch mehr Fehler?
+\end{enumerate}
+
+Idee für eine Verbesserung (Hamming):
+$$ v = (v_1, \ldots v_4) \platz Q=\{ 0, 1 \} \platz \text{+ 3 Redundanzbits} $$
+\begin{eqnarray*}
+    r_1 &=& v_2 + v_3 + v_4 \modulo{2} \\
+    r_2 &=& v_1 + v_3 + v_4 \modulo{2} \\
+    r_3 &=& v_1 + v_2 + v_4 \modulo{2}
+\end{eqnarray*}
+Minimalabstand $3$ \par
+Codierung durch Matrixmultiplikation über $\ganz_2$:
+$$ c(v) = \underbrace{\begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 1 & 0 \\
+  0 & 0 & 0 & 1 \\
+  0 & 1 & 1 & 1 \\
+  1 & 0 & 1 & 1 \\
+  1 & 1 & 0 & 1 \\
+\end{pmatrix}}_{\text{Generatormatrix}} \cdot \begin{pmatrix}
+  v_1 \\
+  v_2 \\
+  v_3 \\
+  v_4 \\
+\end{pmatrix} = \begin{pmatrix}
+  v_1 \\
+  v_2 \\
+  v_3 \\
+  v_4 \\
+  r_1 \\
+  r_2 \\
+  r_3 \\
+\end{pmatrix} $$
+
+Zur Decodierung mit $1$-Fehlerkorrektur verwendet man die folgede Prüfmatrix:
+$$ H = \begin{pmatrix}
+  1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{pmatrix} $$
+
+Berechnung:
+$$ H \cdot \begin{pmatrix}
+  v_1 \\
+  v_2 \\
+  v_3 \\
+  v_4 \\
+  r_1 \\
+  r_2 \\
+  r_3 \\
+\end{pmatrix} =
+\begin{pmatrix}
+  1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+  v_1 \\
+  v_2 \\
+  v_3 \\
+  v_4 \\
+  r_1 \\
+  r_2 \\
+  r_3 \\
+\end{pmatrix} =
+\begin{pmatrix}
+  a_1 \\
+  a_2 \\
+  a_3 \\
+\end{pmatrix} =
+\begin{pmatrix}
+  v_1 + v_3 + r_1 + r_3 \\
+  \ldots \\
+  \ldots \\
+\end{pmatrix}$$
+
+Daraus folgt:
+\begin{itemize}
+    \item Fehlererkennung: Es gilt $H \cdot \vec{w} = \vec{0}$ genau dann, wenn keine Fehler (oder $\geq 2$ Fehler) aufgetreten sind.
+    \item Fehlerkorrektur: Wenn $H \cdot \vec{w} \neq \vec{0}$, dann gibt $\vecthree{a_1}{a_2}{a_3}$ die Stelle an, an welcher der Fehler aufgetreten ist:
+    \begin{eqnarray*}
+        \vecthree{1}{0}{0} &\rightsquigarrow& \text{1. Bit falsch ($\vec{v_1}$)} \\
+        \vecthree{0}{1}{0} &\rightsquigarrow& \text{2. Bit falsch ($\vec{v_2}$)} \\
+        \vecthree{1}{1}{0} &\rightsquigarrow& \text{3. Bit falsch ($\vec{v_3}$)} \\
+        \vecthree{0}{0}{1} &\rightsquigarrow& \text{4. Bit falsch ($\vec{v_4}$)}
+    \end{eqnarray*}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Allgemeine Schranken für die Informationsrate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Allgemeine Schranken für die Informationsrate}
+
+\paragraph{Modell eines binären, symmetrischen Kanals:}
+\begin{itemize}
+    \item Kanalalphabet $Q = \{ 0, 1 \}$, Bitfolge wird übertragen
+    \item Wahrscheinlichkeit, dass $i$-tes Bit fehlerhaft übertragen wird, ist gleich $p < \frac{1}{2}$, unabhängig davon, ob dieses Bit $0$ oder $1$ war.
+    \item Die Ereignisse, dass erstes bzw. zweites, drittes $\ldots$ Bit falsch übertragen werden, sind unabhängig.
+\end{itemize}
+
+\paragraph{Lemma:} Die Wahrscheinlichkeit, dass bei der Übertragung eines Wortes der Länge $n$ \emph{genau} $k$ Fehler auftreten, ist gleich
+$$ \left( { n \atop k } \right) \cdot p^k \cdot (1-p)^{n-k} $$
+
+\paragraph{Satz von Shannon:} Gegeben ein binärer symmetrischer Kanal mit Fehlerwahrscheinlichkeit $p$ und $\varepsilon > 0$:
+\begin{itemize}
+    \item Zu jedem
+    $$ R < 1 + p \cdot \log_2 (p) + (1-p) \cdot \log_2 (1-p) $$
+    gibt es einen Code $C$ mit Informationsrate $\geq R$, so dass die Wahrscheinlichkeit einer falschen Decodierung (bei "`nächster Nachbar"'-Suche) höchstens $\varepsilon$ ist.
+    \item Zu jedem
+    $$ R < 1 + p \cdot \log_2 (p) + (1-p) \cdot \log_2 (1-p) $$
+    gibt es eine Konstante $K_R > 0$, so dass jeder Code mit der Informationsrate $\geq R$ eine Wahrscheinlichkeit $\geq K_R$ für die falsche Decodierung eines Codeworts hat.
+\end{itemize}
+
+\paragraph{Definition:} Die \emph{Kapazität}\index{Kapazität} eines binären symmetrischen Kanals mit Fehlerwahrscheinlichkeit $p$ ist:
+$$ H(p) = 1 + p \cdot \log_2 (p) + (1-p) \cdot \log_2 (1-p) $$
+
+\paragraph{Nachteile des Shannon-Satzes:}
+\begin{enumerate}
+    \item Der Satz ist nicht konstruktiv.
+    \item Wählt man $\varepsilon$ klein, dann folgt daraus, dass $n$ sehr groß ist.
+    \item "`Nächster Nachbar"'-Suche sehr komplex.
+\end{enumerate}
+
+\paragraph{Alternative Ansatz:} Wenn $|Q| = q$ und $\vec{r} \in Q^n$, dann gilt
+$$ B_k (\vec{v}) = \sum_{i=0}^k \left( { n \atop i } \right) (q-1)^i $$
+\begin{itemize}
+    \item $i = 0, 1, \ldots k$: Abstand zu $\vec{v}$
+    \item $\left( { n \atop i } \right)$: Stellen, an denen Unterschied zu $\vec{v}$ auftritt
+    \item $(q-1)^i$: Möglichkeiten an diesen Stellen etwas anderes als in $\vec{v}$ zu schreiben
+\end{itemize}
+
+\paragraph{Erinnerung:} Ein Code $C$ ist genau dann $k$-fehlerkorrigierend, wenn $\forall c \neq c' \in C$ gilt
+$$ B_k(c) \cap B_k(c') = \emptyset $$
+genau dann, wenn der Minimalsabstand $d(C) \geq 2k + 1$
+
+\paragraph{Satz:} Sei $C \subseteq Q^n$ ein Code mit $d(C) \geq 2k + 1$, dann gilt
+$$ |C| \cdot \sum_{i=1}^k \left( {n \atop i} \right) (q-1)^i \leq q^n $$
+
+\paragraph{Beweisidee:} Die Kugeln müssen disjunkt sein.
+
+\paragraph{Definition:} Ein Code $C \subseteq Q^n$ mit Minimalabstand $d(C) = 2k + 1$ ist \emph{perfekt}, wenn
+$$ |C| \cdot \sum_{i=1}^k \left( {n \atop i} \right) (q-1)^i = q^n $$
+
+\paragraph{Beispiel:} Der Hamming-Code aus dem letzten Abschnitt ist perfekt. Angaben zu de Code:
+\begin{itemize}
+    \item $q = |Q| = 2$
+    \item $|C| = 2^4$
+    \item $n = 7$
+    \item $d(C) = 3$
+    \item $k = 1$
+\end{itemize}
+Daraus folgt:
+$$ |C| \cdot \sum_{i=1}^k \left( {n \atop i} \right) (q-1)^i = 2^4 \cdot (1+8) = 2^7 = 2^n $$
+
+\paragraph{Folgerung:} Aus der Schranke
+$$ |C| \cdot \sum_{i=1}^k \left( {n \atop i} \right) (q-1)^i \leq q^n $$
+kann man ableiten, dass ein binärer $k$-fehlerkorrigierender Code der Länge $n$ muss $\approx k \cdot \log_2 n$ Redundanzbits haben.
+
+\paragraph{Satz:} Ist $s \leq n$ und $g$ eine Zahl, die
+$$ g \cdot \sum_{i=0}^{s-1} \left( { n \atop i } \right) (q-1)^i \leq q^n $$
+erfüllt, dann gibt es in $Q^n$ einen Code $c$ mit Minimalabstand $s$ und $|C| = g$.
+
+\paragraph{Beweisidee:} Da $(g-1)$ Kugeln vom Radius $s-1$ $Q^n$ noch nicht überdecken, folgt daraus, dass $C$ erweitert werden kann.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Linear Codes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linear Codes}
+
+\paragraph{Endliche Körper:}
+\begin{itemize}
+    \item Für jede Primzahl $p$ ist $\ganz_p$ ein Körper
+    $$ \ganz_p = \{ 0, 1, \ldots p-1 \} $$
+    \item Für jede Primzahlpotenz $q = p^m$ gibt es einen Körper $\text{GF}(q)$, der genau $q$ Elemente hat. Die Körper haben die Charakteristik $p$, d.h.
+    $$ \underbrace{1 + 1 + \ldots + 1}_{p} = 0 $$
+    $\text{GF}(q)$ ist eine Erweiterung von $\ganz_p$
+\end{itemize}
+
+\paragraph{Definition:} Ein Code $C$ heißt linear, wenn $C$ ein Untervektorraum eines Hammingraumes $H(n, q)$ ist, wobei $H(n, q)$ die Menge der Wörter der Länge $n$ über $\text{GF}(q)$ ist, d.h.
+$$ H(n, q) \cong (\text{GF}(q))^n $$
+
+\paragraph{Beispiel:} Der Hamming-Code aus \ref{grundcode} ist ein linearer Code in $H(7, 2)$, denn er ist Bild einer linearen Abbildung
+$$ (\text{GF}(2))^4 \rightarrow (\text{GF}(2))^7 $$
+Die Dimenstion dieses Codes (Unterraumes) ist $4$, wir sprechen von einem $(7, 4)$-Code.
+
+\paragraph{Beobachtung:} Ein $(n, k)$-Code in $H(n, q)$ hat $q^k$ Elemente ($q^k$ Linearkombinationen der $k$ Basisvektoren). Dieser Code hat die Informationsrate
+$$ \frac{1}{n} \cdot \log_q |C| = \frac{1}{n} \cdot \log_q \left( q^k \right) = \frac{k}{n} $$
+
+\paragraph{Definition:} Für ein $\vec{v} \in H(n, q)$ ist das \emph{Gewicht}\index{Gewicht} $w(\vec{v})$ die Anzahl der Stellen, an denen $\vec{v}$ ungleich $0$ ist.
+
+\paragraph{Definition:} Das \emph{Minimalgewicht}\index{Minimalgewicht} von $C$ ist definiert als
+$$ w(C) = \underset{\vec{v} \neq \vec{0}}{\min} \{ w(\vec{v}) \; | \; \vec{v} \in C \} $$
+
+\paragraph{Beispiel:} Für das Beispiel aus \ref{grundcode} ist $w(C) = 3$.
+
+\paragraph{Satz:} Für jeden linearen Code $C$ gilt:
+$$  w(C) = d(C) $$
+Das heißt: Das Minimalgewicht ist gleich dem Minimalabstand.
+
+\paragraph{Beweis:}
+\begin{enumerate} \buchstaben
+    \item Zu zeigen: $w(C) \geq d(C)$:
+    $$ w(C) = \underbrace{d(\vec{v}, \vec{0})}_{\text{für ein $\vec{v} \in C$}} \underbrace{\geq d(C)}_{\text{denn $\vec{v}, \vec{0} \in C$}} $$
+    \item Zu zeigen: $w(C) \leq d(C)$: \par
+    $d(C)$ wird realisiert als $d(\vec{u}, \vec{v})$ für $\vec{u}, \vec{v} \in C$ mit $\vec{u} \neq \vec{v}$:
+    $$ \vec{0} = \vec{v} - \vec{v} \platz \text{und} \platz \vec{u} - \vec{v} \in C \platz \text{(Unterraum)} $$
+    Dann folgt:
+    $$ w(C) \leq w(\vec{u} - \vec{v}) = d(\vec{u} - \vec{v}, \vec{0}) = d(\vec{u}, \vec{v}) = d(C) $$
+\end{enumerate}
+
+\paragraph{Definition:} Generatormatrix von $C$:
+$$ \forall x in (\text{GF}(q))^k \; G \cdot x \in C \platz \text{und} \platz \text{$G$ spannt $C$ auf} $$
+Prüfmatrix/Checkmatix von $C$
+$$ \forall v \in C \; H \cdot v = (0) \platz (C = \text{Ker } H)  $$
+
+\paragraph{Hmmpf:} Jeder lineare Code $C$ der Dimension $k$ in $H(n, q)$ kann eindeutig (in Bezug auf den Code) durch eine Generatormatrix $G \in M(n \times k, \text{GF}(q))$ dargestellt werden:
+\begin{itemize}
+    \item Wähle Basis von $C$ (als Spaltenvektoren) und stelle aus den $k$ Basisvektoren  eine Matrix auf.
+    \item Damit beschreibt $G$ eine Codierung
+    $$ c : (\text{GF}(q))^k \rightarrow (\text{GF}(q))^n $$
+    \item Eine Matrix $H \in M((n-k) \times n, \text{GF}(q))$ wird Prüfmatrix (Checkmatrix) von $C$ genannt, wenn $C$ der Kern der von $H$ beschriebenen Abbildung:
+    $$ h : (\text{GF}(q))^n \rightarrow (\text{GT}(q))^{n-k} $$
+\end{itemize}
+
+\paragraph{Achtung:} Nach der Dimensionsformel ist
+\begin{eqnarray*}
+    n &=& \text{dim}(\text{Ker } h) + \text{dim}(\text{Im } h) \\
+      &=& \text{dim } C + \text{rg } H \\
+      &=& k + \text{rg } H \\ \\
+    \text{rg } H &=& n - k
+\end{eqnarray*}
+Das heißt: Die Zeilen von $H$ sind linear unabhängig.
+
+\paragraph{Hmmpf:} Für $\vec{v} \in H(n, q)$ gilt:
+$$ \vec{v} \in C \platz \Leftrightarrow \platz H \cdot \vec{v} = \vec{0} $$
+
+\paragraph{Satz:} $G \in M(n \times k, \text{GF}(q))$, $H \in M((n-k) \times n, \text{GF}(q))$ mit $\text{rg } G = k$ und  $\text{rg } H = n - k$ bilden genau dann ein Paar Generator/Checkmatrix für einen linearen Code $C$, wenn
+$$ H \cdot G = (0) $$
+
+\paragraph{Anwendung:} Eine Generatormatrix ist in Standardform, wenn sie die Gestalt
+$$ G = \left( {E_k \atop A} \right) $$
+hat. In diesem Fall ist die Matrix
+$$ H = \left( -A \platz E_{n-k} \right) $$
+eine passende Checkmatrix.
+
+\begin{center}
+    von Henning abscheiben!!!
+\end{center}
+
+\paragraph{Satz:} $C$ ein $(n, k)$-Code mit Prüfmatrix $H$, dann gilt:
+$$ d(C) \geq d \platz \Leftrightarrow \platz \text{je zwei $d-1$ Spalten von $H$  sind linear unabhängig} $$
+
+\paragraph{Beweis ($\Rightarrow$):} Angenommen $H$ enthält $d-1$ linear abhängige Spalten (wir nehmen an, die ersten $d-1$), genau dann wenn
+$$ \exists \alpha_1, \alpha_2, \cdots \alpha_{d-1} (\text{nicht alle $0$}) $$
+so dass
+$$ \alpha_1 \cdot H_1 + \alpha_2 \cdot H_2 + \ldots + \alpha_{d-1} \cdot H_{d-1} = 0 $$
+genau dann, wenn
+$$ \vec{\alpha} = (\alpha_1, \ldots \alpha_{d-1}, 0, \ldots 0) \neq 0 $$
+Dann:
+$$ H \cdot \vec{a} = \sum_{i=1}^n \alpha_i \cdot H_i = \sum_{i=1}^{d-1} \alpha_i \cdot H_i + \sum_{i=d}^n \alpha_i \cdot H_i = 0 $$
+d.h. $\vec{a} \in \text{Ker } H = C$
+$$ d(C) = w(C) \leq w(\vec{\alpha}) \leq d-1 $$
+
+Kommentar: $\vec{\alpha} = \bar{a} \leq d-1$
+
+\paragraph{Beweis ($\Leftarrow$):} $\vec{v} \in C$, $\vec{v} \neq \vec{0}$, dann $H \cdot \vec{v} = \vec{0}$, wenn $w(\vec{v}) \leq d-1$. Das heißt, wir finden $\leq d-1$ Spalten von $H$ die linear abhängig sind. \hfill $\Box$
+
+\paragraph{Folgerung:} (Fall $d=3$ des Satzes) \par
+$C$ ist $(n, k)$-Code mit Prüfmatrix $H$.
+$$ d(C) \geq 3 \platz \Leftrightarrow \platz \exists \text{2 Spalten von $H$ sind linear unabhängig} $$
+
+\paragraph{Wichtig:} Sind keine Spalten von $H$ vielfache von einander, dann ist $C$ $1$-fehlerkorrigierend.
+
+\paragraph{Beispiel:} Code aus \ref{grundcode} \par
+Prüfmatrix:
+$$ H = \begin{pmatrix}
+  1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{pmatrix} $$
+Aus der Prüfmatrix folgt, dass der Hamming-Code ist $1$-fehlerkorrigierend.
+
+\paragraph{Weiteres Beispiel:} Trippel-Check-Code: \par
+Prüfmatrix:
+$$ H = \begin{pmatrix}
+  -1 & -1 & 0 & 1 & 0 & 0 \\
+  -1 & 0 & -1 & 0 & 1 & 0 \\
+  0 & -1 & -1 & 0 & 0 & 1 \\
+\end{pmatrix} $$
+Generatormatrix:
+$$ G = \begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+  1 & 1 & 0 \\
+  1 & 0 & 1 \\
+  0 & 1 & 1 \\
+\end{pmatrix} $$
+Das heißt:
+$$ (a, b, c) \mapsto (a, b, c, a+b, a+c, b+c) $$
+Typischerweise wird hier der Körper $\text{GF}(3)$ benutzt.
+
+\paragraph{Allgemeine binäre Hamming-Codes:} \par
+Ziel: $1$-fehlerkorrigierend, hohe Informationsrate \par
+$n$ Länge des Codes, $H$ Prüfmatrix
+$$ n = \underbrace{\text{dim}(\text{Ker } H)}_{\text{dim }C} + \text{dim}(\text{Im } H) $$
+Informationsrate:
+$$ \frac{\text{dim}(\text{Ker } H)}{n} = \frac{n-k}{n} $$
+Ist $\text{dim}(\text{Im } H) = k$ fest, dann wollen wir $n$ groß, damit die Informationsrate groß ist.
+\begin{itemize}
+    \item Möglichst viele Spalten ($\Rightarrow$ möglichst große Informationsrate)
+    \item Alle Spalten verschieden (und $\neq \vec{0}$) \par
+    damit der Code $1$-fehlerkorrigierend ist
+\end{itemize}
+
+\paragraph{Definition:} Der binäre Hamming-Code $\text{Ham}_2 k$ hat als Prüfmatrix die Matrix $H_k$ der $n$ Spalten alle verschiedenen binären Vektoren der Länge $k$ (ohne $\vec{0}$)
+
+\paragraph{Beispiel:}
+Erstes Beispiel:
+$$ \text{Ham}_2 2 \platz H_2 = \begin{pmatrix}
+  0 & 1 & 1 \\
+  1 & 0 & 1 \\
+\end{pmatrix} \platz (a) \mapsto (a, a, a) \platz text{dim} = 1 \platz \text{Länge}=3 $$
+Zweites Beispiel:
+$$ \text{Ham}_2 3 \platz H_§ = \begin{pmatrix}
+  1 & 0 & 1 & 0 & 0 & 1 & 1 \\
+  1 & 0 & 0 & 1 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 0 & 1 & 0 & 1 \\
+\end{pmatrix} $$
+Das ist (bis auf Permutation der Spalten) der Hamming-Code von früher
+$$ \text{dim} = 4 \platz \text{Länge} = 7 \platz d = 3 $$
+Drittes Beispiel:
+$$ \text{Ham}_2 4 \platz \left( \begin{array}{ccccccccccccccc}
+  1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+  0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+  0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+\end{array} \right) $$
+
+\paragraph{Satz:} $\text{Ham} k$ ist ein linearer Code mit den Parametern $d(\text{Ham} k) = 3$, $\text{Länge}(\text{Ham} k) = 2^k - 1$, $\text{dim}(\text{Ham}(k)) = 2^k - k - ^1$ \par
+Informationsrate für große Werte:
+$$ \lim \left( \frac{2^k - k - 1}{2^k - 1} \right) = 1 $$
+
+\paragraph{Proposition:} Der Hamming-Code $\text{Ham} k$ ist $1$-perfekt.
+
+\paragraph{Erinnerung:} $C$ Code mit $C \subseteq Q^n$ miz $d(C) = 2t - 1$ ist perfekt, wenn
+$$ |C| \cdot \sum_{i=0}^t \left( {n \atop k} \right) (q-1)^t = q^n $$
+(die $t$-Kugeln um die Codewörter füllen den Raum $Q^n$ perfekt aus)
+
+\paragraph{Beweis:} $t=1$, $q=2$, $n = 2^k-1$
+$$ |C = d^{\text{dim } C}| = 2^{2^k - k - 1} $$
+
+Größe der Kugeln:
+$$ \sum_{i=0}^t \left( {2^k - 1 \atop k} \right) 1 = 1 + (2^k - 1) = 2^k $$
+$$ |C| Erd k = 2^{2^k - k - 1} \cdot 2^k = 2^{2^k - 1}= 2^n  $$
+
+\begin{itemize}
+    \item $\text{Ham} 3$ kann als Ausgangspunkt für die Konstruktor von $3$-perfekten Codes genommen werden $d( ) = 7$ \par
+    Galay Codes \par
+    $G_{23}$ ist binärer $(23, 12)$-Code
+    \item Codes über adenren Körpern inbesondere $\text{GF}(2^k)$ \par
+    RCH Codes, RS-Codes
+\end{itemize}

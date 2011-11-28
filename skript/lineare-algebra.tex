@@ -1,0 +1,2763 @@
+\chapter{Lineare Algebra}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vektoren - der intuitive Ansatz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vektoren -- der intuitive Ansatz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Koordinatenfreie Einführung}
+
+\paragraph{Definition:} Ein \emph{Vektor}\index{Vektor, intuitiv} wird durch geordnetes Punktepaar $\overrightarrow{AB}$ repräsentiert (veranschaulicht durch die gerichtete Strecke von $A$ nach $B$), wobei zwei Vektoren $\overrightarrow{AB}$ und $\overrightarrow{A'B'}$ gleich sind, wenn es eine Translation (Parallelverschiebung) gibt, die $A$ in $A'$ und $B$ in $B'$ überführt.
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-1-1-a}
+\end{center}
+Zur Betonung des Aspekts, dass der Anfangspunkt beliebig sein kann, wird der Begriff des \emph{freien Vektors}\index{freier Vektor}\index{Vektor, frei} verwendet. \par \vspace{0.3cm}
+Legt man einen Bezugspunkt $O$ im Raum fest und betrachtet für einen beliebigen Punkt $P$ den Vektor $\overrightarrow{OP}$, so wird dieser der \emph{Ortsvektor}\index{Ortsvektor} von $P$ genannt. \pagebreak
+
+\paragraph{Addition von Vektoren\index{Addition von Vektoren, intuitiv}:} Vertoren werden durch Aneinanderkettung addiert.
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-1-1-b}
+\end{center}
+Kommutativität kann man durch Parallelogrammeigenschaften sehen.
+
+\paragraph{Nullvektor\index{Nullvektor}:} Der Vektor $\overrightarrow{OO} = \overrightarrow{AA}$ wird Nullvektor genannt und kurz mit~$\vec{0}$~bezeichnet. Der Nullvektor ist das neutrale Element der Addition:
+$$ \vec{v} + \vec{0} = \vec{v} $$
+
+\paragraph{Inverser Vektor\index{inverser Vektor}:} Der Vektor $\overrightarrow{BA}$ wird als zu $\overrightarrow{AB}$ invers bezeichnet:
+$$ \overrightarrow{AB} + \overrightarrow{BA} = \overrightarrow{AA} = \vec{0} $$
+
+\paragraph{Betrag\index{Betrag eines Vektors}:} Der Betrag (Länge, Norm) des Vektors $\overrightarrow{AB}$ ist der Abstand zwischen $A$ und $B$ und wird mit $\left\| \overrightarrow{AB} \right\|$ bezeichnet. \par \vspace{0.3cm}
+
+\paragraph{Multiplikation mit Skalaren\index{Multiplikation mit Skalaren}:}
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-1-1-c}
+\end{center}
+Liegen drei Punkte $A$, $B$ und $C$ in dieser Reihefolge auf einer Geraden und ist
+$$ \left\| \overrightarrow{AB} \right\| = \lambda \cdot \left\| \overrightarrow{AC} \right\| $$
+so sagt man
+$$ \overrightarrow{AB} = \lambda \cdot \overrightarrow{AC} $$
+Auf diese Weise wird Multiplikation von reellen Zahlen (Skalaren) mit Vektoren eingeführt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Koordinatensystem}\index{Koordinatensystem}
+
+Betrachtet man zusätzlich ein Koordinatensystem im Raum mit dem Ursprung $O = (0, 0, 0)$, so kann jedem Punkt $P = (p_1, p_2, p_3)$ der Ortsvektor
+$$ \overrightarrow{OP} = \vecthree{p_1}{p_2}{p_3} $$
+zugeordnet werden.
+
+\paragraph{Kosequenz:} Aus $P = (p_1, p_2, p_3)$ und $Q = (q_1, q_2, q_3)$ folgt:
+$$ \overrightarrow{PQ} = \vecthree{q_1 - p_1}{q_2 - p_2}{q_3 - p_3} $$
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-1-2-a}
+\end{center}
+
+\paragraph{Addition:}
+$$ \vecthree{x_1}{x_2}{x_3} + \vecthree{y_1}{y_2}{y_3} = \vecthree{x_1 + y_1}{x_2 + y_2}{x_3 + y_3} $$
+
+\paragraph{Multiplikation mit Skalaren:}
+$$ \lambda \cdot \vecthree{x_1}{x_2}{x_3} = \vecthree{\lambda \cdot x_1}{\lambda \cdot x_2}{\lambda \cdot x_3} $$ \pagebreak
+
+\paragraph{Betrag:}
+$$ \vec{v} = \vecthree{x}{y}{z} \platz \Rightarrow \platz \left\| \vec{v} \right\| = \sqrt{x^2 + y^2 + z^2} $$
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-1-2-b}
+\end{center}
+
+\paragraph{Fazit:} Man kann Vektoren im Raum genauso darstellen wie Punkte, aber im Gegensatz zu Punkten können Vektoren addiert und mit Skalaren multipliziert werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Zusammenhang zwischen Vektoren und linearen Gleichungssystemen (LGS)}
+
+\paragraph{Beispiel:} Die folgenden Probleme sind äquivalent:
+\begin{itemize}
+    \item Hat dieses lineare Gleichungssystem eine Lösung?
+    $$ \begin{array}{ccccc}
+    5 \alpha & + & 3 \beta & = & -1 \\
+    4 \alpha & + & \beta & = & 2 \\
+    3 \alpha & - & \beta & = & 5 \\
+    \end{array} $$
+    \item Gibt es entsprechende $\alpha$ und $\beta$?
+    $$ \alpha \begin{pmatrix} 5 \\ 4 \\ 3 \end{pmatrix} + \beta \begin{pmatrix} 3 \\ 1 \\ -1 \end{pmatrix} = \begin{pmatrix} -1 \\ 2 \\ 5 \end{pmatrix} $$
+    \item Liegt der Punkt $(-1, 2, 5)$ in der Ebene, die von den Punkten $(0, 0, 0)$, $(5, 4, 3)$ und $(3, 1, -1)$ aufgespannt wird?
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vektorräume
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vektorräume}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Vektorräume}
+
+\paragraph{Definition:} Eine Menge $K$ mit zwei Operationen $\oplus$ und $\odot$ und zwei Elementen~$0$ und $1$ (wobei $0 \neq 1$) ist ein \emph{Körper}\index{Körper}, falls
+\begin{itemize}
+    \item $(K, \oplus)$ ist kommutative Gruppe mit neutralem Element $0$ \par
+    ($\ominus k$ ist inverses Element zu $k$ bezüglich $\oplus$)
+    \item $(K \backslash \{ 0 \}, \odot)$ ist kommutative Gruppe mit neutralem Element $1$ \par
+    ($k^{-1} = \frac{1}{k}$ ist inverses Element zu $k$ bezüglich $\odot$)
+    \item $\forall \; k, l, m \in K \platz k \odot (l \oplus m) = (k \odot l) \oplus (k \odot m)$ \par
+    (Distributivität)
+\end{itemize}
+Beispiele: $\rat$, $\real$, $\comp$ (nicht $\ganz$)
+
+\paragraph{Definition:} Eine Menge $V$ mit den Operationen
+\begin{itemize}
+    \item $\oplus : V \times V \rightarrow V$
+    \item $\odot$ : $K \times V \rightarrow V$
+\end{itemize}
+und dem Element $\vec{0}$ wird \emph{Vektorraum}\index{Vektorraum} (VR) über dem Körper $K$ genannt, falls
+\begin{itemize}
+    \item $(V, \oplus)$ ist kommutative Gruppe mit neutralem Element $\vec{0}$ \par
+    ($\ominus \vec{v}$ ist inverses Element zu $\vec{v}$ bezüglich $\oplus$)
+    \item $\forall \; \lambda, \mu \in K \platz \forall \; \vec{v} \in V \platz \lambda \odot (\mu \odot \vec{v}) = (\lambda \cdot \mu) \odot \vec{v}$ \par
+    (Assoziativität der Multiplikationen)
+    \item $\forall \; \vec{v} \in V \platz 1 \odot \vec{v} = \vec{v}$ \par
+    (neutrales Element bezüglich der Multiplikation)
+    \item $\forall \; \lambda, \mu \in K \platz \forall \; \vec{v} \in V \platz (\lambda + \mu) \odot \vec{v} = (\lambda \odot \vec{v}) \oplus (\mu \odot \vec{v})$ \par
+    (Distributivität 1)
+    \item $\forall \; \lambda \in K \platz \forall \; \vec{v}, \vec{w} \in V \platz \lambda \odot (\vec{v} \oplus \vec{w}) = (\lambda \odot \vec{v}) \oplus (\lambda \odot \vec{w})$ \par
+    (Distributivität 2)
+\end{itemize}
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Der reelle Vektorraum $\real^n$ über dem Körper $\real$:
+    $$ V = \real^n = \{ (x_1, \ldots x_n) \; | \; x_i \in \real \} $$
+    Addition:
+    $$ \vecthree{x_1}{\vdots}{x_n} + \vecthree{y_1}{\vdots}{y_n} = \vecthree{x_1 + y_1}{\vdots}{x_n + y_n} $$
+    Multiplikation:
+    $$ \lambda \vecthree{x_1}{\vdots}{x_n} = \vecthree{\lambda x_1}{\vdots}{\lambda x_n} $$
+    Nullvektor:
+    $$ \vec{0} = \vecthree{0}{\vdots}{0} $$
+    Inverser Vektor:
+    $$ - \vecthree{x_1}{\vdots}{x_n} = \vecthree{- x_1}{\vdots}{- x_n} $$
+
+    \item Der Vektorraum der stetigen Funktionen über dem Körper $\real$:
+    $$ V = \{ f \; | \; f : [ \, 0, 1 \, ] \rightarrow \real, \; \text{stetig} \} $$
+    Addition:
+    $$ (f+g)(x) = f(x) + g(x) $$
+    Multiplikation:
+    $$ (\lambda f)(x) = \lambda (f(x)) $$
+
+    \item Der Vektorraum $\real$ über dem Körper $\rat$
+    $$ V = \real \platz \text{und} \platz K = \rat $$
+    Addition:
+    $$ \vec{r}, \vec{s} \in \real \platz \vec{r} + \vec{s} = \overrightarrow{(r + s)} $$
+    Multiplikation:
+    $$ \lambda \in \rat \platz \vec{r} \in \real \platz \lambda \cdot \vec{r} = \overrightarrow{(\lambda \cdot r)} $$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Unterräume}
+
+\paragraph{Definition:} Eine Teilmenge $U \neq \emptyset$ eines Vektorraums $V$ über $K$ ist \emph{Unterraum}\index{Unterraum} (Untervektorraum\index{Untervektorraum}, UR) von $V$, falls
+\begin{itemize}
+    \item $\forall \; \vec{v}, \vec{w} \in U \platz \vec{v} + \vec{w} \in U$
+    \item $\forall \; \vec{v} \in U \platz \forall \; \lambda \in K \platz \lambda \vec{v} \in U$
+\end{itemize}
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item $V = \real^n = \{ (x_1, \ldots x_n) \; | \; x_i \in \real \}$
+    \begin{itemize} \renewcommand{\labelitemi}{$\rightarrow$}
+        \item $U = \{ (x_1, x_2, 0, \ldots 0) \; | \; x_1, x_2 \in \real \}$
+        \item speziell für $R^3$: jede Ebene und jede Gerade durch $(0, 0, 0)$
+    \end{itemize}
+    \item $V = \{ f \; | \; f : [0, 1] \rightarrow \real, \; \text{stetig} \}$
+    \begin{itemize} \renewcommand{\labelitemi}{$\rightarrow$}
+        \item $U = \{ f \; | \; f : [0, 1] \rightarrow \real, \; \text{$f$ ist konstant} \}$
+        \item $U' = \{ f \; | \; f : [0, 1] \rightarrow \real, \; \text{$f$ ist linear, d.h. $f(x) = ax + b$} \}$
+    \end{itemize}
+    \item $V = \real$ über dem Körper $\rat$
+    \begin{itemize} \renewcommand{\labelitemi}{$\rightarrow$}
+        \item $U = \{ q_1 + q_2 \sqrt{2} \; | \; q_1, q_2 \in \rat \}$
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Satz:} Sei $V$ ein Vektorraum über einem Körper $K$ und $\{ U_i \; | \; i \in I \}$ eine Familie von Unterräumen, dann ist $\underset{i \in I}{\bigcap} U_i$ auch ein Unterraum von $V$.
+
+\paragraph{Beweis:} Sei $\vec{u}$, $\vec{v} \in \underset{i \in I}{\bigcap} U_i$ und $\lambda \in K$, dann gilt
+\begin{itemize}
+    \item $\vec{u}$ und $\vec{v}$ sind Elemente von allen $U_i$
+    \item $\vec{u} + \vec{v}$ und $\lambda \vec{u}$ sind Elemente von allen $U_i$
+\end{itemize}
+Daraus folgt, dass $\vec{u} + \vec{v} \in \underset{i \in I}{\bigcap} U_i$ und $\lambda \vec{u} \in \underset{i \in I}{\bigcap} U_i$. \pagebreak
+
+\paragraph{Beispiel:} Durchschnitt von $xy$-Ebene und der $yz$-Ebene in $\real^3$ ist die $y$-Achse.
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-2-2-a}
+\end{center}
+
+\paragraph{Folgerung:}
+\begin{itemize}
+    \item Der Nullvektor $\vec{0}$ gehört zu jeden Unterraum:
+    $$ \forall \; U \; \text{ UR } V \text{ gilt } \vec{0} \in U $$
+    \item Zu jeden Vektor $\vec{v}$ aus dem Unterraum gehört auch der inverse Vektor $- \vec{v}$ zum Unterraum:
+    $$ \forall \; U \text{ UR } V \platz \forall \; \vec{v} \in U \text{ gilt } -\vec{v} \in U $$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Linearkombinationen und lineare Hülle}
+
+\paragraph{Definition:} Sind $\veclist{v}{k} \in V$ und $\scalarlist{\lambda}{k} \in K$, so nennt man den Vektor
+$$ \veclk{v}{\lambda}{k} $$
+eine \emph{Linearkombination}\index{Linearkombination} (LK) aus $\veclist{v}{k}$.
+
+\paragraph{Lemma:} Die Menge aller Linearkombinationen
+$$ \{ \veclk{v}{\lambda}{k} \; | \; \lambda_i \in K \} $$
+der Vektoren $\veclist{v}{k}$ bildet einen Unterraum. \pagebreak
+
+\paragraph{Beweis:} Seien $\vec{v}, \vec{w} \in U$ und $\alpha \in K$ mit
+\begin{itemize}
+    \item $\vec{v} = \veclk{u}{\lambda}{k}$
+    \item $\vec{w} = \veclk{u}{\mu}{k}$
+\end{itemize}
+dann gilt:
+\begin{eqnarray*}
+    \vec{v} + \vec{w} &=& (\veclk{u}{\lambda}{k}) + (\veclk{u}{\mu}{k}) \\
+                      &=& (\lambda_1 + \mu_1) \vec{u_1} + (\lambda_2 + \mu_2) \vec{u_2} + \ldots + (\lambda_k + \mu_k) \vec{u}_k \in U \\ \\
+    \alpha \vec{v} &=& \alpha (\veclk{u}{\lambda}{k}) \\
+                   &=& (\alpha \lambda_1) \vec{u}_1 + (\alpha \lambda_2) \vec{u}_2 + \ldots + (\alpha \lambda_k) \vec{u}_k \in U
+\end{eqnarray*}
+
+\paragraph{Definition:} Sei $M \subseteq V$ eine Menge von Vektoren, dann ist die \emph{lineare Hülle}\index{lineare Hülle} (Lin) von $M$ der kleinste (bezüglich Inklusion) Unterraum von $V$, der $M$ enthält, d.h.
+$$ \text{Lin}(M) = \bigcap_{U \text{ UR } V \atop M \subseteq U} U $$
+
+\paragraph{Satz:} Die lineare Hülle einer Menge $M \subseteq V$ ist die Menge aller Linearkombinationen der Vektoren $\vec{v}_i \in M$:
+$$ \text{Lin}(M) = \{ \lambda_1 \vec{v}_1 + \ldots \lambda_k \vec{v}_k \; | \; \lambda_i \in K, \vec{v}_i \in M \} $$
+
+\paragraph{Beweis:} Zum Einen bildet die Menge aller Linearkombinationen der Vektoren $\vec{v}_i \in M$ (rechte Seite) einen Unterraum (siehe Lemma). Zum Anderen enthält jeder Unterraum $U$, der $M$ enthält, auch die Menge aller Linearkombinationen der Vektoren $\vec{v}_i \in M$ (Abgeschlossenheit von Unterräumen bezüglich der Addition und der Multiplikation mit Skalaren). Daraus folgt, dass die Menge aller Linearkombinationen der Vektoren $\vec{v}_i \in M$ der kleinste Unterraum ist, der $M$ enthält. \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lineare Unabhängigkeit, Basis und Dimension
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lineare Unabhängigkeit, Basis und \mbox{Dimension}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lineare Unabhängigkeit}
+
+\paragraph{Definition:} Eine Menge $\{ \veclist{v}{k} \}$ von $k$ Vektoren heißt \emph{linear abhängig}\index{linear abhängig} (l.a.), wenn eine Linearkombination existiert, mit
+$$ \veclk{v}{\lambda}{k} = \vec{0} $$
+wobei mindestens ein $\lambda_i \neq 0$ ist.
+
+\paragraph{Definition:} Eine Menge $\{ \veclist{v}{k} \}$ von $k$ Vektoren heißt \emph{linear unabhängig}\index{linear unabhängig} (l.u.), wenn sie nicht linear abhängig ist.
+
+\paragraph{Satz:} Eine Menge $M \subseteq V$ ist linear unabhängig, wenn jede endliche Teilmenge von $M$ linear unabhängig ist.
+
+\paragraph{Folgerungen:}
+\begin{enumerate}
+    \item Es kann bei \emph{Aufzählungen} von Vektoren zu Mehrfachnennungen kommen (im Gegensatz zu Mengen). In diesem Fall folgt lineare Abhängigkeit. \par
+    Beispiel: Sei $\vec{v}_1, \vec{v}_2, \ldots$ eine Aufzählung und $\vec{v}_5 = \vec{v}_7$, dann ist die Aufzählung linear abhängig, weil
+    $$ \vec{0} = 1 \cdot \vec{v}_5 + (-1) \cdot \vec{v}_7 $$
+    \item Aus $\vec{0} \in M$ folgt lineare Abhängigkeit, denn
+    $$ \vec{0} = \lambda \cdot \vec{0} \platz (\text{auch wenn } \lambda \neq 0) $$
+    \item Sei $M$ linear unabhängig und $\scalarlist{\lambda}{k} \in K$, dann folgt aus
+    $$ \forall \; \veclist{v}{k} \in M \platz\platz (i \neq j \; \rightarrow \; \vec{v}_i \neq \vec{v}_j) \platz\platz \vec{0} = \veclk{v}{\lambda}{k} $$
+    dass für alle $\lambda_i$ gelten muss
+    $$ \lambda_i = 0 \platz\platz (i = 1, 2, \ldots k) $$
+    Das heißt: Es existiert \emph{keine} nichttriviale Linearkombination von $\vec{0}$.
+    \item Wenn $M$ linear abhängig ist, dann existiert eine nichttriviale Linearkombination von $\vec{0}$.
+\end{enumerate} \pagebreak
+
+\paragraph{Beispiel:} Die Vektoren
+$$ \vecthree{0}{1}{1}, \vecthree{1}{1}{1} \in \real^3 $$
+sind linear unabhängig, dann ist der Nullvektor $\vec{0}$ ist eine Linearkombination dieser Vektoren:
+$$ \vec{0} = \vecthree{0}{0}{0} = \lambda_1 \vecthree{0}{1}{1} + \lambda_2 \vecthree{1}{1}{1} = \vecthree{\lambda_2}{\lambda_1 + \lambda_2}{\lambda_1 + \lambda_2} $$
+\begin{eqnarray*}
+    0 &=& \lambda_2 \\
+    0 &=& \lambda_1 + \lambda_2 \\
+    0 &=& \lambda_1 + \lambda_2
+\end{eqnarray*}
+Daraus folgt, dass $\lambda_1 = \lambda_2 = 0$.
+
+\paragraph{Satz:} Für jede Teilmenge $M \subseteq V$ (über dem Körper $K$) sind die folgenden Aussagen äquivalent:
+\begin{itemize}
+    \item Aussage $\text{A}$: \par
+    Die Menge $M$ ist linear unabhängig.
+    \item Aussage $\text{B}$: \par
+    Kein Vektor $\vec{v} \in M$ kann als Linearkombination aus den übrigen Vektoren aus $M$ dargestellt werden.
+    \item Aussage $\text{C}$: \par
+    Jeder Vektor $\vec{v} \in \text{Lin}(M)$ hat \emph{eindeutige} Darstellung als Linearkombination aus $M$.
+\end{itemize}
+
+\paragraph{Beweis:} Der Satz wird nach folgendem Schema gezeigt:
+$$ \neg \, \text{A} \platz \underset{\text{1. Schritt}}{\Rightarrow} \platz \neg \, \text{B} \platz \underset{\text{2. Schritt}}{\Rightarrow} \platz \neg \, \text{C} \platz \underset{\text{3. Schritt}}{\Rightarrow} \platz \neg \, \text{A} $$
+Die drei Aussagen in ihrer Negation:
+\begin{itemize}
+    \item Aussage $\neg \, \text{A}$: \par
+    Es existiert eine nichttriviale Linearkombination von $\vec{0}$.
+    \item Aussage $\neg \, \text{B}$: \par
+    Es existiert ein Vektor $\vec{v} \in M$, der eine Linearkombination der übrigen Vektoren ist.
+    \item Aussage $\neg \, \text{C}$: \par
+    Es existiert ein Vektor $\vec{v} \in \text{Lin}(M)$ mit verschiedenen Linearkombinationen aus $M$.
+\end{itemize}
+
+Beweisschritte:
+\begin{itemize}
+    \item Schritt 1: \par
+    Es existiert folgende nichttriviale Linearkombination von $\vec{0}$:
+    $$ \vec{0} = \veclk{v}{\lambda}{k} $$
+    mit $\veclist{v}{k} \in M$, $\scalarlist{\lambda}{k} \in K$ und $\exists \; \lambda_i \neq 0$. \par
+    Ohne Beschränkung der Allgemeinheit gelte $\lambda_1 \neq 0$. Damit kann die Gleichung nach $\vec{v}_1$ umgeformt werden:
+    $$ \vec{v}_1 = \left( - \frac{\lambda_2}{\lambda_1} \right) \vec{v}_2 + \left( - \frac{\lambda_3}{\lambda_1} \right) \vec{v}_3 + \ldots + \left( - \frac{\lambda_k}{\lambda_1} \right) \vec{v}_k $$
+    Damit existiert ein Vektor $\vec{v}_1$, der Linearkombination der übrigen Vektoren ist:
+    $$ \vec{v}_1 \in \text{Lin}(M \; \backslash \; \{ \vec{v}_1 \}) $$
+    \item Schritt 2: \par
+    Es existiert ein Vektor $\vec{v}_1$, der Linearkombination der übrigen Vektoren ist:
+    $$ \vec{v}_1 = \lambda_2 \vec{v}_2 + \lambda_3 \vec{v}_3 + \ldots + \lambda_k \vec{v}_k $$
+    Damit existieren mindestens zwei verschiedene Linearkombinationen von $\vec{v_1}$:
+    \begin{eqnarray*}
+        \vec{v}_1 &=& 1 \cdot \vec{v}_1 + 0 \cdot \vec{v}_2 + 0 \cdot \vec{v}_3 + \ldots + 0 \cdot \vec{v}_k \\
+                  &=& 0 \cdot \vec{v}_1 + \lambda_2 \cdot \vec{v}_2 + \lambda_3 \cdot \vec{v}_3 + \ldots + \lambda_k \cdot \vec{v}_k
+    \end{eqnarray*}
+    \item Schritt 3: \par
+    Es existiert ein Vektor $\vec{v} \in \text{Lin}(M)$ mit verschiedenen Linearkombinationen aus $M$:
+    \begin{eqnarray*}
+        \vec{v} &=& \veclk{u}{\lambda}{m} \\
+                &=& \veclk{w}{\mu}{n}
+    \end{eqnarray*}
+    mit
+    $$ \{ \veclist{u}{m} \} \cup \{ \veclist{w}{n} \} = \{ \veclist{v}{k} \} \subseteq M $$
+    Die beiden Linearkombinationen von $\vec{v}$ ausgedrückt als Linearkombinationen der die Vektoren aus $\{ \veclist{v}{k} \}$:
+    \begin{eqnarray*}
+        \vec{v} &=& \veclk{v}{\lambda'}{k} \\
+                &=& \veclk{v}{\mu'}{k}
+    \end{eqnarray*}
+    mit
+    $$ \lambda'_i = \left\{ \begin{array}{ll} \lambda_j & \text{ falls } \vec{v}_i = \vec{u}_j \\ 0 & \text{ sonst} \end{array} \right. \hspace{0.5cm} \text{und} \hspace{0.5cm} \mu'_i = \left\{ \begin{array}{ll} \mu_j & \text{ falls } \vec{v}_i = \vec{w}_j \\ 0 & \text{ sonst} \end{array} \right.  $$
+    Da es sich um verschiedene Linearkombinationen handelt, existiert ein $i_0$ mit $\lambda'_{i_0} \neq \mu'_{i_0}$. Daraus folgt:
+    \begin{eqnarray*}
+        \vec{0} &=& \vec{v} - \vec{v} \\
+                &=& (\veclk{v}{\lambda'}{k}) - (\veclk{v}{\mu'}{k}) \\
+                &=& (\lambda'_1 - \mu'_1) \vec{v}_1 + \ldots + \underbrace{(\lambda'_{i_0} - \mu'_{i_0})}_{\neq 0} \vec{v}_{i_0} + \ldots + (\lambda'_k - \mu'_k) \vec{v}_k
+    \end{eqnarray*}
+    Damit existiert eine nichttriviale Linearkombination von $\vec{0}$. \hfill $\Box$
+    \item Beispiel zu Schritt 3: \par
+    \begin{eqnarray*}
+        \vectwo{1}{2} &=& 1 \cdot \vectwo{1}{0} + 2 \cdot \vectwo{0}{1} \\
+                      &=& 1 \cdot \vectwo{1}{1} + 1 \cdot \vectwo{0}{1}
+    \end{eqnarray*}
+    Die Menge aller Vektoren, aus beiden Linearkombinationen:
+    $$ \left\{ \vectwo{1}{0}, \vectwo{0}{1}, \vectwo{1}{1} \right\} $$
+    Die beiden Linearkombinationen mit Hilfe aller Vektoen aus dieser Menge:
+    \begin{eqnarray*}
+        \vectwo{1}{2} &=& 1 \cdot \vectwo{1}{0} + 2 \cdot \vectwo{0}{1} + 0 \cdot \vectwo{1}{1} \\
+                      &=& 0 \cdot \vectwo{1}{0} + 1 \cdot \vectwo{0}{1} + 1 \cdot \vectwo{1}{1}
+    \end{eqnarray*}
+    Nichttriviale Linearkombination von $\vec{0}$:
+    \begin{eqnarray*}
+        \vectwo{0}{0} &=& \vectwo{1}{2} - \vectwo{1}{2} \\
+                      &=& \left[ 1 \cdot \vectwo{1}{0} + 2 \cdot \vectwo{0}{1} + 0 \cdot \vectwo{1}{1} \right] - \left[ 0 \cdot \vectwo{1}{0} + 1 \cdot \vectwo{0}{1} + 1 \cdot \vectwo{1}{1} \right] \\
+                      &=& (1 - 0) \cdot \vectwo{1}{0} + (2 - 1) \cdot \vectwo{0}{1} + (0 - 1) \cdot \vectwo{1}{1} \\
+                      &=& 1 \cdot \vectwo{1}{0} + 1 \cdot \vectwo{0}{1} - 1 \cdot \vectwo{1}{1}
+    \end{eqnarray*}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Erzeugendensystem und Basis}
+
+\paragraph{Definition:} Eine Teilmenge $M \subseteq V$ heißt \emph{Erzeugendensystem}\index{Erzeugendensystem} von $V$, wenn die lineare Hülle von $M$ der Vektorraum $V$ ist:
+$$ \text{Lin}(M) = V $$
+
+\paragraph{Definition:} Eine Teilmenge $M \subseteq V$ heißt \emph{Basis}\index{Basis}, wenn sie Erzeugendensystem von~$V$ und linear unabhängig ist.
+
+\paragraph{Folgerung:} Eine Teilmenge $M \subseteq V$ ist genau dann eine Basis von $V$, wenn jeder Vektor $\vec{v} \in V$ eine \emph{eindeutige} Darstellung als Linearkombination aus $M$ hat.
+
+\paragraph{Beispiele:}
+\begin{itemize}
+    \item kanonische Basis von $\real^n$:
+    $$ \vec{e}_1 = \vecfour{1}{0}{\vdots}{0}, \hspace{0.5cm} \vec{e}_2 = \vecfour{0}{1}{\vdots}{0}, \hspace{0.5cm} \ldots \hspace{0.5cm} \vec{e}_n = \vecfour{0}{0}{\vdots}{1} $$
+    Für die kanonische Basis gilt:
+    $$ \vecfour{a_1}{a_2}{\vdots}{a_n} = a_1 \vec{e}_1 + a_2 \vec{e}_2 + \ldots + a_n \vec{e}_n $$
+    \item weitere Basis von $\real^n$:
+    $$ \vec{e}_1 = \vecfour{1}{0}{\vdots}{0}, \hspace{0.5cm} \vec{e}_2 = \vecfour{1}{1}{\vdots}{0}, \hspace{0.5cm} \ldots \hspace{0.5cm} \vec{e}_n = \vecfour{1}{1}{\vdots}{1} $$
+    \item Standardbasis für den Vektorraum $\real[x]$ der Polynome:
+    $$ \vec{e}_1 = 1, \hspace{0.5cm} \vec{e}_2 = x, \hspace{0.5cm} \vec{e}_3 = x^2, \hspace{0.5cm} \ldots $$
+\end{itemize}
+
+\paragraph{Folgerung:} Für jede Teilmenge $M \subseteq V$ sind die folgenden Bedingungen äquivalent:
+\begin{itemize}
+    \item Aussage $\text{A}$: \par
+    Die Menge $M$ ist Basis von $V$.
+    \item Aussage $\text{B}$: \par
+    Die Menge $M$ ist minimales Erzeugendensystem von $V$.
+    \item Aussage $\text{C}$: \par
+    Die Menge $M$ ist eine maximale linear unabhängige Menge.
+\end{itemize}
+Bemerkung: Die Begriffe "`minimal"' und "`maximal"' gelten in Bezug auf Inklusion.
+
+\paragraph{Lemma:} Ist die Teilmenge $M \subseteq V$ linear unabhängig und der Vektor $\vec{v}$ Element von $V$, aber nicht Element aus der linearen Hüllen von $M$, dann ist die Menge $M \cup \{ \vec{v} \}$ ebenfalls linear unabhängig:
+$$ M \subseteq V \text{ l.u.} \platz \land \platz \vec{v} \in V \platz \land \platz \vec{v} \notin \text{Lin}(M) \platz \Rightarrow \platz M \cup \{ \vec{v} \} \text{ l.u.} $$
+
+\paragraph{Beweis (indirekt):} Angenommen die Teilmenge $M \subseteq V$ ist linear unabhängig und der Vektor $\vec{v}$ Element von $V$, aber nicht Element aus der linearen Hüllen von $M$, und die Menge $M \cup \{ \vec{v} \}$ ist linear abhängig. Damit existiert eine nichttriviale Linearkombination von $\vec{0}$ (mit $\exists \, \lambda_i \neq 0 \; \lor \; \lambda \neq 0$):
+$$ \vec{0} = \veclk{v}{\lambda}{k} + \lambda \vec{v} $$
+Wenn $\lambda \neq 0$, dann lässt sich die Gleichung nach $\vec{v}$ umformen:
+$$ \vec{v} = \left( - \frac{\lambda_1}{\lambda} \right) \vec{v}_1 + \left( - \frac{\lambda_2}{\lambda} \right) \vec{v}_2 + \ldots + \left( - \frac{\lambda_k}{\lambda} \right) \vec{v}_k $$
+Damit ist der Vektor $\vec{v}$ in der linearen Hüllen von $M$:
+$$ \vec{v} \in \text{Lin}(M) $$
+Dies wäre ein Widerspruch zur Annahme. Damit ist $\lambda = 0$. Daraus folgt:
+$$ \exists \, \lambda_i \neq 0 \hspace{0.5cm} \vec{0} = \veclk{v}{\lambda}{k} $$
+Dies ist ein Widerspruch, da die Menge $M$ linear unabhängig ist und damit keine nichttriviale Linearkombination von $\vec{0}$ existiert. \hfill $\Box$
+
+\paragraph{Basisergänzungssatz (Steinitz)\index{Basisergänzungssatz}\index{Steinitz (Basisergänzungssatz)}:} Seien
+\begin{itemize}
+    \item $V$ ein Vektorraum über dem Körper $K$
+    \item $M$ eine Teilmenge von $V$
+    \item $N$ eine Teilmenge von $V$
+\end{itemize}
+Ist die Menge $M$ linear unabhängig und die lineare Hülle von $M \cup N$ der Vektorraum~$V$, dann kann man die Menge $M$ durch eventuelle Hinzunahme von Vektoren aus der Menge $N$ zu einer Basis des Vektorraumes $V$ erweitern.
+
+\paragraph{Beweis:} Induktion nach $k = |N|$:
+\begin{itemize}
+    \item Induktionsanfang ($k = 0$, das heißt $N = \emptyset$): \par
+    Die Menge $M$ ist Basis, weil $M$ linear unabhängig ist und
+    $$ \text{Lin}(M) = \text{Lin}(M \cup \emptyset) = \text{Lin}(M \cup N) = V $$
+    \item Induktionsschritt ($k - 1 \rightarrow k$): \par
+    \begin{itemize} \punkt
+        \item Fall 1: $\text{Lin}(M) = V$ \par
+        Daraus folgt, dass die Menge $M$ Basis ist.
+        \item Fall 2: $\text{Lin}(M) \neq V$ \par
+        Sei der Vektor $\vec{v}$ Element von $N$, aber nicht Element aus der linearen Hüllen von $M$. Damit ist die Menge $M \cup \{ \vec{v} \}$ ebenfalls linear unabhängig. \par
+        Die Menge $M$ wird also um den Vektor $\vec{v}$ erweitert, und die Menge $N$ wird um den Vektor $\vec{v}$ reduziert:
+        $$ | N \; \backslash \; \{ \vec{v} \} | = k - 1 $$
+        Nach Induktionsvoraussetzung existiert eine Erweiterung der Menge~$M$ zur Basis.
+    \end{itemize}
+\end{itemize} \hfill $\Box$ \pagebreak
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Sei $M_1$ die folgende linear unabhängige Menge und $N_1$ die kanonische Basis von $\real^3$:
+    $$ M_1 = \left\{ \vecthree{1}{1}{0}, \vecthree{0}{1}{1} \right\} $$
+    Man kann jeden der drei Vektoren aus $N_1$ als Basisergänzung wählen.
+    \item Sei $M_2$ die folgende linear unabhängige Menge und $N_2$ die kanonische Basis von $\real^3$:
+    $$ M_2 = \left\{ \vecthree{1}{0}{0}, \vecthree{1}{1}{0} \right\} $$
+    Der Vektor $\vec{e}_1$ ist bereits in $M_2$ enthalten und damit keine Ergänzung von~$M_2$, der Vektor $\vec{e}_2$ ist auch keine Basisergänzung, weil $M_2 \cup \{ \vec{e}_2 \}$ linear abhängig wäre, doch der dritte Vektor $\vec{e}_3$ ergänzt die Menge $M_2$ zu einer Basis.
+\end{enumerate}
+
+\paragraph{Austauschlemma:} Sind die Mengen $\{ \veclist{v}{n} \}$ und $\{ \veclist{w}{m} \}$ Basen von $V$, dann gibt es für jeden Vektor $\vec{v}_i$ einen Vektor $\vec{w}_j$, so dass die Menge
+$$ \left( \{ \veclist{v}{n} \} \; \backslash \; \{ \vec{v}_i \} \right) \cup \{ \vec{w}_j \} $$
+ebenfalls Basis von $V$ ist.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dimension}
+
+\paragraph{Definition:} Besitzt ein Vektorraum $V$ eine endliche Basis $\{ \veclist{v}{n} \}$, dann ist $V$ \emph{endlich-dimensional}\index{endlich-dimensional} und $n$ heißt die \emph{Dimension}\index{Dimension} von $V$:
+$$ \text{dim } V = n $$
+Ein Vektorraum, der keine endliche Basis besitzt, ist \emph{unendlich-dimensional}\index{unendlich-dimensional}:
+$$ \text{dim } V = \infty $$
+
+\paragraph{Folgerung:} Ist die Menge $M = \{ \veclist{v}{k} \}$ Teilmenge eines Vektorraums $V$ und ist $k > \text{dim } V$, so ist $M$ linear abhängig.
+
+\paragraph{Satz:} Jeder Vektorraum besitzt eine Basis.
+
+\paragraph{Satz:} Ist die Dimension eines Vektorraumes $V$ endlich und $U$ ein Unterraum von $V$, dann gilt:
+$$ \text{dim } U \leq \text{dim } V $$
+und
+$$ \text{dim } U < \text{dim } V \platz \Leftrightarrow \platz U \neq V $$
+
+\paragraph{Definition:} Sind $U_1$ und $U_2$ Unterräume von $V$, so heißt
+$$ U_1 + U_2 = \{ \vec{x} + \vec{y} \; | \; \vec{x} \in U_1, \vec{y} \in U_2 \} $$
+die Summe von $U_1$ und $U_2$\index{Summe von Unterräumen}.
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Sei $V = \real^4$:
+    \begin{eqnarray*}
+        U_1 &=& \text{Lin}(\{ \vec{e}_1, \vec{e}_2, \vec{e}_4 \}) \\
+        U_2 &=& \text{Lin}(\{ \vec{e}_1, \vec{e}_3, \vec{e}_4 \}) \\ \\
+        U_1 + U_2 &=& \real^4
+    \end{eqnarray*}
+    \item Sei $V = \real^3$:
+    \begin{eqnarray*}
+        U_1 &=& \text{Lin} \left( \left\{ \vecthree{1}{-1}{1} \right\} \right) \\
+        U_2 &=& \text{Lin} \left( \left\{ \vecthree{1}{-1}{-1} \right\} \right) \\ \\
+        U_1 + U_2 &=& \text{Lin} \left( \left\{ \vecthree{1}{-1}{1}, \vecthree{1}{-1}{-1} \right\} \right) = \text{Lin} \left( \left\{ \vecthree{1}{-1}{0}, \vecthree{0}{0}{1} \right\} \right)
+    \end{eqnarray*}
+    Bemerkung: $U_1 + U_2$ ist die Ebene senkrecht zu $xy$-Ebene auf der Geraden~$y = -x$ durch den Ursprung $(0, 0, 0)$.
+\end{enumerate}
+
+\paragraph{Satz:} Die Summe von zwei Unterräumen ist ein Unterraum. Für zwei endlich-dimensionale Unterräume $U_1$ und $U_2$ gilt:
+$$ \text{dim}(U_1 + U_2) = \text{dim } U_1 + \text{dim } U_2 - \text{dim}(U_1 \cap U_2) $$
+
+\paragraph{Beweisidee:}
+\begin{itemize}
+    \item Die Basis von $U_1 \cap U_2$ sei:
+    $$ \{ \veclist{v}{r} \} $$
+    \item Ergänzung der Basis von $U_1 \cap U_2$ zur Basis von $U_1$:
+    $$ \{ \veclist{v}{r}, \veclist{u}{s} \} $$
+    \item Ergänzung der Basis von $U_1 \cap U_2$ zur Basis von $U_2$:
+    $$ \{ \veclist{v}{r}, \veclist{w}{t} \} $$
+    \item Man zeigt: Die Basis von $U_1 + U_2$ ist:
+    $$ \{ \veclist{v}{r}, \veclist{u}{s}, \veclist{w}{t} \} $$
+    \item Damit gilt für die Dimenstionen:
+    \begin{itemize}
+        \item $\text{dim}(U_1 + U_2) = r + s + t$
+        \item $\text{dim } U_1 = r + s$
+        \item $\text{dim } U_2 = r + t$
+        \item $\text{dim}(U_1 \cap U_2) = r$
+    \end{itemize}
+    Daraus folgt:
+    $$ \underbrace{\text{dim}(U_1 + U_2)}_{r + s + t} = \underbrace{\text{dim } U_1}_{r + s} + \underbrace{\text{dim } U_2}_{r + t} - \underbrace{\text{dim}(U_1 \cap U_2)}_{r} $$
+\end{itemize}
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Sei $U_1$ eine Ebene durch den Ursprung $(0, 0, 0)$ und $U_2$ eine Gerade durch den Ursprung $(0, 0, 0)$ mit $U_2 \not\subset U_1$. Daraus heißt:
+    \begin{itemize}
+        \item $\text{dim } U_1 = 2$
+        \item $\text{dim } U_2 = 1$
+        \item $\text{dim}(U_1 \cap U_2) = 0$ (weil $U_1 \cap U_2 = \vec{0}$)
+    \end{itemize}
+    Daraus folgt:
+    \begin{itemize}
+        \item $\text{dim}(U_1 + U_2) = 3$
+    \end{itemize}
+    Damit ist $U_1 + U_2 = \real^3$.
+    \item Seien $U_1$ und $U_2$ Ebenen durch den Ursprung $(0, 0, 0)$ mit $U_1 \neq U_2$. Daraus heißt:
+    \begin{itemize}
+        \item $\text{dim } U_1 = 2$
+        \item $\text{dim } U_2 = 2$
+        \item $\text{dim}(U_1 \cap U_2) = 1$ (weil $U_1 \cap U_2$ eine Gerade ist)
+    \end{itemize}
+    Daraus folgt:
+    \begin{itemize}
+        \item $\text{dim}(U_1 + U_2) = 3$
+    \end{itemize}
+    Damit ist $U_1 + U_2 = \real^3$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lineare Abbildungen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lineare Abbildungen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einleitung}
+
+\paragraph{Definition:} Seien $V$ und $W$ Vektorräume über dem Körper $K$. Eine Abbildung $f : V \rightarrow W$ heißt \emph{linear}\index{lineare Abbildung} \emph{(Vektorraumhomomorphismus)}\index{Vektorraumhomomorphismus}\index{Homomorphismus}, wenn für alle $\vec{v}, \vec{w} \in V$ und für alle $\lambda \in K$ gilt:
+\begin{eqnarray*}
+    f(\vec{v} + \vec{w}) &=& f(\vec{v}) + f(\vec{w}) \\
+    f(\lambda \cdot \vec{v}) &=& \lambda \cdot f(\vec{v})
+\end{eqnarray*}
+$\text{Hom}(V, W)$ bezeichnet die Menge aller linearer Abbildungen $f : V \rightarrow W$.
+
+\paragraph{Beobachtungen:}
+\begin{itemize}
+    \item Sei $f \in \text{Hom}(V, W)$, dann gilt:
+    $$ f(\veclk{v}{\lambda}{k}) = \lambda_1 \cdot f(\vec{v}_1) + \lambda_2 \cdot f(\vec{v}_2) + \ldots + \lambda_k \cdot f(\vec{v}_k) $$
+    \item Die Verknüpfung von linearen Abbildungen $f : V \rightarrow W$ und $g : W \rightarrow Y$ ist eine lineare Abbildung $gf : V \rightarrow Y$ mit
+    $$ gf(\vec{v}) = g(f(\vec{v})) $$
+    \item Die Menge aller linearen Abbildungen $\text{Hom}(V, W)$ ist selbst ein Vektorraum mit den Operationen:
+    \begin{itemize} \punkt
+        \item $(f + g)(\vec{v}) = f(\vec{v}) + g(\vec{v})$
+        \item $(\lambda \cdot f)(\vec{v}) = \lambda \cdot f(\vec{v})$
+    \end{itemize}
+    Denn für alle $f, g \in \text{Hom}(V, W)$, $\vec{u}, \vec{v} \in V$ und $\lambda \in K$:
+    \begin{eqnarray*}
+        (f+g)(\vec{u}) + (f+g)(\vec{v}) &=& f(\vec{u}) + g(\vec{u}) + f(\vec{v}) + g(\vec{v}) \\
+                                        &=& f(\vec{u}) + f(\vec{u}) + g(\vec{v}) + g(\vec{v}) \\
+                                        &=& f(\vec{u}+\vec{v}) + g(\vec{u} + \vec{v}) \\
+                                        &=& (f+g)(\vec{u}+\vec{v}) \\ \\
+                                        &\rightarrow& f+g \in \text{Hom}(V, W) \\ \\
+        \lambda \cdot (f+g)(\vec{u}) &=& \lambda \cdot (f(\vec{u}) + g(\vec{u})) \\
+                                     &=& \lambda \cdot f(\vec{u}) + \lambda \cdot g(\vec{u}) \\
+                                     &=& f(\lambda \vec{u}) + g(\lambda \vec{u}) \\
+                                     &=& (f+g)(\lambda \vec{u}) \\ \\
+                                     &\rightarrow& \lambda \cdot f \in \text{Hom}(V, W)
+    \end{eqnarray*}
+\end{itemize}
+
+\paragraph{Beispiele:} $f, g, h, j : \real^2 \rightarrow \real^2$ \label{linabb}
+\begin{enumerate} \buchstaben
+    \item Spiegelung an der $x$-Achse :
+    $$ f \left( \vectwo{x}{y} \right) = \vectwo{x}{-y} $$
+    \begin{center}
+        \includegraphics{skript/grafiken/lineare-algebra-2-4-1-a}
+    \end{center} \pagebreak
+    \item Spiegelung an der Geraden $y = x$:
+    $$ g \left( \vectwo{x}{y} \right) = \vectwo{y}{x} $$
+    \begin{center}
+        \includegraphics{skript/grafiken/lineare-algebra-2-4-1-b}
+    \end{center}
+    \item Projektion auf die $y$-Achse:
+    $$ h \left( \vectwo{x}{y} \right) = \vectwo{0}{y} $$
+    \begin{center}
+        \includegraphics{skript/grafiken/lineare-algebra-2-4-1-c}
+    \end{center}
+    \item Drehung um 45°:
+    \begin{eqnarray*}
+        j \left( \vectwo{1}{0} \right) &=& \vectwo{\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{2}}} \\
+        j \left( \vectwo{0}{1} \right) &=& \vectwo{-\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{2}}} \\ \\ \\
+        j \left( \vectwo{x}{y} \right) &=& j \left( x \vectwo{1}{0} + y \vectwo{0}{1} \right) \\ \\
+                                       &=& x \cdot j \left( \vectwo{1}{0} \right) + y \cdot j \left( \vectwo{0}{1} \right) \\ \\
+                                       &=& x \cdot \vectwo{\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{2}}} + y \cdot \vectwo{-\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{2}}} \\ \\
+                                       &=& \vectwo{\frac{1}{\sqrt{2}} \; x - \frac{1}{\sqrt{2}} \; y}{\frac{1}{\sqrt{2}} \; x + \frac{1}{\sqrt{2}} \; y}
+    \end{eqnarray*}
+    \begin{center}
+        \includegraphics{skript/grafiken/lineare-algebra-2-4-1-d}
+    \end{center}
+\end{enumerate} \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kern und Bild von linearen Abbildungen}
+
+\paragraph{Definition:} Sei $f \in \text{Hom}(V,W)$ eine lineare Abbildung, so ist ihr \emph{Kern}\index{Kern einer linearen Abbildung} ($\text{Ker } f$) und ihr \emph{Bild}\index{Bild einer linearen Abbildung} ($\text{Im } f$) folgendermaßen definiert:
+\begin{eqnarray*}
+    \text{Ker } f &=& \{ \vec{v} \in V \; | \; f(\vec{v}) = \vec{0} \} \\
+    \text{Im } f &=& \{ \vec{w} \in W \; | \; \exists \, \vec{v} \; \; f(\vec{v}) = \vec{w} \}
+\end{eqnarray*}
+
+\paragraph{Beispiele:} Kerne und Bilder aus dem obigen Beispiel (siehe \ref{linabb})
+\begin{enumerate} \buchstaben
+    \item $\text{Ker } f = \{ \vec{0} \}$:
+    $$ f \left( \vectwo{x}{y} \right) = \vectwo{x}{-y} = \vectwo{0}{0} \platz \Leftrightarrow \platz x = 0 \platz \land \platz y = 0 $$
+    $\text{Im } f = \real^2$:
+    \begin{itemize}
+        \item $f$ ist eine Abbildung von $\real^2$ nach $\real^2$, und zwar $f^{-1} = f$.
+    \end{itemize}
+
+    \item $\text{Ker } g = \{ \vec{0} \}$:
+    $$ g \left( \vectwo{x}{y} \right) = \vectwo{y}{x} = \vectwo{0}{0} \platz \Leftrightarrow \platz x = 0 \platz \land \platz y = 0 $$
+    $\text{Im } g = \real^2$:
+    \begin{itemize}
+        \item $g$ ist eine Abbildung von $\real^2$ nach $\real^2$, und zwar $g^{-1} = g$.
+    \end{itemize}
+
+    \item $\text{Ker } h = \text{Lin} \left( \vectwo{1}{0} \right)$:
+    $$ h \left( \vectwo{x}{y} \right) = \vectwo{0}{y} = \vectwo{0}{0} \platz \Leftrightarrow \platz y = 0 $$
+    $\text{Im } h = \text{Lin} \left( \vectwo{0}{1} \right)$:
+    \begin{itemize}
+        \item die $x$-Komponente aller Elemente aus dem Bild ist $0$.
+    \end{itemize}
+
+    \item $\text{Ker } j = \{ \vec{0} \}$:
+    $$ j \left( \vectwo{x}{y} \right) = \vectwo{\frac{1}{\sqrt{2}} \; x - \frac{1}{\sqrt{2}} \; y}{\frac{1}{\sqrt{2}} \; x + \frac{1}{\sqrt{2}} \; y} = \vectwo{0}{0} \platz \Leftrightarrow \platz x = 0 \platz \land \platz y = 0 $$
+    $\text{Im } f = \real^2$:
+    \begin{itemize}
+        \item $j$ ist eine Abbildung von $\real^2$ nach $\real^2$ und $j$ ist bijektiv, so dass folgende Umkehrabbildung existiert:
+        $$ j^{-1} \left( \vectwo{x}{y} \right) = \vectwo{\frac{1}{\sqrt{2}} \; x + \frac{1}{\sqrt{2}} \; y}{- \frac{1}{\sqrt{2}} \; x + \frac{1}{\sqrt{2}} \; y} $$
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Lemma:} Der Kern und das Bild einer linearen Abbildung $f \in \text{Hom}(V, W)$ sind Unterräume von $V$ bzw. $W$:
+\begin{eqnarray*}
+    \text{Ker } f &\text{UR}& V \\
+    \text{Im } f &\text{UR}& W
+\end{eqnarray*}
+
+\paragraph{Beweis (Kern):} Seien $\vec{u}, \vec{v} \in \text{Ker } f$ und $\lambda \in K$ (Körper zu $V$).
+\begin{itemize}
+    \item Prüfe, ob $\text{Ker } f$ mindestens ein Element enthält:
+    \begin{eqnarray*}
+        f(\vec{0}) &=& f(\vec{0} - \vec{0}) \\
+                   &=& f(\vec{0}) - f(\vec{0}) \\
+                   &=& \vec{0}
+    \end{eqnarray*}
+    Damit ist $\vec{0} \in \text{Ker } f$.
+    \item Prüfe Abgeschlossenheit gegenüber der Addition:
+    \begin{eqnarray*}
+        f(\vec{u} + \vec{v}) &=& f(\vec{u}) + f(\vec{v}) \\
+                             &=& \vec{0} + \vec{0} \hspace{0.5cm} \text{(da $\vec{u}, \vec{v} \in \text{Ker } f$)} \\
+                             &=& \vec{0}
+    \end{eqnarray*}
+    Damit ist auch $\vec{u} + \vec{v} \in \text{Ker } f$.
+    \item Prüfe Abgeschlossenheit gegenüber der Multiplikation mit Skalaren:
+    \begin{eqnarray*}
+        f(\lambda \vec{u}) &=& \lambda \cdot f(\vec{u}) \\
+                           &=& \lambda \cdot \vec{0} \hspace{0.5cm} \text{(da $\vec{u} \in \text{Ker } f$)} \\
+                           &=& \vec{0}
+    \end{eqnarray*}
+    Damit ist auch $\lambda \vec{u} \in \text{Ker } f$. \hfill $\Box$
+\end{itemize}
+
+\paragraph{Beweis (Bild):} Seien $\vec{u}, \vec{v} \in \text{Im } f$ und $\lambda \in K$ (Körper zu $W$).
+\begin{itemize}
+    \item Prüfe, ob $\text{Im } f$ mindestens ein Element enthält:
+    \begin{eqnarray*}
+        f(\vec{0}) &=& \vec{0} \hspace{0.5cm} \text{(siehe oben)}
+    \end{eqnarray*}
+    Damit ist $\vec{0} \in \text{Im } f$.
+    \item Prüfe Abgeschlossenheit gegenüber der Addition:
+    \begin{eqnarray*}
+        \vec{u} + \vec{v} &=& f(\vec{p}) + f(\vec{q}) \hspace{0.5cm} \text{(mit $f(\vec{p}) = \vec{u}$ und $f(\vec{q}) = \vec{v}$)} \\
+                          &=& f(\vec{p} + \vec{q}) \\
+                          &=& f(\vec{r}) \hspace{0.5cm} \text{(mit $\vec{r} = \vec{p} + \vec{q} \in V$)}
+    \end{eqnarray*}
+    Damit ist auch $\vec{u} + \vec{v} \in \text{Im } f$.
+    \item Prüfe Abgeschlossenheit gegenüber der Multiplikation mit Skalaren:
+    \begin{eqnarray*}
+        \lambda \vec{u} &=& \lambda \cdot f(\vec{p}) \hspace{0.5cm} \text{(mit $f(\vec{p}) = \vec{u}$)} \\
+                        &=& f(\lambda \vec{p}) \\
+                        &=& f(\vec{r}) \hspace{0.5cm} \text{(mit $\vec{r} = \lambda \vec{p} \in V$)}
+    \end{eqnarray*}
+    Damit ist auch $\lambda \vec{u} \in \text{Im } f$. \hfill $\Box$
+\end{itemize}
+
+\paragraph{Lemma:} Eine lineare Abbildung $f \in \text{Hom}(V, W)$ ist genau dann injektiv, wenn ihr Kern nur aus dem Nullvektor besteht:
+$$ \text{Ker } f = \{ \vec{0} \} $$
+
+\paragraph{Beweis ($\Rightarrow$):} Da $f(\vec{0}) = \vec{0}$ und $f$ injektiv ist, bildet kein anderer Vektor auf $\vec{0}$ ab. Damit liegt außer dem Nullvektor kein anderer Vektor im $\text{Ker } f$. \hfill $\Box$
+\paragraph{Beweis durch Widerspruch ($\Leftarrow$):} Angenommen $\text{Ker } f = \{ \vec{0} \}$ und $f$ ist \emph{nicht} injektiv, dann existieren zwei Vektoren $\vec{u}, \vec{v} \in V$, so dass
+$$ \vec{u} \neq \vec{v} \platz \land \platz f(\vec{u}) = f(\vec{v}) $$
+Daraus folgt:
+$$ f(\vec{u} - \vec{v}) = f(\vec{u}) - f(\vec{w}) = \vec{0} $$
+Damit liegt $\vec{u} - \vec{v} \neq \vec{0}$ in $\text{Ker } f$. Dies ist ein Widerspruch, da $\text{Ker } f = \{ \vec{0} \}$. \hfill $\Box$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Spezielle Homomorphismen}
+
+\paragraph{Definitionen:} Einen Homomorphismus $f \in \text{Hom}(V, W)$ nennt man einen
+\begin{itemize}
+    \item \emph{Monomorphismus}\index{Monomorphismus}, wenn $f$ injektiv ist,
+    \item \emph{Epimorphismus}\index{Epimorphismus}, wenn $f$ surjektiv ist,
+    \item \textbf{\emph{Isomorphismus}}\index{Isomorphismus}, wenn $f$ bijektiv ist,
+    \item \emph{Endomorphismus}\index{Endomorphismus}, wenn $V = W$,
+    \item \textbf{\emph{Automorphismus}}\index{Automorphismus}, wenn $V = W$ und $f$ bijektiv ist.
+\end{itemize}
+
+\paragraph{Satz:} Ist $f \in \text{Hom}(V, W)$ ein Isomorphismus, dann ist auch $f^{-1} \in \text{Hom}(W, V)$ ein Isomorphismus.
+
+\paragraph{Satz:} Die Verkettung von Isomorphismen ist auch wieder ein Isomorphismus.
+
+\paragraph{Satz:} Seien
+\begin{itemize}
+    \item $V, W$ Vektorräume über $K$,
+    \item die Menge $\{ \veclist{v}{n} \} \subseteq V$ eine Basis von $V$ und
+    \item $\veclist{w}{n} \in W$ beliebig,
+\end{itemize}
+dann gibt es eine \emph{eindeutige} lineare Abbildung $f \in \text{Hom}(V, W)$ definiert durch
+$$ f(\vec{v}_i) = \vec{w}_i \platz \text{für} \platz i = 1, 2, \ldots n $$
+
+\paragraph{Beweis:} Jeder Vektor $\vec{v} \in V$ hat eine eindeutige Darstellung als Linearkombination aus $\{ \veclist{v}{n} \}$:
+$$ \vec{v} = \veclk{v}{\lambda}{n} $$
+\begin{itemize}
+    \item Zu zeigen ist, dass eine entsprechende lineare Abbildung existiert. Dazu wird die Abbildung des Vektors $\vec{v}$ folgendermaßen definiert:
+    \begin{eqnarray*}
+        f(\vec{v}) &=& \veclk{w}{\lambda}{n} \\
+                   &=& \lambda_1 \cdot f(\vec{v}_1) + \lambda_2 \cdot f(\vec{v}_2) + \ldots + \lambda_n \cdot f(\vec{v}_n)
+    \end{eqnarray*}
+    Außerdem gilt:
+    $$ f(\vec{v}) = f(\veclk{v}{\lambda}{n}) $$
+    Daraus folgt:
+    $$ f(\veclk{v}{\lambda}{n}) = \lambda_1 \cdot f(\vec{v}_1) + \lambda_2 \cdot f(\vec{v}_2) + \ldots + \lambda_n \cdot f(\vec{v}_n) $$
+    Damit ist $f$ eine lineare Abbildung.
+    \item Außerdem ist zu zeigen, dass $f$ eine eindeutige lineare Abbildung ist: \par
+    Angenommen es existiert eine lineare Abbildung $g \neq f$ mit $g(\vec{v}_i) = \vec{w}_i$. Damit gilt:
+    \begin{eqnarray*}
+        g(\vec{v}) &=& g(\veclk{v}{\lambda}{n}) \\
+                   &=& \lambda_1 \cdot g(\vec{v}_1) + \lambda_2 \cdot g(\vec{v}_2) + \ldots + \lambda_n \cdot g(\vec{v}_n) \\
+                   &=& \veclk{w}{\lambda}{n} \\
+                   &=& f(\vec{v})
+    \end{eqnarray*}
+    Das heißt, für alle $\vec{v} \in V$ gilt $g(\vec{v}) = f(\vec{v})$. Damit ist $g = f$. Dies ein Widerspruch zur Annahme. \hfill $\Box$
+\end{itemize}
+
+\paragraph{Folgerung:} Zu zwei $n$-dimentionalen Vektorräumen existiert mindestens ein Isomorphismus, der den einen Vektorraum in den anderen überführt.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rang einer linearen Abbildung}
+
+\paragraph{Definition:} Der \emph{Rang}\index{Rang einer linearen Abbildung} einer linearen Abbildung $f \in \text{Hom}(V, W)$ ist die Dimension des Bildes von $f$:
+$$ \text{rg } f = \text{dim}(\text{Im f}) $$
+
+\paragraph{Satz (Dimensionsformel für lineare Abbildungen\index{Dimensionsformel}):} Für jede lineare Abbildung $f \in \text{Hom}(V, W)$ gilt:
+$$ \begin{array}{ccccc}
+    \text{dim}(\text{Ker } f) &+& \text{dim}(\text{Im } f) &=& \text{dim } V \\
+    \text{dim}(\text{Ker } f) &+& \text{rg } f &=& \text{dim } V
+\end{array} $$
+
+\paragraph{Beweis:} Sei $\{ \veclist{v}{k} \}$ eine Basis von $\text{Ker } f \subseteq V$:
+$$ \text{Ker } f = \text{Lin}(\{ \veclist{v}{k} \}) \platz \text{und} \platz \{ \veclist{v}{k} \} \text{ ist l.u.} $$
+Diese Basis wird durch die Vektoren $\{ \vec{v}_{k+1}, \vec{v}_{k+2}, \ldots \vec{v}_n \}$ zu einer Basis von $V$ erweitert:
+$$ V = \text{Lin}(\{ \vec{v}_1, \ldots \vec{v}_k, \vec{v}_{k+1}, \ldots \vec{v}_n \}) \platz \text{und} \platz \{ \vec{v}_1, \ldots \vec{v}_k, \vec{v}_{k+1}, \ldots \vec{v}_n \} \text{ ist l.u.} $$
+Zu zeigen ist, dass $\{ f(\vec{v}_{k+1}), f(\vec{v}_{k+2}), \ldots f(\vec{v}_n) \}$ eine Basis von $\text{Im } f$ ist.
+\begin{itemize}
+    \item Angenommen $\vec{w} \in \text{Im } f$:
+    \begin{eqnarray*}
+        \vec{w} &=& f(\vec{v}) \\
+                &=& f(\lambda_1 \cdot \vec{v}_1 + \ldots + \lambda_k \cdot \vec{v}_k + \lambda_{k+1} \cdot \vec{v}_{k+1} + \ldots + \lambda_n \cdot \vec{v}_n) \\
+                &=& \lambda_1 \cdot f(\vec{v}_1) + \ldots + \lambda_k \cdot f(\vec{v}_k) + \lambda_{k+1} \cdot f(\vec{v}_{k+1}) + \ldots + \lambda_n \cdot f(\vec{v}_n)
+    \end{eqnarray*}
+    Da $\veclist{v}{k} \in \text{Ker } f$, gilt $f(\vec{v}_1) = f(\vec{v}_2) = \ldots = f(\vec{v}_k) = \vec{0}$. Daraus folgt:
+    $$ \vec{w} = \lambda_{k+1} \cdot f(\vec{v}_{k+1}) + \lambda_{k+2} \cdot f(\vec{v}_{k+2}) + \ldots + \lambda_n \cdot f(\vec{v}_n) $$
+    Damit ist $\{ f(\vec{v}_{k+1}), f(\vec{v}_{k+2}), \ldots f(\vec{v}_n) \}$ Erzeugendensystem von $\text{Im } f$.
+    \item Der Nullvektor $\vec{0}$ sei eine Linearkombination dieses Erzeugendensystems:
+    \begin{eqnarray*}
+        \vec{0} &=& \lambda_{k+1} \cdot f(\vec{v}_{k+1}) + \lambda_{k+2} \cdot f(\vec{v}_{k+2}) + \ldots + \lambda_n \cdot f(\vec{v}_n) \\
+                &=& f(\lambda_{k+1} \cdot \vec{v}_{k+1} + \lambda_{k+2} \cdot \vec{v}_{k+2} + \ldots + \lambda_n \cdot \vec{v}_n) \\
+                &=& f(\vec{u})
+    \end{eqnarray*}
+    Daraus folgt, dass $\vec{u} \in \text{Ker } f$. Da $\vec{u}$ eine eindeutige Darstellung bezüglich der Basis $\{ \vec{v}_1, \ldots \vec{v}_k, \vec{v}_{k+1}, \ldots \vec{v}_n \}$ hat und bereits mit der Basis $\{ \veclist{v}{k} \}$ darstellbar ist, gilt:
+    $$ \lambda_{k+1} = \lambda_{k+2} = \ldots = \lambda_n = 0 $$
+\end{itemize}
+Daraus folgt:
+\begin{itemize}
+    \item Die Dimension des Kern von $f$ beträgt $k$:
+    $$ \text{dim}(\text{Ker } f) = k $$
+    \item Die Dimension des Bildes von $f$ beträgt $n-k$:
+    $$ \text{dim}(\text{Im } f) = n - k $$
+    \item Die Dimension von $V$ beträgt $n$:
+    $$ \text{dim } V = n $$
+\end{itemize}
+Damit gilt:
+$$ \begin{array}{ccccc}
+    k &+& n-k &=& n \\
+    \Leftrightarrow \platz \text{dim}(\text{Ker } f) &+& \text{dim}(\text{Im } f) &=& \text{dim } V
+\end{array} $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Matrizen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matrizen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einleitung}
+
+\paragraph{Definition:} Eine $m \times n$-\emph{Matrix}\index{Matrix} über $K$ ist eine Anordnung von $m \times n$ Elementen aus $K$ nach dem folgenden Schema:
+$$ A = \begin{pmatrix}
+  a_{1 \, 1} & a_{1 \, 2} & \cdots & a_{1 \, n} \\
+  a_{2 \, 1} & a_{2 \, 2} & \cdots & a_{2 \, n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{m \, 1} & a_{m \, 2} & \cdots & a_{m \, n} \\
+\end{pmatrix} $$
+Alternative Schreibweise:
+$$ A = (a_{i \, j})_{(i, j) \in m \times n} $$
+wobei $a_{i \, j}$ die Einträge (Koeffizieten) der Matrix sind.
+
+\paragraph{Definition:} Die Menge aller $m \times n$-Matrizen über $K$ wird mit $M(m \times n, K)$ bezeichnet.
+
+\paragraph{Beobachtung:} Die Menge $M(m \times n, K)$ ist ein Vektorraum mit den folgenden Operationen ($\lambda \in K$):
+\begin{eqnarray*}
+    \begin{pmatrix}
+      a_{1 \, 1} & \cdots & a_{1 \, n} \\
+      a_{2 \, 1} & \cdots & a_{2 \, n} \\
+      \vdots & \ddots & \vdots \\
+      a_{m \, 1} & \cdots & a_{m \, n} \\
+    \end{pmatrix} +
+    \begin{pmatrix}
+      b_{1 \, 1} & \cdots & b_{1 \, n} \\
+      b_{2 \, 1} & \cdots & b_{2 \, n} \\
+      \vdots & \ddots & \vdots \\
+      b_{m \, 1} & \cdots & b_{m \, n} \\
+    \end{pmatrix}&=&
+    \begin{pmatrix}
+      a_{1 \, 1} + b_{1 \, 1} & \cdots & a_{1 \, n} + b_{1 \, n} \\
+      a_{2 \, 1} + b_{2 \, 1} & \cdots & a_{2 \, n} + b_{2 \, n} \\
+      \vdots & \ddots & \vdots \\
+      a_{m \, 1} + b_{m \, 1} & \cdots & a_{m \, n} + b_{m \, n} \\
+    \end{pmatrix} \\ \\
+    \lambda \cdot
+    \begin{pmatrix}
+      a_{1 \, 1} & \cdots & a_{1 \, n} \\
+      a_{2 \, 1} & \cdots & a_{2 \, n} \\
+      \vdots & \ddots & \vdots \\
+      a_{m \, 1} & \cdots & a_{m \, n} \\
+    \end{pmatrix} &=&
+    \begin{pmatrix}
+      \lambda \cdot a_{1 \, 1} & \cdots & \lambda \cdot a_{1 \, n} \\
+      \lambda \cdot a_{2 \, 1} & \cdots & \lambda \cdot a_{2 \, n} \\
+      \vdots & \ddots & \vdots \\
+      \lambda \cdot a_{m \, 1} & \cdots & \lambda \cdot a_{m \, n} \\
+    \end{pmatrix}
+\end{eqnarray*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Multiplikation von Matrizen}\index{Multiplikation von Matrizen}
+
+\paragraph{Definition:} Seien $A$ und $B$ Matrizen folgender Gestalt
+\begin{itemize}
+    \item $A = (a_{i \, j})_{(i, j) \in p \times q} \in M(p \times \textbf{q}, K)$ und
+    \item $B = (b_{i \, j})_{(i, j) \in q \times r} \in M(\textbf{q} \times r, K)$,
+\end{itemize}
+dann ist $C = A \cdot B = (c_{i \, j})_{(i, j) \in p \times r}$ definiert durch:
+\begin{eqnarray*}
+    c_{i \, j} &=& a_{i \, 1} \cdot b_{1 \, j} + a_{i \, 2} \cdot b_{2 \, j} + \ldots + a_{i \, q} \cdot b_{q \, j} \\
+               &=& \sum_{k=1}^q a_{i \, k} \cdot b_{k \, j}
+\end{eqnarray*}
+
+\paragraph{Regel:} "`Zeile $\times$ Spalte"'
+
+\paragraph{Satz:} Die Multiplikation von Matrizen ist assoziativ:
+$$ (A \cdot B) \cdot C = A \cdot (B \cdot C) $$
+
+\paragraph{Achtung:} Die Multiplikation von Matrizen ist \emph{nicht} kommutativ:
+$$ A \cdot B \neq B \cdot A $$ \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lineare Abbildungen}
+
+\paragraph{Definition:} Sei
+\begin{itemize}
+    \item $f \in \text{Hom}(V, W)$ eine lineare Abbildung,
+    \item die Menge $\{ \veclist{v}{n} \}$ Basis von $V$ und
+    \item die Menge $\{ \veclist{w}{m} \}$ Basis von $W$,
+\end{itemize}
+dann wird der Abbildung $f$ eine Matrix $A \in M(m \times n, K)$ zugeordnet durch Darstellung der Bilder der Basisvektoren $f(\vec{v}_i)$ in der Basis $\{ \veclist{w}{m} \}$ mit
+\begin{eqnarray*}
+    f(\vec{v}_1) &=& a_{1 \, 1} \; \vec{w}_1 + a_{2 \, 1} \; \vec{w}_2 + \ldots + a_{m \, 1} \; \vec{w}_m \\
+    f(\vec{v}_2) &=& a_{1 \, 2} \; \vec{w}_1 + a_{2 \, 2} \; \vec{w}_2 + \ldots + a_{m \, 2} \; \vec{w}_m \\
+                 &\vdots& \\
+    f(\vec{v}_n) &=& a_{1 \, n} \; \vec{w}_1 + a_{2 \, n} \; \vec{w}_2 + \ldots + a_{m \, n} \; \vec{w}_m
+\end{eqnarray*}
+Umgekehrt bestimmt jede Matrix $A \in M(m \times n, K)$ eine Abbildung $f$, durch die oberen Formeln.
+
+\paragraph{Regel:} Die $j$-te Spalte der Matrix $A$ stellt $f(\vec{v}_j)$ dar.
+
+\paragraph{Folgerung:} Die Vektorräume der linearen Abbildungen $\text{Hom}(V, W)$ und der Matrizen $M(m \times n, K)$ sind isomorph ($n = \text{rg } V$ und $m = \text{rg } W$).
+
+\paragraph{Festlegung:} Für den Vektorraum $V = K^n$ wird die Standardbasis verwendet:
+$$ \vec{e}_1^{\; (n)} = \begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}, \vec{e}_2^{\; (n)} = \begin{pmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}, \vec{e}_n^{\; (n)} = \begin{pmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix} $$
+Entsprechendes gilt für $W = K^m$.
+
+\paragraph{Regel:} Die $j$-te Spalte von der Matrix $A$ entspricht im Folgenden $f \left( \vec{e}_j^{\; (n)} \right)$. \pagebreak
+
+\paragraph{Beobachtung:} Sei $A \in M(m \times n, K)$ die zur Abbidlung $f \in \text{Hom}(K^n, K^m)$ zugehörige Matrix wobei für $K^n$ die Standardbasis verwendet wird. Wird zudem ein Vektor mit $k$ Koeffizienten als $k \times 1$-Matrix aufgefasst, dann gilt:
+$$ A \cdot \vec{v} = f(\vec{v}) $$
+
+\begin{eqnarray*}
+    A \cdot \vec{v} &=&
+    \begin{pmatrix}
+      a_{1 \, 1} & a_{1 \, 2} & \cdots & a_{1 \, n} \\
+      a_{2 \, 1} & a_{2 \, 2} & \cdots & a_{2 \, n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{m \, 1} & a_{m \, 2} & \cdots & a_{m \, n} \\
+    \end{pmatrix} \cdot
+    \vecfour{x_1}{x_2}{\ldots}{x_n} \\ \\
+    &=& \vecfour{a_{1 \, 1} \cdot x_1 + a_{1 \, 2} \cdot x_2 + \ldots + a_{1 \, n} \cdot x_n}{a_{2 \, 1} \cdot x_1 + a_{2 \, 2} \cdot x_2 + \ldots + a_{2 \, n} \cdot x_n}{\vdots}{a_{m \, 1} \cdot x_1 + a_{m \, 2} \cdot x_2 + \ldots + a_{m \, n} \cdot x_n} \\ \\ \\
+    f(\vec{v}) &=& f \left( \vecfour{x_1}{x_2}{\vdots}{x_n} \right) \\ \\
+    &=& f \left( x_1 \cdot \vec{e}_1^{\; (n)} + x_2 \cdot \vec{e}_2^{\; (n)} + \ldots + x_n \cdot \vec{e}_n^{\; (n)} \right) \\ \\
+    &=& x_1 \cdot f \left( \vec{e}_1^{\; (n)} \right) + x_2 \cdot f \left( \vec{e}_2^{\; (n)} \right) + \ldots + x_n \cdot f \left( \vec{e}_{n_{\hspace{-0.5cm}\ _{\ _{\ }}}}^{\; (n)} \right) \\ \\
+    &=& x_1 \cdot \vecfour{a_{1 \, 1}}{a_{2 \, 1}}{\vdots}{a_{m \, 1}} + x_2 \cdot \vecfour{a_{1 \, 2}}{a_{2 \, 2}}{\vdots}{a_{m \, 2}} + \ldots + x_n \cdot \vecfour{a_{1 \, n}}{a_{2 \, n}}{\vdots}{a_{m \, n}} \\ \\
+    &=& \vecfour{a_{1 \, 1} \cdot x_1 + a_{1 \, 2} \cdot x_2 + \ldots + a_{1 \, n} \cdot x_n}{a_{2 \, 1} \cdot x_1 + a_{2 \, 2} \cdot x_2 + \ldots + a_{2 \, n} \cdot x_n}{\vdots}{a_{m \, 1} \cdot x_1 + a_{m \, 2} \cdot x_2 + \ldots + a_{m \, n} \cdot x_n} \\ \\ \\
+    \Rightarrow \platz A \cdot \vec{v} &=& f(\vec{v})
+\end{eqnarray*} \pagebreak
+
+\paragraph{Satz:} Sind $f \in \text{Hom}(K^p, K^q)$ und $g \in \text{Hom}(K^q, K^r)$ lineare Abbildungen und $A \in M(p \times q, K)$ und $B \in M(q \times r, K)$ die zu $f$ und $g$ gehörigen Matrizen bezüglich der Standardbasen von $K^p$ bzw. $K^q$, dann entspricht das Produkt der Matrizen $A \cdot B$ der Verkettung der Abbildungen $fg$:
+$$ C = A \cdot B \in M(p \times r, K) \platz \longleftrightarrow \platz fg \in \text{Hom}(K^p, K^r) $$
+
+\paragraph{Beweis:} Für alle Basisvektoren $\vec{e}_k^{\; (p)} \in K^p$ mit $k = 1, 2, \ldots p$ gilt:
+\begin{eqnarray*}
+    (gf)\left( \vec{e}_k^{\; (q)} \right) &=& f \left( g \left( \vec{e}_k^{\; (q)} \right) \right) \\ \\
+                                          &=& f \left( \vecfour{b_{1 \, k}}{b_{2 \, k}}{\vdots}{b_{r \, k}} \right) \\ \\
+                                          &=& f \left( b_{1 \, k} \cdot \vec{e}_1^{\; (r)} + b_{2 \, k} \cdot \vec{e}_2^{\; (r)} + \ldots + b_{r \, k} \cdot \vec{e}_r^{\; (r)} \right) \\ \\
+                                          &=& b_{1 \, k} \cdot f \left( \vec{e}_1^{\; (r)} \right) + b_{2 \, k} \cdot f \left( \vec{e}_2^{\; (r)} \right) + \ldots + b_{r \, k} \cdot f \left( \vec{e}_{r_{\hspace{-0.5cm}\ _{\ _{\ }}}}^{\; (r)} \right) \\ \\
+                                          &=& b_{1 \, k} \cdot \vecfour{a_{1 \, 1}}{a_{2 \, 1}}{\vdots}{a_{q \, 1}} + b_{2 \, k} \cdot \vecfour{a_{1 \, 2}}{a_{2 \, 2}}{\vdots}{a_{q \, 2}} + \ldots + b_{q \, k} \cdot \vecfour{a_{1 \, r}}{a_{2 \, r}}{\vdots}{a_{q \, r}} \\ \\
+                                          &=& \vecfour{a_{1 \, 1} \cdot b_{1 \, k} + a_{1 \, 2} \cdot b_{2 \, k} + \ldots + a_{1 \, r} \cdot b_{q \, k}}{a_{2 \, 1} \cdot b_{1 \, k} + a_{2 \, 2} \cdot b_{2 \, k} + \ldots + a_{2 \, r} \cdot b_{q \, k}}{\vdots}{a_{q \, 1} \cdot b_{1 \, k} + a_{q \, 2} \cdot b_{2 \, k} + \ldots + a_{q \, r} \cdot b_{q \, k}} \\ \\ \\
+\end{eqnarray*}
+\begin{eqnarray*}
+    A \cdot B \cdot \vec{e}_k^{\; (q)} &=&
+    \begin{pmatrix}
+      a_{1 \, 1} & a_{1 \, 2} & \cdots & a_{1 \, q} \\
+      a_{2 \, 1} & a_{2 \, 1} & \cdots & a_{2 \, q} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{p \, 1} & a_{p \, 1} & \cdots & a_{p \, q}
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+      b_{1 \, 1} & b_{1 \, 2} & \cdots & b_{1 \, r} \\
+      b_{2 \, 1} & b_{2 \, 1} & \cdots & b_{2 \, r} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      b_{q \, 1} & b_{q \, 1} & \cdots & b_{q \, r}
+    \end{pmatrix} \cdot
+    \begin{pmatrix}
+      0 \\ \vdots \\ 1 \\ \vdots \\ 0
+    \end{pmatrix} {\mbox{\scriptsize $\leftarrow$ $k$-te Zeile}} \\ \\
+    &=& \underset{\overset{\mbox{\scriptsize $\uparrow$} \atop \ }{\mbox{\scriptsize $k$-te Spalte}}}{\begin{pmatrix}
+      \cdots & a_{1 \, 1} \cdot b_{1 \, k} + a_{1 \, 2} \cdot b_{2 \, k} + \ldots + a_{q \, 1} \cdot b_{q \, k} & \cdots \\
+      \cdots & a_{2 \, 1} \cdot b_{1 \, k} + a_{2 \, 2} \cdot b_{2 \, k} + \ldots + a_{2 \, r} \cdot b_{q \, k} & \cdots \\
+       & \vdots &  \\
+      \cdots & a_{q \, 1} \cdot b_{1 \, k} + a_{q \, 2} \cdot b_{2 \, k} + \ldots + a_{q \, r} \cdot b_{q \, k} & \cdots \\
+    \end{pmatrix}} \cdot
+    \begin{pmatrix}
+      0 \\ \vdots \\ 1 \\ \vdots \\ 0
+    \end{pmatrix} \\ \\
+    &=& \vecfour{a_{1 \, 1} \cdot b_{1 \, k} + a_{1 \, 2} \cdot b_{2 \, k} + \ldots + a_{1 \, r} \cdot b_{q \, k}}{a_{2 \, 1} \cdot b_{1 \, k} + a_{2 \, 2} \cdot b_{2 \, k} + \ldots + a_{2 \, r} \cdot b_{q \, k}}{\vdots}{a_{q \, 1} \cdot b_{1 \, k} + a_{q \, 2} \cdot b_{2 \, k} + \ldots + a_{q \, r} \cdot b_{q \, k}}
+\end{eqnarray*}
+Daraus folgt:
+$$ \forall k \platz (gf)\left( \vec{e}_k^{\; (q)} \right) = A \cdot B \cdot \vec{e}_k^{\; (q)} $$
+
+\paragraph{Beispiele:}
+\begin{enumerate} \buchstaben
+    \item Skalierung des Raumes $\real^n$ um einen Faktor $c \in \real$:
+    \begin{itemize}
+        \item Definition der Abbildung:
+        $$ f_{\real^n} \left( \vecfour{x_1}{x_2}{\vdots}{x_n} \right) = \vecfour{c \cdot x_1}{c \cdot x_2}{\vdots}{c \cdot x_n} $$
+        \item Abbildung der Basisvektoren:
+        $$ \vecfour{1}{0}{\vdots}{0} \mapsto \vecfour{c}{0}{\vdots}{0}, \platz \vecfour{0}{1}{\vdots}{0} \mapsto \vecfour{0}{c}{\vdots}{0}, \platz \ldots \platz \vecfour{0}{0}{\vdots}{1} \mapsto \vecfour{0}{0}{\vdots}{c} $$
+        \item Matrix:
+        $$ A_{f, \real^n} = \begin{pmatrix}
+          c & 0 & \cdots & 0 \\
+          0 & c & \cdots & 0 \\
+          \vdots & \vdots & \ddots & \vdots \\
+          0 & 0 & \cdots & c \\
+        \end{pmatrix} $$
+    \end{itemize}
+    \item Projektion von $\real^3$ auf die $xy$-Ebene (nach $\real^3$):
+    \begin{itemize}
+        \item Definition der Abbildung:
+        $$ g \left( \vecthree{x}{y}{z} \right) = \vecthree{x}{y}{0} $$
+        \item Abbildung der Basisvektoren:
+        $$ \vecthree{1}{0}{0} \mapsto \vecthree{1}{0}{0}, \platz \vecthree{0}{1}{0} \mapsto \vecthree{0}{1}{0}, \platz \vecthree{0}{0}{1} \mapsto \vecthree{0}{0}{0} $$
+        \item Matrix:
+        $$ B_g = \begin{pmatrix}
+          1 & 0 & 0 \\
+          0 & 1 & 0 \\
+          0 & 0 & 0
+        \end{pmatrix} $$
+    \end{itemize}
+    \item Projektion von $\real^3$ auf die $xy$-Ebene (nach $\real^2$):
+    \begin{itemize}
+        \item Definition der Abbildung:
+        $$ g' \left( \vecthree{x}{y}{z} \right) = \vectwo{x}{y} $$
+        \item Abbildung der Basisvektoren:
+        $$ \vecthree{1}{0}{0} \mapsto \vectwo{1}{0}, \platz \vecthree{0}{1}{0} \mapsto \vectwo{0}{1}, \platz \vecthree{0}{0}{1} \mapsto \vectwo{0}{0} $$
+        \item Matrix:
+        $$ B'_{g'} = \begin{pmatrix}
+          1 & 0 & 0 \\
+          0 & 1 & 0
+        \end{pmatrix} $$
+    \end{itemize} \pagebreak
+
+    \item Drehung ($\circlearrowleft$) von $\real^2$ um einen Winkel $\varphi$:
+    \begin{center}
+        \includegraphics{skript/grafiken/lineare-algebra-2-5-3-a}
+    \end{center}
+    \begin{itemize}
+        \item Definition der Abbildung:
+        $$ h \left( \vectwo{x}{y} \right) = \vectwo{x \cdot \cos \varphi - y \cdot \sin \varphi}{x \cdot \sin \varphi + y \cdot \cos \varphi} $$
+        \item Abbildung der Basisvektoren:
+        $$ \vectwo{1}{0} \mapsto \vectwo{\cos \varphi}{\sin \varphi}, \platz \vectwo{0}{1} \mapsto \vectwo{- \sin \varphi}{\cos \varphi} $$
+        \item Matrix:
+        $$ C_h = \begin{pmatrix}
+          \cos \varphi & - \sin \varphi \\
+          \sin \varphi & \cos \varphi
+        \end{pmatrix} $$
+    \end{itemize}
+    \item Drehung ($\circlearrowleft$) von $\real^2$ um einen Winkel $\varphi$ mit anschließender Skalierung um den Faktor $c \in \real$:
+    \begin{itemize}
+        \item Definition der Abbildung:
+        \begin{eqnarray*}
+            (f_{\real^2} h) \left( \vectwo{x}{y} \right) &=& f_{\real^2} \left( \vectwo{x \cdot \cos \varphi - y \cdot \sin \varphi}{x \cdot \sin \varphi + y \cdot \cos \varphi} \right) \\ \\
+                                                         &=& \vectwo{x \cdot c \cdot \cos \varphi - y \cdot c \cdot \sin \varphi}{x \cdot c \cdot \sin \varphi + y \cdot c \cdot \cos \varphi}
+        \end{eqnarray*}
+        \item Matrix:
+        \begin{eqnarray*}
+            A_{f, \real^2} \cdot C_h &=&
+            \begin{pmatrix}
+            c & 0 \\
+            0 & c \\
+            \end{pmatrix} \cdot
+            \begin{pmatrix}
+            \cos \varphi & - \sin \varphi \\
+            \sin \varphi & \cos \varphi
+            \end{pmatrix} \\ \\
+            &=& \begin{pmatrix}
+            c \cdot \cos \varphi & - c \cdot \sin \varphi \\
+            c \cdot \sin \varphi & c \cdot \cos \varphi
+            \end{pmatrix}
+        \end{eqnarray*}
+    \end{itemize}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Rang einer Matrix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rang einer Matrix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einleitung}
+
+\paragraph{Definition:} Sei $A \in M(m \times n, K)$ eine Matrix und $f \in \text{Hom}(K^n, K^m)$ die zugehörige lineare Abbildung (bezüglich der Standardbasis), dann ist der \emph{Rang}\index{Rang einer Matrix} von $A$ definiert als
+$$ \text{rg } A := \text{rg } f = \text{dim } (\text{Im } f) $$
+Der \emph{Zeilenrang}\index{Zeilenrang} von $A$ ist die maximale Anzahl von linear unabhängigen Zeilenvektoren aus $A$. \par \vspace{0.3cm}
+Der \emph{Spaltenrang}\index{Spaltenrang} von $A$ ist die maximale Anzahl von linear unabhängigen Spaltenvektoren aus $A$.
+
+\paragraph{Lemma:} Ist $\vec{v}_i$ ein Spaltenvektor (Zeilenvektor) von $A$, der sich als Linearkombination der übrigen Spalten (Zeilen) darstellen lässt und ist $A'$ die Matrix $A$ ohne Spalte (Zeile) $\vec{v}_i$, dann gilt:
+$$ \text{Spaltenrang } A' = \text{Spaltenrang } A \platz \text{bzw.} \platz \text{Zeilenrang } A' = \text{Zeilenrang } A $$
+
+\paragraph{Satz:} Der Rang, der Spaltenrang und der Zeilenrang einer Matrix $A$ sind gleich:
+$$ \text{rg } A = \text{Spaltenrang } A = \text{Zeilenrang } A $$
+
+\paragraph{Beweis:}
+\begin{itemize}
+    \item Zu zeigen ist, dass $\text{rg } A = \text{Spaltenrang } A$: \par
+    Die Spalten von $A$ sind die Bilder der Basisvektoren. Daraus folgt, dass die Spaltenvektoren Erzeugendensystem für $\text{Im } f$ sind. Damit ist die maximale linear unabhängige Teilmenge der Spaltenvektoren die Basis von $\text{Im } f$. Also ist der Spaltenrang von $A$ die Dimension von $\text{Im } f$:
+    $$ \text{Spaltenrang } A = \text{dim } (\text{Im } f) = \text{rg } A $$
+    \item Zu zeigen ist, dass $\text{Spaltenrang } A = \text{Zeilenrang } A$: \par
+    Streiche aus $A$ Zeilen und/oder Spalten, die jeweils Linearkombinationen der übrigen Zeilen bzw. Spalten sind, solange das möglich ist.
+    $$ A \mapsto A' \mapsto A'' \mapsto \ldots \mapsto A^{(\text{end})} $$
+    Nach dem Lemma gilt:
+    \begin{eqnarray*}
+        n &:=& \text{Spaltenrang } A = \text{Spaltenrang } A^{(\text{end})} \\
+        m &:=& \text{Zeilenrang } A = \text{Zeilenrang } A^{(\text{end})}
+    \end{eqnarray*}
+    \begin{itemize}
+        \item Angenommen, dass $n < m$: \par
+        Das heißt, dass $A^{(\text{end})}$ $m$ Zeilen hat, aber $m$ Vektoren können in $K^n$ nicht linear unabhängig sein. Damit muss einer der Vektoren eine Linearkombination der übrigen Vektoren sein. Dies ist ein Widerspruch zur Annahme. Also ist $n \geq m$.
+        \item Angenommen, dass $n > m$: \par
+        Das heißt, dass $A^{(\text{end})}$ $n$ Spalten hat, aber $n$ Vektoren können in $K^m$ nicht linear unabhängig sein. Damit muss einer der Vektoren eine Linearkombination der übrigen Vektoren sein. Dies ist ein Widerspruch zur Annahme. Also ist $n = m$. \hfill $\Box$
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Definition:} Sei $A = (a_{i \; j}) \in M(m \times n, K)$ eine Matrix, dann ist transponierte Matrix von $A$ definiert durch
+$$ A^t = (a_{i \; j}^t) \in M(n \times m, K) \platz \text{mit} \platz a_{i \; j}^t = a_{j \; i} $$
+
+\paragraph{Beispiel:}
+$$ \begin{pmatrix} 1 & 0 \\ 2 & 1 \\ 4 & 0 \end{pmatrix}^t = \begin{pmatrix} 1 & 2 & 4 \\ 0 & 1 & 0 \end{pmatrix} $$
+
+\paragraph{Folgerung:} Der Rang einer Matrix $A$ und der transponierten Matrix $A^t$ ist gleich.
+$$ \text{rg } A = \text{rg } A^t $$ \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Elementare Umformungen}
+
+\paragraph{Feststellung:} Der Rang einer Matrix kann mit den folgenden elementaren Umformungen bestimmt werden:
+\begin{itemize}
+    \item Typ 1: Vertauschung von zwei Zeilen (Spalen).
+    \item Typ 2: Multiplikation einer Zeile (Spalte) mit einem Skalar $\lambda \neq 0$.
+    \item Typ 3: Addition des $\lambda$-fachen einer Zeile (Spalte) zu einer anderen Zeile~(Spalte).
+\end{itemize}
+
+\paragraph{Satz:} Elementare Umformungen ändern den Rang einer Matrix nicht.
+
+\paragraph{Beweis:}
+\begin{itemize}
+    \item Typ 1 und 2: trivial
+    \item Typ 3: Sei $\vec{v}_i$ ein Zeilenvektor vor und $\vec{v}^{\, *}_i$ nach der Umformung, $\vec{v}_k$ sei ein anderer Zeilenvektor und $\lambda \in K$ ein Skalar:
+    $$ \vec{v}^{\, *}_i = \vec{v}_i + \lambda \vec{v}_k $$
+    Die ursprüngliche Matrix sei $A$ und die Matrix nach der Umformung $A^*$:
+    $$ A^* = A(\vec{v} \leftrightarrow \vec{v}^{\, *}) $$
+    Sei $\vec{w}$ darstellbar als Linearkombination aus den Zeilenvektoren von $A$:
+    $$ \vec{w} = \mu_1 \vec{v}_1 + \mu_2 \vec{v}_2 + \ldots + \mu_i \vec{v}_i + \ldots + \mu_k \vec{v}_k + \ldots + \mu_n \vec{v}_n $$
+    Damit ist der Vektor $\vec{w}$ auch als Linearkombination aus den Zeilenvektoren von $A^*$ darstellbar:
+    $$ \vec{w} = \mu_1 \vec{v}_1 + \mu_2 \vec{v}_2 + \ldots + \mu_i \vec{v}^{\, *}_i + \ldots + (\mu_k - \lambda \mu_i) \vec{v}_k + \ldots + \mu_n \vec{v}_n $$
+    Daraus folgt:
+    $$ \text{Lin}(\text{Zeilenvektoren von $A$}) = \text{Lin}(\text{Zeilenvektoren von $A^*$}) $$
+    Da die Dimension gleich bleibt, bleibt auch der Rang gleich. \hfill $\Box$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bis hier von Herrn Kriegel korrigiert
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Obere Dreiecksform}
+
+\paragraph{Definition:} Die Matrix $A$ ist in oberer Dreiecksform, wenn die Matrix die folgende Form hat (das Symbol $*$ steht für beliebigen Inhalt):
+$$ A = \left( \begin{array}{ccccc@{\hspace{0.2cm}}|@{\hspace{0.3cm}}ccc}
+    a_{1 \, 1} & *          & *          & \cdots & *          & *      & \cdots & *      \\
+    0          & a_{2 \, 2} & *          & \cdots & *          & \vdots & \ddots & \vdots \\
+    0          & 0          & a_{3 \, 3} & \ddots & \vdots     & \vdots & \ddots & \vdots \\
+    \vdots     & \vdots     & \ddots     & \ddots & *          & \vdots & \ddots & \vdots \\
+    0          & 0          & \cdots     & 0      & a_{r \, r} & *      & \cdots & *      \\ \hline
+    0          & \cdots     & \cdots     & \cdots & 0          & 0      & \cdots & 0      \\
+    \vdots     & \ddots     & \ddots     & \ddots & \vdots     & \vdots & \ddots & \vdots \\
+    0          & \cdots     & \cdots     & \cdots & 0          & 0      & \cdots & 0
+\end{array} \right) $$
+Für die Werte $a_{1 \, 1}, a_{2 \, 2}, a_{3 \, 3}, \ldots a_{r \, r}$ muss dabei gelten:
+$$ a_{1 \, 1} \cdot a_{2 \, 2} \cdot a_{3 \, 3} \cdot \ldots \cdot a_{r \, r} \neq 0 $$
+
+\paragraph{Beobachtung:} Der Rang einer solchen Matrix ist $r$.
+
+\paragraph{Verfahren:} Überführung einer Matrix $A \in M(m \times n, K)$ in obere Dreiecksform:
+\begin{itemize}
+    \item Die Matrix $A_0$ wird mit der Matrix $A$ initialisiert.
+    $$ A_0 := A $$
+    \item Anschließend $A_k$ mit $k = 0, 1, \ldots \min(m, n)$ das folgende Verfahren angewandt. Dabei muss $A_k$ vor jeder Inkrementierung von $k$ folgende Form haben:
+    $$ A_k = \left( \begin{array}{ccccc@{\hspace{0.4cm}}|@{\hspace{0.3cm}}ccc}
+        a_{1 \, 1} & *          & *          & \cdots & *          & *              & \cdots & *            \\
+        0          & a_{2 \, 2} & *          & \cdots & *          & \vdots         & \ddots & \vdots       \\
+        0          & 0          & a_{3 \, 3} & \ddots & \vdots     & \vdots         & \ddots & \vdots       \\
+        \vdots     & \vdots     & \ddots     & \ddots & *          & \vdots         & \ddots & \vdots       \\
+        0          & 0          & \cdots     & 0      & a_{k \, k} & *              & \cdots & *            \\ \hline
+        0          & \cdots     & \cdots     & \cdots & 0          & b_{k+1 \; k+1} & \cdots & b_{k+1 \; n} \\
+        \vdots     & \ddots     & \ddots     & \ddots & \vdots     & \vdots         & \ddots & \vdots       \\
+        0          & \cdots     & \cdots     & \cdots & 0          & b_{m   \; k+1} & \cdots & b_{m   \; n}
+    \end{array} \right) $$
+    Die Koeffzienten $b_{i \, j}$ (mit $i = k+1, k+2, \ldots m$ und $j = k+1, k+2, \ldots n$) sind beliebig, und es gilt $a_{1 \, 1} \cdot a_{2 \, 2} \cdot a_{3 \, 3} \cdot \ldots \cdot a_{k \, k} \neq 0$. \par
+    Die Teilmatrix von $A_k$, die nur aus den Elementen $b_{p \, q}$ besteht, wird im Folgenden mit $B$ bezeichnet:
+    $$ B = \begin{pmatrix}
+      b_{k+1 \; k+1} & \cdots & b_{k+1 \; n} \\
+      \vdots         & \ddots & \vdots       \\
+      b_{m   \; k+1} & \cdots & b_{m   \; n} \\
+    \end{pmatrix} $$
+    Verfahren für $A_k$:
+    \begin{itemize}
+        \item Falls für alle $b_{i \, j}$ aus $B$ gilt
+        $$ b_{i \, j} = 0 $$
+        dann ist das Verfahren abgeschlossen. Die Matrix $A_k$ hat obere Dreiecksform.
+        \item Sonst werden folgende Umformungen durchgeführt:
+        \begin{enumerate} \buchstaben
+            \item Vertausche Zeilen und/oder Spalten, die durch $B$ gehen, um einen Koeffizieten $b_{i, j} \neq 0$ an die Stelle $a'_{k+1 \, k+1}$ zu bringen:
+            $$ A'_k = \left( \begin{array}{cccc@{\hspace{0.4cm}}|@{\hspace{0.3cm}}cccc}
+                a_{1 \, 1} & *          & \cdots & *          & *               & *              & \cdots & *             \\
+                0          & a_{2 \, 2} & \ddots & *          & \vdots          & \vdots         & \ddots & \vdots        \\
+                \vdots     & \ddots     & \ddots & *          & \vdots          & \vdots         & \ddots & \vdots        \\
+                0          & 0          & 0      & a_{k \, k} & *               & *              & \cdots & *             \\ \hline
+                0          & \cdots     & \cdots & 0          & a'_{k+1 \; k+1} & \cdots         & \cdots & a'_{k+1 \; n} \\
+                \vdots     & \ddots     & \ddots & \vdots     & b'_{k+2 \; k+1} & \cdots         & \cdots & b'_{k+2 \; n} \\
+                \vdots     & \ddots     & \ddots & \vdots     & \vdots          & \ddots         & \ddots & \vdots        \\
+                0          & \cdots     & \cdots & 0          & b'_{m   \; k+1} & \cdots         & \cdots & b'_{m   \; n}
+            \end{array} \right) $$ \pagebreak
+
+            \item Für $b'_{k+2 \; k+1}, b'_{k+3 \; k+1}, \ldots b'_{m \; k+1}$ werden durch Typ-3-Umformungen Nullen erzeugt:
+            $$ A'_k = \left( \begin{array}{cccc@{\hspace{0.4cm}}|@{\hspace{0.3cm}}cccc}
+                a_{1 \, 1} & *          & \cdots & *          & *               & *                & \cdots & *              \\
+                0          & a_{2 \, 2} & \ddots & *          & \vdots          & \vdots           & \ddots & \vdots         \\
+                \vdots     & \ddots     & \ddots & *          & \vdots          & \vdots           & \ddots & \vdots         \\
+                0          & 0          & 0      & a_{k \, k} & *               & *                & \cdots & *              \\ \hline
+                0          & \cdots     & \cdots & 0          & a'_{k+1 \; k+1} & \cdots           & \cdots & a'_{k+1 \; n}  \\
+                \vdots     & \ddots     & \ddots & \vdots     & 0               & b''_{k+2 \; k+2} & \cdots & b''_{k+2 \; n} \\
+                \vdots     & \ddots     & \ddots & \vdots     & \vdots          & \vdots           & \ddots & \vdots         \\
+                0          & \cdots     & \cdots & 0          & 0               & b''_{m   \; k+2} & \cdots & b''_{m   \; n}
+            \end{array} \right) $$
+            Dies wird durch folgende Operation realisiert ($i = k+2, k+3, \ldots m$ und $j = k+1, k+2, \ldots n$):
+            $$ b''_{i \; j} := b'_{i \; j} - a'_{i \; k+1} \cdot \frac{b'_{k+1 \; j}}{a'_{k+1 \; k+1}} $$
+        \end{enumerate}
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Beispiel:}
+\begin{itemize}
+    \item Folgende Matrix $A$ soll in obere Dreiecksform umgeformt werden:
+    $$ \begin{pmatrix}
+      0 & -2 & 4 \\
+      2 & 1 & 0 \\
+      1 & 0 & 2 \\
+      2 & 0 & 3 \\
+    \end{pmatrix} $$
+    \item Vertausche die erste und die dritte Zeile, so dass an der Stelle $a_{1 \, 1}$ ein Koeffizient $\neq 0$ steht:
+    $$ \begin{pmatrix}
+      1 & 0 & 2 \\
+      2 & 1 & 0 \\
+      0 & -2 & 4 \\
+      2 & 0 & 3 \\
+    \end{pmatrix} $$
+    \item Erzeuge an den Stellen $a_{2 \; 1}$ und $a_{4 \; 1}$ Nullen durch Typ-3-Umformungen mit der ersten Zeile:
+    $$ \begin{pmatrix}
+      1 & 0 & 2 \\
+      2 - 1 \cdot 2 & 1 - 0 \cdot 2 & 0 - 2 \cdot 2 \\
+      0 & -2 & 4 \\
+      2 - 1 \cdot 2 & 0 - 0 \cdot 2 & 3 - 2 \cdot 2 \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 1 & -4 \\
+      0 & -2 & 4 \\
+      0 & 0 & -1 \\
+    \end{pmatrix} $$
+    \item An der Stelle $a_{2 \, 2}$ befindet sich ein Koeffizient $\neq 0$. Damit muss nur noch an der Stelle $a_{2 \, 3}$ eine Null erzeugt werden:
+    $$ \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 1 & -4 \\
+      0 & -2 - (-2) \cdot 1 & 4 - (-2) \cdot (-4) \\
+      0 & 0 & -1 \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 1 & -4 \\
+      0 & 0 & -4 \\
+      0 & 0 & -1 \\
+    \end{pmatrix} $$
+    \item An der Stelle $a_{3 \, 3}$ muss eine Null erzeugt werden:
+    $$ \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 1 & -4 \\
+      0 & 0 & -4 \\
+      0 & 0 & -1 - \frac{1}{4} \cdot (-4) \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+      1 & 0 & 2 \\
+      0 & 1 & -4 \\
+      0 & 0 & -4 \\
+      0 & 0 & 0 \\
+    \end{pmatrix} $$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Elementarmatrizen}
+
+\paragraph{Beobachtung:} Elementare Matrixumformungen können auch durch Multiplikation mit sogenannten Elementarmatrizen realisiert werden.
+\begin{itemize}
+    \item Typ 1: \par
+    Für die Vertauschung der $i$-ten und der $j$-ten Zeile (Spalte) in einer Matrix $A$ wird folgende Matrix durch Abwandlung der Einheitsmatrix konstruiert:
+    $$ T_{i \, j} = \left( \begin{array}{cccccccccccc}
+        1      &        &        &            &        &             &        &          &        &        &          \\
+               & \ddots &        &            &        &             &        &          &        & 0      &          \\
+               &        & 1      &            &        &             &        &          &        &        &          \\
+               &        &        & 0          & \cdots & \rightarrow & \cdots & 1        &        &        &          \\
+               &        &        & \vdots     & 1      &             &        & \vdots   &        &        &          \\
+               &        &        & \downarrow &        & \ddots      &        & \uparrow &        &        &          \\
+               &        &        & \vdots     &        &             & 1      & \vdots   &        &        &          \\
+               &        &        & 1          & \cdots & \leftarrow  & \cdots & 0        &        &        &          \\
+               &        &        &            &        &             &        &          & 1      &        &          \\
+               & 0      &        &            &        &             &        &          &        & \ddots &          \\
+               &        &        &            &        &             &        &          &        &        & 1        \\
+    \end{array} \right) \begin{array}{ll}
+      \longleftarrow & \text{$i$-te Zeile} \\
+      \ \\
+      \ \\
+      \ \\
+      \ \\
+      \longleftarrow & \text{$j$-te Zeile} \\
+    \end{array} $$
+    Vertauschung der $i$-ten und der $j$-ten Zeile:
+    $$ A' =  T_{i \, j} \cdot A $$
+    Vertauschung der $i$-ten und der $j$-ten Spalte:
+    $$ A'' = A \cdot T_{i \, j} $$
+
+    \item Typ 2: \par
+    Für die Multiplikation einer Zeile (Spalte) mit dem Faktor $\lambda$ in einer Matrix $A$ wird eine Matrix konstruiert, in welcher in der Diagonalen der Einheitsmatrix in der entsprechenden Zeile (Spalte) eine Eins durch $\lambda$ ersetzt:
+    $$ S_{i \, \lambda} = \left( \begin{array}{ccccccc}
+        1     &        &        &         &        &        &        \\
+              & \ddots &        &         &        & 0      &        \\
+              &        & 1      &         &        &        &        \\
+              &        &        & \lambda &        &        &        \\
+              &        &        &         & 1      &        &        \\
+              & 0      &        &         &        & \ddots &        \\
+              &        &        &         &        &        & 1      \\
+    \end{array} \right) \begin{array}{ll}
+      \longleftarrow & \text{$i$-te Zeile} \\
+    \end{array} $$
+    Multiplkation der $i$-ten Zeile mit $\lambda$:
+    $$ A' =  S_{i \, \lambda} \cdot A $$
+    Multiplkation der $j$-ten Spalte mit $\lambda$:
+    $$ A'' = A \cdot S_{i \, \lambda} $$
+
+    \item Typ 3: \par
+    Für die Addition des $\lambda$-fachen einer Zeile (Spalte) zu einer anderen Zeile (Spalte) in einer Matrix $A$ wird eine Einheitsmatrix um ein $\lambda$ folgendermaßen erweitert:
+    $$ \begin{array}{c}
+        K_{i \, j \, \lambda} = \left( \begin{array}{ccccccc}
+        1     &        &        &        &         &        &        \\
+              & \ddots &        &        &         & 0      &        \\
+              &        & \ddots &        &         &        &        \\
+              &        &        & \ddots & \lambda &        &        \\
+              &        &        &        & \ddots  &        &        \\
+              & 0      &        &        &         & \ddots &        \\
+              &        &        &        &         &        & 1      \\
+        \end{array} \right) \begin{array}{ll}
+            \longleftarrow & \text{$i$-te Zeile} \\
+        \end{array} \\
+        \uparrow \\
+        \text{$j$-te Spalte} \\
+    \end{array} $$
+    Addition des $\lambda$-fachen der $j$-ten Zeile zur $i$-ten Zeile:
+    $$ A' =  K_{i \, j \, \lambda} \cdot A $$
+    Addition des $\lambda$-fachen der $i$-ten Spalte zur $j$-ten Spalte:
+    $$ A'' = A \cdot K_{i \, j \, \lambda} $$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lineare Gleichungssysteme
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lineare Gleichungssysteme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einleitung}
+
+\paragraph{Definition:} Ein \emph{lineares Gleichungssystem}\index{lineares Gleichungssystem}\index{Gleichungssystem, linear} (LGS)\index{LGS} mit Koeffizienten in einem Körper $K$, mit $m$ Gleichungen und $n$ Unbekannten wird durch eine Matrix
+$$ A = (a_{i \, j})_{(i, j) \in m \times n} \in M(m \times n, K) $$
+und einem Vektor
+$$ \vec{b} = \begin{pmatrix}
+  b_1 \\
+  b_2 \\
+  \vdots \\
+  b_m
+\end{pmatrix} \in K^m $$
+repräsentiert. Das lineare Gleichungssystem  wird folgendermaßen interpretiert:
+$$ \begin{array}{ccccccccc}
+  a_{1 \, 1} \cdot x_1 & + & a_{1 \, 2} \cdot x_2 & + & \ldots & + & a_{1 \, n} \cdot x_n & = & b_1    \\
+  a_{2 \, 1} \cdot x_1 & + & a_{2 \, 2} \cdot x_2 & + & \ldots & + & a_{2 \, n} \cdot x_n & = & b_2    \\
+  \vdots               &   & \vdots               &   &        &   & \vdots               &   & \vdots \\
+  a_{m \, 1} \cdot x_1 & + & a_{m \, 2} \cdot x_2 & + & \ldots & + & a_{m \, n} \cdot x_n & = & b_m    \\
+\end{array} $$
+
+Man bezeichnet mit $(A \, | \, b)$ folgende Matrix:
+$$ (A \, | \, b) = \left( \begin{array}{cccc|c}
+    a_{1 \, 1} & a_{1 \, 2} & \cdots & a_{1 \, n} & b_1 \\
+    a_{2 \, 1} & a_{2 \, 2} & \cdots & a_{2 \, n} & b_2 \\
+    \vdots     & \vdots     & \ddots & \vdots           \\
+    a_{m \, 1} & a_{m \, 2} & \cdots & a_{m \, n} & b_m \\
+\end{array} \right) $$
+
+\paragraph{Beobachtung:} $x_1, x_2, \ldots x_n$ bilden genau dann eine Lösung des linearen Gleichungssystems, wenn
+$$ A \cdot \begin{pmatrix}
+  x_1 \\
+  x_2 \\
+  \vdots \\
+  x_n
+\end{pmatrix} = \vec{b} $$ \pagebreak
+
+\paragraph{Satz:} Die Gleichung $A \cdot \vec{x} = \vec{b}$ ist genau dann lösbar, wenn
+$$ \text{rg } A = \text{rg}(A \, | \, b) $$
+
+\paragraph{Beweis:}
+\begin{eqnarray*}
+    &               & \text{rg } A = \text{rg}(A \; | \; b) \\ \\
+    &\Leftrightarrow& \text{Spaltenrang}(A) = \text{Spaltenrang}(A \; | \; b) \\ \\
+    &\Leftrightarrow& \vec{b} \in \text{Lin} \left( \left\{ \vecfour{a_{1 \, 1}}{a_{2 \, 1}}{\vdots}{a_{m \, 1}}, \vecfour{a_{1 \, 2}}{a_{2 \, 2}}{\vdots}{a_{m \, 2}}, \ldots \vecfour{a_{1 \, n}}{a_{2 \, n}}{\vdots}{a_{m \, n}} \right\} \right) \\ \\
+    &\Leftrightarrow& \exists x_1, x_2, \ldots x_n \platz \vec{b} = x_1 \cdot \vecfour{a_{1 \, 1}}{a_{2 \, 1}}{\vdots}{a_{m \, 1}} + x_2 \cdot \vecfour{a_{1 \, 2}}{a_{2 \, 2}}{\vdots}{a_{m \, 2}} + \ldots + x_n \cdot \vecfour{a_{1 \, n}}{a_{2 \, n}}{\vdots}{a_{m \, n}} \\ \\
+    &\Leftrightarrow& \exists x_1, x_2, \ldots x_n \platz A \cdot \vecfour{x_1}{x_2}{\vdots}{x_n} = \vec{b}
+\end{eqnarray*}
+
+\paragraph{Definition:} Ein lineares Gleichungssystem mit $\vec{b} = \vec{0}^{\; (m)}$ wird \emph{homogenes Gleichungssystem}\index{homogenes Gleichungssystem}\index{Gleichungssystem, homogen} genannt.
+
+\paragraph{Beobachtung:} Zu jedem linearen Gleichungssystem kann durch Ersetzung von~$\vec{b}$ durch $\vec{0}^{\; (m)}$ ein homogenes Gleichungssystem gefunden werden.
+
+\paragraph{Definition:} Die Lösungsmenge eines linaren Gleichungssystems aus $A$ und $\vec{b}$ ist folgermaßen definiert:
+$$ \text{Lös}(A, \vec{b}) = \{ \vec{x} \; | \; A \cdot \vec{x} = \vec{b} \} $$
+
+\paragraph{Satz:} Sei $A \in M(m \times n, K)$ die Matrix einer linearen Abbildung $f : K^n \rightarrow K^m$ bezüglich der Standardbasis, dann ist
+\begin{enumerate} \buchstaben
+    \item Die Lösungsmenge $\text{Lös}(A, \vec{0}^{\; (m)})$ ist gleich $\text{Ker } f$. Damit ist $\text{Lös}(A, \vec{0}^{\; (m)})$ ein Unterraum von $K^n$.
+    \item Sei $\vec{b} \in K^m$ und $\vec{x}, \vec{y} \in \text{Lös}(A, \vec{b})$, dann gilt:
+    $$ \vec{x} - \vec{y} \in \text{Lös}(A, \vec{0}^{\; (m)}) $$
+    \item Sei $\vec{b} \in K^m$, $\vec{x} \in \text{Lös}(A, \vec{b})$ und $\vec{z} \in \text{Lös}(A, \vec{0}^{\; (m)})$, dann gilt:
+    $$ \vec{x} + \vec{z} \in \text{Lös}(A, \vec{b}) $$
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate} \buchstaben
+    \item Durch Einsetzen der jeweiligen Definitionen folgt:
+    \begin{eqnarray*}
+        \text{Lös}(A, \vec{0}^{\; (m)}) &=& \{ \vec{x} \; | \; A \cdot \vec{x} = \vec{0}^{\; (m)} \} \\
+                                        &=& \{ \vec{x} \; | \; f(\vec{x}) = \vec{0}^{\; (m)} \} \\
+                                        &=& \text{Ker } f
+    \end{eqnarray*}
+    \item Seien $\vec{x}, \vec{y} \in \text{Lös}(A, \vec{b})$, dann gilt:
+    $$ f(\vec{x}) = \vec{b} \platz \text{und} \platz f(\vec{y}) = \vec{b} $$
+    Daraus folgt:
+    $$ f(\vec{x} - \vec{y}) = f(\vec{x}) - f(\vec{y}) = \vec{b} - \vec{b} = \vec{0} $$
+    Das heißt:
+    $$ \vec{x} - \vec{y} \in \text{Lös}(A, \vec{0}^{\; (m)}) $$
+    \item Seien $\vec{x} \in \text{Lös}(A, \vec{b})$ und $\vec{z} \in \text{Lös}(A, \vec{0}^{\; (m)})$, dann gilt:
+    $$ f(\vec{x}) = \vec{b} \platz \text{und} \platz f(\vec{z}) = \vec{0} $$
+    Daraus folgt:
+    $$ f(\vec{x} + \vec{z}) = f(\vec{x}) - f(\vec{z}) = \vec{b} - \vec{0} = \vec{b} $$
+    Das heißt:
+    $$ \vec{x} + \vec{z} \in \text{Lös}(A, \vec{b}) $$
+\end{enumerate}
+
+\paragraph{Beobachtung:} Sei $A \in M(m \times n, K)$ die Matrix einer linearen Abbildung $f : K^n \rightarrow K^m$ bezüglich der Standardbasis, dann ist die Lösungsmenge $\text{Lös}(A, b)$ genau dann \emph{nicht} leer, wenn $\vec{b} \in \text{Im } f$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gauß'scher Algorithmus}\index{Gauß'scher Algorithmus}
+
+\paragraph{Verfahren:} Ein lineares Gleichungssystem aus $A$ und $\vec{b}$ kann nach folgendem Algorithmus gelöst werden:
+\begin{enumerate} \buchstaben
+    \item Überprüfung, ob das lineare Gleichungssystem eine Lösung hat:
+    Man bringt die Matrix $A$ in obere Dreiecksform, aber erweitert alle Schritte auf die Matrix $(A \; | \; b)$ ohne Elementarumformungen mit letzter Spalte vorzunehmen. \par
+    Achtung: Spaltenvertauschungen in $A$ bedeuten Variablenvertauschung im linearen Gleichungssystem. \par
+    Ergebnis:
+    $$ A' = \left( \begin{array}{ccccc@{\hspace{0.2cm}}|@{\hspace{0.3cm}}ccc@{\hspace{0.4cm}}|c}
+        a'_{1 \, 1} & *           & *           & \cdots & *           & *      & \cdots & *      & b'_1     \\
+        0           & a'_{2 \, 2} & *           & \cdots & *           & \vdots & \ddots & \vdots & b'_2     \\
+        0           & 0           & a'_{3 \, 3} & \ddots & \vdots      & \vdots & \ddots & \vdots & b'_3     \\
+        \vdots      & \vdots      & \ddots      & \ddots & *           & \vdots & \ddots & \vdots & \vdots   \\
+        0           & 0           & \cdots      & 0      & a'_{r \, r} & *      & \cdots & *      & b'_r     \\ \hline
+        0           & \cdots      & \cdots      & \cdots & 0           & 0      & \cdots & 0      & b'_{r+1} \\
+        \vdots      & \ddots      & \ddots      & \ddots & \vdots      & \vdots & \ddots & \vdots & \vdots   \\
+        0           & \cdots      & \cdots      & \cdots & 0           & 0      & \cdots & 0      & b'_m
+    \end{array} \right) $$
+    \begin{itemize}
+        \item Fall 1: Falls mindestens ein $b'_i \neq 0$ mit $i = r+1, r+2, \ldots m$ existiert, dann ist $\text{rg } (A) < \text{rg} (A \; | \; b)$, und das System hat \emph{keine} Lösung. Das Verfahren wird abgebrochen.
+        \item Fall 2: Falls $b'_{r+1} = b'_{r+2} = \ldots = b'_m = 0$, dann ist $\text{rg } (A) = \text{rg} (A \; | \; b)$, und das System hat eine Lösung. \par
+        Im Folgenden wird das System auf folgende Form reduziert:
+        $$ (T \; | \; S \; | \; b') = \left( \begin{array}{ccccc@{\hspace{0.2cm}}|@{\hspace{0.3cm}}ccc@{\hspace{0.4cm}}|c}
+            a'_{1 \, 1} & *           & *           & \cdots & *           & *      & \cdots & *      & b'_1     \\
+            0           & a'_{2 \, 2} & *           & \cdots & *           & \vdots & \ddots & \vdots & b'_2     \\
+            0           & 0           & a'_{3 \, 3} & \ddots & \vdots      & \vdots & \ddots & \vdots & b'_3     \\
+            \vdots      & \vdots      & \ddots      & \ddots & *           & \vdots & \ddots & \vdots & \vdots   \\
+            0           & 0           & \cdots      & 0      & a'_{r \, r} & *      & \cdots & *      & b'_r
+        \end{array} \right) $$
+    \end{itemize} \pagebreak
+
+    \item Bestimmung einer speziellen Lösung von $(T \; | \; S \; | \; b')$: \par
+    Zur Bestimmung \emph{einer} speziellen Lösung von $(T \; | \; S \; | \; b')$ wird das lineare Gleichungssystem folgendermaßer geteilt:
+    $$ (T \; | \; S) \cdot \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_r \\ x_{r+1} \\ \vdots \\ x_n \end{pmatrix} = T \cdot \vecfour{x_1}{x_2}{\vdots}{x_r} + S \cdot \vecfour{x_{r+1}}{x_{r+2}}{\vdots}{x_n} = \vec{b}' $$
+    Man wählt $x_{r+1} = x_{r+2} = \ldots = x_n = 0$. Dadurch reduziert sich das lineare Gleichungssystem wiefolgt:
+    $$ T \cdot \vecfour{x_1}{x_2}{\vdots}{x_r} = \vec{b}' \platz \Rightarrow \platz \left( \begin{array}{ccccc}
+            a'_{1 \, 1} & a'_{1 \, 2} & \cdots & a'_{1 \, r} \\
+            0           & a'_{2 \, 2} & \cdots & a'_{2 \, r} \\
+            \vdots      & \ddots      & \ddots & \vdots      \\
+            0           & \cdots      & 0      & a'_{r \, r}
+    \end{array} \right) \cdot \vecfour{x_1}{x_2}{\vdots}{x_r} = \vecfour{b'_1}{b'_2}{\vdots}{b'_r} $$
+    Die Werte von $x_1, x_2, \ldots x_r$ können nun direkt bestimmt werden:
+    $$ \begin{array}{rcl@{\hspace{0.5cm}}c@{\hspace{0.5cm}}rcl}
+        b'_r     &=& a'_{r \, r}     \cdot x_r                               &\Rightarrow& x_r     &=& \frac{b'_r}{a'_{r \, r}}                                            \\ \\
+        b'_{r-1} &=& a'_{r-1 \, r-1} \cdot x_{r-1} +          a'_{r-1 \, r} \cdot x_r &\Rightarrow& x_{r-1} &=& \frac{b'_{r-1} - a'_{r-1 \, r} \cdot x_r}{a'_{r-1 \, r-1}} \\ \\
+                 & &                                                                  &\vdots     &         & &                                                            \\ \\
+        b'_1     &=& a'_{1 \, 1}     \cdot x_1     + \ldots + a'_{1 \, r}   \cdot x_r &\Rightarrow& x_1     &=& \frac{b'_1     - a'_{1 \, r}   \cdot x_r - \ldots - a'_{1 \, 2} \cdot x_2}{a'_{1 \, 1}} \\ \\
+    \end{array} $$
+    Der Vektor mit einer speziellen Lösung des linearen Gleichungssystem werde mit $\vec{x}$ bezeichnet:
+    $$ \vec{x} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_r \\ x_{r+1} \\ \vdots \\ x_n \end{pmatrix} = \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_r \\ 0 \\ \vdots \\ 0 \end{pmatrix} $$ \pagebreak
+
+    \item Bestimmung einer Basis der Lösungsmenge des homogenen Gleichungssystems $(T \; | \; S \; | \; \vec{0}^{\; (r)})$: \par
+    Zur Bestimmung des $j$-ten Basisvektors von
+    $$ (T \; | \; S) \cdot \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_r \\ x_{r+1} \\ \vdots \\ x_n \end{pmatrix} = T \cdot \vecfour{x_1}{x_2}{\vdots}{x_r} + S \cdot \vecfour{x_{r+1}}{x_{r+2}}{\vdots}{x_n} = \vec{0}^{\; (r)} $$
+    wählt man
+    $$ x_{r+j} = 1 \platz \text{und} \platz x_{r+1} = \ldots = x_{r+j-1} = x_{r+j+1} = \ldots x_n = 0 $$
+    Im Folgenden gelte:
+    $$ S = (s_{i \; j})_{(i, j) \in r \times (n-r)} $$
+    Damit erhält man das folgende lineare Gleichungssystem
+    $$ \left( \begin{array}{ccccc}
+            a'_{1 \, 1} & a'_{1 \, 2} & \cdots & a'_{1 \, r} \\
+            0           & a'_{2 \, 2} & \cdots & a'_{2 \, r} \\
+            \vdots      & \ddots      & \ddots & \vdots      \\
+            0           & \cdots      & 0      & a'_{r \, r}
+    \end{array} \right) \cdot \vecfour{x_1}{x_2}{\vdots}{x_r} = \vecfour{- s_{1 \; j}}{- s_{2 \; j}}{\vdots}{- s_{r \; j}} $$
+    Bemerkung: Der Vektor
+    $$ \vecfour{- s_{1 \; j}}{- s_{2 \; j}}{\vdots}{- s_{r \; j}} $$
+    ist dabei der $j$-Spaltenvektor aus $S$, multipliziert mit $-1$. \par \vspace{0.3cm}
+    Die Werte von $x_1, x_2, \ldots x_r$ können nun wie bei der speziellen Lösung bestimmt werden. \par \vspace{0.3cm}
+    Der $j$-te Basisvektor des homogenen Gleichungssystem werde mit $\vec{x}_j$ bezeichnet. \par \vspace{0.3cm}
+    Das Verfahren muss für alle $n-r$ Spalten von $S$ durchgeführt werden. \pagebreak
+
+    \item Bestimmung der allgemeinen Lösung von $(T \; | \; S \; | \; b)$: \par
+    Mit Hilfe der speziellen Lösung des linaren Gleichungssystem und der Basisvektoren der Lösungsmenge der homogenen Gleichungssystem lässt sich die Lösungsmenge des linearen Gleichungssystem folgermaßen darstellen:
+    $$ \text{Lös}(A \; | \; b) = \text{Lös}(T \; | S \; | \; b') = \left\{ \vec{x} + \sum_{j=1}^{n-r} \lambda_j \cdot \vec{x}_j \; | \; \lambda_1, \lambda_2, \ldots \lambda_{n-r} \in \real \right\} $$
+\end{enumerate}
+
+\paragraph{Beispiel:} Gegeben sei das folgende Gleichungssystem:
+$$ \begin{array}{rrrrrrrrrr}
+    &   &   & 2x_2 & + & x_3 & - & x_4 & = & 6 \\
+    & x_1 & - & x_2 & + & 2x_3 &   &   & = & -1 \\
+    & 2x_1 &   &   & + & 5x_3 &   &   & = & 3 \\
+  - & x_1 & - & x_2 & - & 3x_3 & + & 2x_4 & = & -6 \\
+\end{array} $$
+\begin{enumerate} \buchstaben
+    \item Die dazugehörige Matrix $(A \; | \; b)$:
+    $$ \left( \begin{array}{rrrr|r}
+        0 & 2 & 1 & -1 & 6 \\
+        1 & -1 & 2 & 0 & -1 \\
+        2 & 0 & 5 & 0 & 3 \\
+        -1 & -1 & -3 & 2 & -6 \\
+    \end{array} \right) $$
+    Diese Matrix muss zuerst in obere Dreiecksform überführt werden. \par
+    Erste und zweite Zeile vertauschen:
+    $$ \left( \begin{array}{rrrr|r}
+        1 & -1 & 2 & 0 & -1 \\
+        0 & 2 & 1 & -1 & 6 \\
+        2 & 0 & 5 & 0 & 3 \\
+        -1 & -1 & -3 & 2 & -6 \\
+    \end{array} \right) $$
+    In der ersten Spalte unter $a_{1 \; 1}$ Nullen erzeugen:
+    $$ \left( \begin{array}{rrrr|r}
+        1 & -1 & 2 & 0 & -1 \\
+        0 & 2 & 1 & -1 & 6 \\
+        0 & 2 & 1 & 0 & 5 \\
+        0 & -2 & -1 & 2 & -7 \\
+    \end{array} \right) $$
+    In der zweiten Spalte unter $a_{2 \; 2}$ Nullen erzeugen:
+    $$ \left( \begin{array}{rr@{\hspace{0.65cm}}rr|r}
+        1 & -1 & 2 & 0 & -1 \\
+        0 & 2 & 1 & -1 & 6 \\
+        0 & 0 & 0 & 1 & -1 \\
+        0 & 0 & 0 & 1 & -1 \\
+    \end{array} \right) $$
+    Dritte und vierte Spalte tauschen, um an der Stelle $a_{3 \; 3}$ einen Wert $\neq 0$ zu erzeugen (Achtung: $x_3 \leftrightarrow x_4$):
+    $$ \left( \begin{array}{rrr@{\hspace{0.65cm}}r|r}
+        1 & -1 & 0 & 2 & -1 \\
+        0 & 2 & -1 & 1 & 6 \\
+        0 & 0 & 1 & 0 & -1 \\
+        0 & 0 & 1 & 0 & -1 \\
+    \end{array} \right) $$
+    In der dritten Spalte unter $a_{3 \; 3}$ Nullen erzeugen:
+    $$ \left( \begin{array}{rrr@{\hspace{0.3cm}}|@{\hspace{0.3cm}}r|r}
+        1 & -1 & 0 & 2 & -1 \\
+        0 & 2 & -1 & 1 & 6 \\
+        0 & 0 & 1 & 0 & -1 \\ \hline
+        0 & 0 & 0 & 0 & 0 \\
+    \end{array} \right) $$
+    Die Matrix hat nun obere Dreiecksform. \par
+    Es existiert eine Lösung, da der untere Teil von $\vec{b}$ aus einer Null besteht. Die Matrix kann nun folgendermaßen reduziert werden:
+    $$ \left( \begin{array}{rrr@{\hspace{0.3cm}}|@{\hspace{0.3cm}}r|r}
+        1 & -1 & 0 & 2 & -1 \\
+        0 & 2 & -1 & 1 & 6 \\
+        0 & 0 & 1 & 0 & -1 \\
+    \end{array} \right) $$
+    Das lineare Gleichungssystem wird geteilt:
+    $$ \left( \begin{array}{rrr}
+        1 & -1 & 0 \\
+        0 & 2 & -1 \\
+        0 & 0 & 1  \\
+    \end{array} \right) \cdot \vecthree{x_1}{x_2}{x_4} + \vecthree{2}{1}{0} \cdot \left( x_3 \right) = \left( \begin{array}{r} -1 \\ 6 \\ -1 \\ \end{array} \right) $$
+
+    \item Bestimmung der speziellen Lösung:
+    $$ \left( \begin{array}{rrr}
+        1 & -1 & 0 \\
+        0 & 2 & -1 \\
+        0 & 0 & 1  \\
+    \end{array} \right) \cdot \vecthree{x_1}{x_2}{x_4} = \left( \begin{array}{r} -1 \\ 6 \\ -1 \\ \end{array} \right) $$
+    Wähle $x_3 = 0$ und bestimme die übrigen Variablen:
+    $$ \begin{array}{rcrcrcr@{\hspace{0.5cm}}c@{\hspace{0.5cm}}rcr}
+                    & &                & &    1 \cdot x_4 &=& -1 &\Rightarrow& x_4 &=&  -1 \\
+                    & &    2 \cdot x_2 &+& (-1) \cdot x_4 &=&  6 &\Rightarrow& x_2 &=& 2,5 \\
+        1 \cdot x_1 &+& (-1) \cdot x_2 &+&    0 \cdot x_4 &=& -1 &\Rightarrow& x_1 &=& 1,5
+    \end{array} $$ \pagebreak
+
+    \item Bestimmung des ersten (und einzigen) Basisvektors von $(A \; | \; \vec{0}^{\; (4)})$:
+    $$ \left( \begin{array}{rrr}
+        1 & -1 & 0 \\
+        0 & 2 & -1 \\
+        0 & 0 & 1  \\
+    \end{array} \right) \cdot \vecthree{x_1}{x_2}{x_4} = \left( \begin{array}{r} -2 \\ -1 \\ 0 \\ \end{array} \right) $$
+    Wähle $x_3 = 1$ und bestimme die übrigen Variablen:
+    $$ \begin{array}{rcrcrcr@{\hspace{0.5cm}}c@{\hspace{0.5cm}}rcr}
+                    & &                & &    1 \cdot x_4 &=&  0 &\Rightarrow& x_4 &=&    0 \\
+                    & &    2 \cdot x_2 &+& (-1) \cdot x_4 &=& -1 &\Rightarrow& x_2 &=& -0,5 \\
+        1 \cdot x_1 &+& (-1) \cdot x_2 &+&    0 \cdot x_4 &=& -2 &\Rightarrow& x_1 &=& -2,5
+    \end{array} $$
+    \item Lösungsmenge:
+    $$ \text{Lös}(A \; | \; b) = \left\{ \vecfour{1,5}{2,5}{0}{-1} + \lambda \cdot \vecfour{-2,5}{-0,5}{1}{0} \; | \; \lambda \in \real \right\} $$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Quotientenraum}
+
+\paragraph{Beobachtung:} Die Lösungsmenge ist \emph{kein} Unterraum, aber eine "`Verschiebung"' eines Unterraums.
+
+\paragraph{Definition:} Sei $V$ ein Vektorraum, $U$ ein Unterraum von $V$ und $\vec{v}$ ein Vektor aus $V$, dann nennt man
+$$ \vec{v} + U = \{ \vec{v} + \vec{u} \; | \; \vec{u} \in U \} $$
+die \emph{Nebenklasse}\index{Nebenklasse} von $\vec{v}$ bezüglich $U$.
+
+\paragraph{Satz:} Sei $V$ ein Vektorraum, $U$ ein Unterraum von $V$ und $\vec{w}, \vec{w}$ zwei Vektoren aus $V$, dann gilt:
+$$ \vec{v} + U = \vec{w} + U \platz \Leftrightarrow \platz \vec{v} - \vec{w} \in U \platz \Leftrightarrow \platz \vec{w} \in \vec{v} + U $$
+
+\paragraph{Definition:} Sei $V$ ein Vektorraum, $U$ ein Unterraum von $V$ und $K$ der Körper von $V$, dann bezeichnet man die Menge
+$$ V_{/ U} = \{ \vec{v} + U \; | \; \vec{v} \in V \} $$
+als \emph{Quotientenraum}\index{Quotientenraum} von $V$ nach $U$. \pagebreak[3]
+
+\paragraph{Beobachtung:} Der Quotientenraum $V_{/ U}$ ist ein Vektorraum mit folgenden Operationen ($\vec{v}, \vec{w} \in V$, $\lambda \in K$)
+\begin{eqnarray*}
+    (\vec{v} + U) + (\vec{w} + U) &=& (\vec{v} + \vec{w}) + U \\
+    \lambda \cdot (\vec{v} + U) &=& (\lambda \cdot \vec{v}) + U
+\end{eqnarray*}
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-7-3-a}
+\end{center}
+und dem neutralen Element $\vec{0} + U = U$.
+
+
+\paragraph{Beobachtung:} Sei $V_{/ U}$ ein Quotientenraum, dann ist $\vec{v} + U \in V_{/ U}$ eine Äquivalenzklasse von $\vec{v}$ bezüglich der Relation "`Differenz ist in $U$"'.
+
+\paragraph{Satz:} Sei $V$ ein Vektorraum, $U$ ein Unterraum von $V$, dann ist
+$$ \text{dim } V_{/ U} = \text{dim } V - \text{dim } U $$
+
+\paragraph{Beweisidee:} Man definiert eine Abbildung $\varphi : V \rightarrow V_{/ U}$ durch
+$$ \vec{v} \mapsto \vec{v} + U $$
+Die Abbidlung $\varphi$ ist linear und surjektiv (epimorph). Damit ist das $\text{Im } \varphi = V_{/ U}$. Außerdem ist $\text{Ker } \varphi = U$, denn
+$$ \forall \, \vec{v} \in U \platz \vec{v} + U = U = \vec{0} + U $$
+Nach der Dimensionsformel gilt somit:
+$$ \text{dim } V = \text{dim}(\text{Ker } \varphi) + \text{dim} (\text{Im } \varphi) = \text{dim } U + \text{dim } V_{/ U} $$
+
+\paragraph{Beobachtung:} Seien $A \in M(m \times n, K)$ eine Matrix, $f \in \text{Hom}(K^n, K^m)$ die dazugehörige Abbildung, $\vec{b}, \vec{c} \in K^n$ sowie $\vec{x}, \vec{y} \in K^m$ Vektoren und $\lambda \in K$ ein Skalar.
+\begin{itemize}
+    \item Addition:
+    $$ \begin{array}{c}
+        \text{Lös}(A, \vec{b} + \vec{c}) = (\vec{x} + \vec{y}) + \text{Ker } f \\ \\
+        \Updownarrow \\ \\
+        \text{Lös}(A, \vec{b}) = \vec{x} + \text{Ker } f \platz \text{und} \platz \text{Lös}(A, \vec{c}) = \vec{y} + \text{Ker } f
+    \end{array} $$
+    \item Multiplikation mit Skalaren:
+    $$ \begin{array}{c}
+        \text{Lös}(A \, | \, \vec{b}) = \vec{x} + \text{Ker } f \\ \\
+        \Updownarrow \\ \\
+        \text{Lös}(A \, | \, \lambda \, \vec{b}) = \lambda \, \vec{x} + \text{Ker } f
+    \end{array} $$
+\end{itemize}
+Lösungsmengen haben damit die Struktur von Vektorräumen.
+
+\paragraph{Beispiel:} Sei $A \in M(2 \times 2, \real)$ eine Matrix und $f \in \text{Hom}(\real^2, \real^2)$ die dazugehörige Abbildung (bezüglich der Standardbasis):
+$$ A = \begin{pmatrix}
+  1 & 2 \\
+  2 & 4 \\
+\end{pmatrix} \platz \leftrightarrow \platz f \left( \vectwo{x}{y} \right) = \vectwo{x+2y}{2x+4y} $$
+Bestimmung von $\text{Ker } f$ (also von $\text{Lös}(A, \vec{0}^{\; (2)})$):
+$$ x + 2y = 0 \platz \text{und} \platz 2x + 4y = 0 $$
+Daraus folgt:
+$$ \text{Lös}(A, \vec{0}^{\; (2)}) = \text{Ker } f = \text{Lin}\left( \left\{ \vectwo{2}{-1} \right\} \right) $$
+Sei $\vec{b} \in \real^2$ ein Vektor, dann gilt:
+$$ \text{Lös}(A, \vec{b}) \in \real^2_{/ \text{Ker } f} $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inverse Matrizen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inverse Matrizen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einheitsmatrix}
+
+\paragraph{Definition:} Die Matrix
+$$ E_n = \begin{pmatrix}
+    \mathbf{1}      & 0      & \cdots & \cdots & 0      \\
+    0      & \mathbf{1}      & \ddots & \ddots & \vdots \\
+    \vdots & \ddots & \mathbf{\ddots} & \ddots & \vdots \\
+    \vdots & \ddots & \ddots & \mathbf{1}      & 0      \\
+    0      & \cdots & \cdots & 0      & \mathbf{1}      \\
+\end{pmatrix} \in M(n \times n, K) $$
+ist neutrales Element der Matrixmultiplikation in $M(n \times n, K)$ und wird als~\emph{Einheitsmatrix}\index{Einheitsmatrix} bezeichnet. Das heißt ($A \in M(n \times n, K)$):
+$$ E_n \cdot A \platz = \platz  A \platz  = \platz  A \cdot E_n $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inverse Matrizen}
+
+\paragraph{Definition:} Sei $A \in M(n \times n, K)$, dann ist $A^{-1}$ die zu $A$ inverse Matrix, wenn
+$$ A \cdot A^{-1} \platz = \platz E_n \platz = \platz A^{-1} \cdot A $$
+
+\paragraph{Achtung:} Die Menge $M(n \times n, K)$ ist \emph{keine} Gruppe. Es gibt z.B. gibt es kein inverses Element für die Nullmatrix:
+$$ \forall \, A \in M(n \times n, K) \platz \begin{pmatrix}
+  0      & \cdots & 0      \\
+  \vdots & \ddots & \vdots \\
+  0      & \cdots & 0      \\
+\end{pmatrix} \cdot A = A \cdot \begin{pmatrix}
+  0      & \cdots & 0      \\
+  \vdots & \ddots & \vdots \\
+  0      & \cdots & 0      \\
+\end{pmatrix} = \begin{pmatrix}
+  0      & \cdots & 0      \\
+  \vdots & \ddots & \vdots \\
+  0      & \cdots & 0      \\
+\end{pmatrix} \neq E_n $$
+
+\paragraph{Satz:} Die Matrix $A \in M(n \times n, K)$ ist genau dann invertierbar, wenn $\text{rg } A = n$.
+
+\paragraph{Beweis:} Aufgrund des Zusammenhanges zu linearen Abbildungen lässt sich jeder Matrix eine Funktion $f \in \text{Hom}(K^n, K^n)$ zuordnen, sowie umgekehrt jeder linearen Abbildung eine Matrix zuordnen:
+$$ A \platz \leftrightarrow \platz f $$
+Daraus folgt:
+\begin{itemize}
+    \item Surjektivität von $f$:
+    $$ \text{rg } A = n \platz \Leftrightarrow \platz \text{dim}(\text{Im } f) = n \platz \Leftrightarrow \platz \text{$f$ ist surjektiv} $$
+    \item Injektivität von $f$:
+    $$ \text{dim}(\text{Im } f) = n \platz \Leftrightarrow \platz \underbrace{\text{dim}(\text{Ker } f) = 0}_{\text{dim } K^n - \text{dim}(\text{Im } f)} \platz \Leftrightarrow \platz \text{$f$ ist injektiv} $$
+    \item Umkehrbarkeit von $f$: \par
+    Da $f$ surjektiv und injektiv ist, ist $f$ bijektiv. Damit existiert eine Umkehrabbildung $f^{-1} \in \text{Hom}(K^n, K^n)$ und damit auch die dazugehörige Matrix $A' \in M(n \times n, K)$:
+    $$ f^{-1} \platz \leftrightarrow \platz A' $$
+    \item Verkettung von Funktionen als Matrixmultiplikation:
+    $$ A \cdot A^{-1} \platz \leftrightarrow \platz f \cdot f^{-1} = \text{Id}_{K^n} \platz \leftrightarrow \platz E^n \platz \Rightarrow \platz A \cdot A^{-1} = E_n $$
+\end{itemize} \hfill $\Box$
+
+\paragraph{Beobachtungen:}
+\begin{enumerate} \buchstaben
+    \item Seien $A, B, C \in M(n \times n, K)$ Matrixen und $A \cdot B = C$. \par
+    Überführt man mit den gleichen elementaren \emph{Zeilen}umformungen $A$ in $A'$ und $C$ in $C'$ (ohne $B$ zu verändern), so gilt $A' \cdot B = C'$. \par
+    Grund: Zeilenumformungen entsprechen Multiplikation mit Elementarmatrizen von links:
+    $$ A' \cdot B = \underbrace{D_k \cdot \ldots \cdot D_2 \cdot D_1} \cdot A \cdot B = \underbrace{D_k \cdot \ldots \cdot D_2 \cdot D_1} \cdot \, C = C' $$
+    \item Sei $A \in M(n \times n, K)$ eine Matrix. \par
+    Ist die Matrix $A$ invertierbar, so kann man $A$ mit elementaren \emph{Zeilen}um\-for\-mungen in $E_n$ überführen. \par
+    Grund: Die Matrix $A$ hat vollen Rang haben.
+    \item Sei $A \in M(n \times n, K)$ eine Matrix. \par
+    Überführt man die Matrix $A$ durch Zeilenumformungen in $E_n$ und wendet die gleichen Umformungen auf $E_n$ an, so erhält man $A^{-1}$. \par
+    Grund: Man wendet die Beobachtung a) an:
+    \begin{eqnarray*}
+                           A &\rightsquigarrow& E_n \\
+                         E_n &\rightsquigarrow& X \\ \\
+        A \cdot A^{-1} = E_n &\rightsquigarrow& E_n \cdot A^{-1} = \underbrace{D_k \cdot \ldots \cdot D_1} \cdot A \cdot A^{-1} = \underbrace{D_k \cdot \ldots \cdot D_1} \cdot E_n = X \\ \\
+        E_n \cdot A^{-1} = X &\Rightarrow& X = A^{-1}
+    \end{eqnarray*}
+\end{enumerate}
+
+\paragraph{Beispiel:}
+\begin{eqnarray*}
+  A = \begin{pmatrix}
+    1 & 2 & 0 \\
+    1 & 1 & 2 \\
+    0 & -1 & 4 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{pmatrix} = E_n \\ \\
+  \begin{pmatrix}
+    1 & 2 & 0 \\
+    0 & -1 & 2 \\
+    0 & -1 & 4 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    1 & 0 & 0 \\
+    -1 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{pmatrix} \\ \\
+  \begin{pmatrix}
+    1 & 2 & 0 \\
+    0 & -1 & 2 \\
+    0 & 0 & 2 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    1 & 0 & 0 \\
+    -1 & 1 & 0 \\
+    1 & -1 & 1 \\
+  \end{pmatrix} \\ \\
+  \begin{pmatrix}
+    1 & 0 & 4 \\
+    0 & -1 & 2 \\
+    0 & 0 & 2 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    -1 & 2 & 0 \\
+    -1 & 1 & 0 \\
+    1 & -1 & 1 \\
+  \end{pmatrix} \\ \\
+  \begin{pmatrix}
+    1 & 0 & 4 \\
+    0 & -1 & 0 \\
+    0 & 0 & 2 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    -1 & 2 & 0 \\
+    -2 & 2 & -1 \\
+    1 & -1 & 1 \\
+  \end{pmatrix} \\ \\
+  \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & -1 & 0 \\
+    0 & 0 & 2 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    -3 & 4 & -2 \\
+    -2 & 2 & -1 \\
+    1 & -1 & 1 \\
+  \end{pmatrix} \\ \\
+  E_n = \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{pmatrix} &&
+  \begin{pmatrix}
+    -3 & 4 & -2 \\
+    2 & -2 & 1 \\
+    0,5 & -0,5 & 0,5 \\
+  \end{pmatrix} = A^{-1}
+\end{eqnarray*}
+
+Probe:
+$$ \begin{pmatrix}
+  1 & 2 & 0 \\
+  1 & 1 & 2 \\
+  0 & -1 & 4 \\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+  -3 & 4 & -2 \\
+  2 & -2 & 1 \\
+  0,5 & -0,5 & 0,5 \\
+\end{pmatrix} =
+\begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 1 \\
+\end{pmatrix} $$ \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Determinanten
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Determinanten}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Einleitung}
+
+\paragraph{Definition:} Die \emph{Determinante}\index{Determinante} $\text{det } A$ ist eine Kenngröße einer quadratischen Matrix $A \in M(n \times n, K)$, die wie folgt bestimmen kann:
+\begin{itemize}
+    \item Fall 1: $n = 1$
+    $$ \text{det } a_{1 \; 1} = a_{1 \; 1} $$
+    \item Fall 2: $n > 1$ \par
+    Entwicklung nach der ersten Spalte:
+    $$ \text{det } A = \sum_{i=1}^n (-1)^{i+1} a_{i \; 1} \cdot \text{det } A_{i \; 1} $$
+    Dabei ist $A_{i \; 1}$ die Matrix, die man aus $A$ durch Streichen der $i$-ten Zeile und der ersten Spalte enthält.
+\end{itemize}
+
+\paragraph{Schreibweise:} Für die Determinante wird folgende Schreibweise vereinbart:
+$$ \begin{vmatrix}
+  a_{1 \; 1} & \cdots & a_{1 \; n} \\
+  \vdots & \ddots & \vdots \\
+  a_{m \; 1} & \cdots & a_{m \; n} \\
+\end{vmatrix} := \; \text{det} \begin{pmatrix}
+  a_{1 \; 1} & \cdots & a_{1 \; n} \\
+  \vdots & \ddots & \vdots \\
+  a_{m \; 1} & \cdots & a_{m \; n} \\
+\end{pmatrix} $$
+
+\paragraph{Beispiel:}
+\begin{eqnarray*}
+    \begin{vmatrix}
+    \textbf{0} & 1 & 2 & 0 \\
+    \textbf{1} & \textbf{2} & \textbf{4} & \textbf{6} \\
+    \textbf{0} & 1 & 5 & 1 \\
+    \textbf{0} & 0 & 2 & 0 \\
+    \end{vmatrix} &=& (-1)^{2+1} \cdot 1 \cdot \begin{vmatrix}
+    1 & 2 & 0 \\
+    1 & 5 & 1 \\
+    0 & 2 & 0 \\
+    \end{vmatrix} \\ \\
+    &=& - \left( 1 \cdot \begin{vmatrix}
+    5 & 1 \\
+    2 & 0 \\
+    \end{vmatrix} - 1 \cdot \begin{vmatrix}
+    2 & 0 \\
+    2 & 0 \\
+    \end{vmatrix} \right) \\ \\
+    &=& -  \left( (5 \cdot 0 - 2 \cdot 1) - (2 \cdot 0 - 2 \cdot 0) \right) \\ \\
+    &=& 2
+\end{eqnarray*}
+
+\paragraph{Beobachtung:} Für die Spezialfälle $n=2$ und $n=3$ existiert eine einfache Methode zur Bestimmung der Determinenten:
+\begin{eqnarray*}
+    \begin{vmatrix}
+      a_{1 \, 1} & a_{1 \, 2} \\
+      a_{2 \, 1} & a_{2 \, 2} \\
+    \end{vmatrix} &=& a_{1 \, 1} \cdot a_{2 \, 2} - a_{1 \, 2} \cdot a_{2 \, 1} \\ \\
+    \begin{vmatrix}
+      a_{1 \, 1} & a_{1 \, 2} & a_{1 \, 3} \\
+      a_{2 \, 1} & a_{2 \, 2} & a_{2 \, 3} \\
+      a_{3 \, 1} & a_{3 \, 2} & a_{3 \, 3} \\
+    \end{vmatrix} &=& \left( a_{1 \, 1} \cdot a_{2 \, 2} \cdot a_{3 \, 3} + a_{1 \, 2} \cdot a_{2 \, 3} \cdot a_{3 \, 1} + a_{1 \, 3} \cdot a_{2 \, 1} \cdot a_{3 \, 2} \right) \\
+                  & & - \left( a_{1 \, 3} \cdot a_{2 \, 2} \cdot a_{3 \, 1} + a_{1 \, 1} \cdot a_{2 \, 3} \cdot a_{3 \, 2} + a_{1 \, 2} \cdot a_{2 \, 1} \cdot a_{3 \, 3} \right)
+\end{eqnarray*}
+Achtung: Ab $n = 4$ funktioniert diese Methode nicht mehr!
+
+\paragraph{Definition:} Eine Funktion $f : M(m \times n, K) \rightarrow L$ heißt \emph{linear in jeder Zeile}\index{linear in jeder Zeile}, wenn folgende Bedingungen erfüllt sind:
+\begin{itemize}
+    \item Seien $A, A' \in M(m \times n, K)$ Matrizen. Wenn sich $A$ und $A'$ nur in der $p$-ten Zeile unterscheiden, dann gilt:
+    \begin{eqnarray*}
+        f(A) + f(A') &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{p \, 1} & \cdots & a_{p \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) +
+        f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a'_{p \, 1} & \cdots & a'_{p \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) \\ \\
+        &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{p \, 1} + a'_{p \, 1} & \cdots & a_{p \, n} + a'_{p \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right)
+    \end{eqnarray*} \pagebreak
+    \item Sei $A, \in M(m \times n, K)$ eine Matrix und $\lambda \in K$ ein Skalar, dann gilt für alle~$p \leq m$:
+    \begin{eqnarray*}
+        \lambda \cdot f(A) &=& \lambda \cdot f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{p \, 1} & \cdots & a_{p \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) \\ \\
+        &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          \lambda \cdot a_{p \, 1} & \cdots & \lambda \cdot a_{p \, n} \\
+          \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right)
+    \end{eqnarray*}
+\end{itemize}
+
+Eine Funktion $f : M(m \times n, K) \rightarrow L$ heißt \emph{linear in jeder Spalte}\index{linear in jeder Spalte}, wenn folgende Bedingungen erfüllt sind:
+\begin{itemize}
+    \item Seien $A, A' \in M(m \times n, K)$ Matrizen. Wenn sich $A$ und $A'$ nur in der $p$-ten Spalte unterscheiden, dann gilt:
+    \begin{eqnarray*}
+        f(A) + f(A') &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, p} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, p} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) \\ \\
+        & & + f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a'_{1 \, p} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a'_{m \, p} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) \\ \\ \\
+        &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, p} + a'_{1 \, p} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, p} + a'_{m \, p} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right)
+    \end{eqnarray*} \pagebreak
+    \item Sei $A, \in M(m \times n, K)$ eine Matrix und $\lambda \in K$ ein Skalar, dann gilt für alle~$p \leq n$:
+    \begin{eqnarray*}
+        \lambda \cdot f(A) &=& \lambda \cdot f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & a_{1 \, p} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & a_{m \, p} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right) \\ \\
+        &=& f \left( \begin{pmatrix}
+          a_{1 \, 1} & \cdots & \lambda \cdot a_{1 \, p} & \cdots & a_{1 \, n} \\
+          \vdots     & \ddots & \vdots     & \ddots & \vdots     \\
+          a_{m \, 1} & \cdots & \lambda \cdot a_{m \, p} & \cdots & a_{m \, n} \\
+        \end{pmatrix} \right)
+    \end{eqnarray*}
+\end{itemize}
+
+\paragraph{Satz:} Es gibt genau eine Abbildung $\text{det} : M(n \times n, K) \rightarrow K$ mit den folgenden Eigenschaften:
+\begin{itemize}
+    \item Die Abbildung $\text{det}$ ist linear in jeder Zeile.
+    \item Wenn $\text{rg } A < n$, dann gilt $\text{det } A = 0$.
+    \item Für die Determinante der Einheitsmatrix $E_n$ gilt: $\text{det } E_n = 1$.
+\end{itemize}
+Diese Abbildung lässt sich durch die am Anfang angegebene Entwicklungsformel bestimmen.
+
+\paragraph{Beobachtung:} Die Abbidlung $\text{det}$ ist ebenfalls linear in jeder Spalte.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Eigenschaften von Determinanten}
+
+\paragraph{Beobachtung:} Die Abbildung $\text{det}$ ist invariant gegenüber Typ-3-Zeilen- oder Spaltenumformungen:
+\begin{itemize}
+    \item Zeilenumformungen: \par
+    Umformung:
+    \begin{eqnarray*}
+        A = \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix} &\longrightarrow&
+        A' = \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} + \lambda \cdot a_{j \, 1} & \cdots & a_{i \, n} + \lambda \cdot a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix}
+    \end{eqnarray*}
+    Betrachtung der Determinante von $A'$:
+    \begin{eqnarray*}
+        \text{det } A' &=& \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} + \lambda \cdot a_{j \, 1} & \cdots & a_{i \, n} + \lambda \cdot a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix} \\ \\
+        &=& \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix} +
+        \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            \mathbf{\lambda \cdot a_{j \, 1}} & \mathbf{\cdots} & \mathbf{\lambda \cdot a_{j \, n}} \\
+            \vdots     & \ddots & \vdots     \\
+            \mathbf{a_{j \, 1}} & \mathbf{\cdots} & \mathbf{a_{j \, n}} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix} \\ \\
+        &=& \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix} = \text{det } A \\ \\ \\
+        && \text{weil} \platz \text{rg} \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            \mathbf{\lambda \cdot a_{j \, 1}} & \mathbf{\cdots} & \mathbf{\lambda \cdot a_{j \, n}} \\
+            \vdots     & \ddots & \vdots     \\
+            \mathbf{a_{j \, 1}} & \mathbf{\cdots} & \mathbf{a_{j \, n}} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix} < n
+    \end{eqnarray*}
+    \item Spaltenumformungen: analog
+\end{itemize} \pagebreak
+
+\paragraph{Beobachtung:} Vertauschung von zwei Zeilen (Spalten) bewirkt Vorzeichenänderung der Determinanten:
+\begin{itemize}
+    \item Vertauschung der $i$-ten und der $j$-ten Zeilen in der Matrix $A \in M(n \times n, K)$ mit Hilfe von Typ-2- und Typ-3-Zeilenumformungen:
+    \begin{enumerate}
+        \item Matrix $A$:
+        $$ A = \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix} $$
+        \item Addition der $j$-ten Zeile zur $i$-ten Zeile (Typ 3):
+        $$ \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} + a_{j \, 1} & \cdots & a_{i \, n} + a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix} $$
+        \item Subtraktion der $i$-ten Zeile von der $j$-ten Zeile (Typ 3):
+        \begin{eqnarray*}
+            & & \begin{pmatrix}
+                a_{1 \, 1} & \cdots & a_{1 \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{i \, 1} + a_{j \, 1} & \cdots & a_{i \, n} + a_{j \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{j \, 1} - (a_{i \, 1} + a_{j \, 1}) & \cdots & a_{j \, n} - (a_{i \, n} + a_{j \, n}) \\
+                \vdots     & \ddots & \vdots     \\
+                a_{n \, 1} & \cdots & a_{n \, n}
+            \end{pmatrix} \\ \\
+            &=& \begin{pmatrix}
+                a_{1 \, 1} & \cdots & a_{1 \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{i \, 1} + a_{j \, 1} & \cdots & a_{i \, n} + a_{j \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                - a_{i \, 1} & \cdots & - a_{i \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{n \, 1} & \cdots & a_{n \, n}
+            \end{pmatrix}
+        \end{eqnarray*}
+        \item Addition der $j$-ten Zeile zur $i$-ten Zeile (Typ 3):
+        \begin{eqnarray*}
+            & & \begin{pmatrix}
+                a_{1 \, 1} & \cdots & a_{1 \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{i \, 1} + a_{j \, 1} - a_{i \, 1} & \cdots & a_{i \, n} + a_{j \, n} - a_{i \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                - a_{i \, 1} & \cdots & - a_{i \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{n \, 1} & \cdots & a_{n \, n}
+            \end{pmatrix} \\ \\
+            &=& \begin{pmatrix}
+                a_{1 \, 1} & \cdots & a_{1 \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{j \, 1} & \cdots & a_{j \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                - a_{i \, 1} & \cdots & - a_{i \, n} \\
+                \vdots     & \ddots & \vdots     \\
+                a_{n \, 1} & \cdots & a_{n \, n}
+            \end{pmatrix}
+        \end{eqnarray*}
+        \item Multiplikation der $j$-ten Zeile mit $-1$ (Typ 2):
+        $$ \begin{pmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{pmatrix} = A' $$
+    \end{enumerate}
+    Betrachtung der Determinante von $A'$: \par
+    Da die Determinante einer Matrix invariant gegenüber Typ-3-Zeilen\-um\-formungen ist, wirkt sich nur die Typ-2-Zeilenumformung, die Multiplikation einer Zeile mit $-1$, auf die Determinante aus: Aufgrund der Linearität der Determinante in einer Zeile, muss die Determinate durch diese Operation ebenfalls mit $-1$ multipliziert werden:
+    \begin{eqnarray*}
+        \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            - a_{i \, 1} & \cdots & - a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix} &=&
+        \mathbf{-} \begin{vmatrix}
+            a_{1 \, 1} & \cdots & a_{1 \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{j \, 1} & \cdots & a_{j \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{i \, 1} & \cdots & a_{i \, n} \\
+            \vdots     & \ddots & \vdots     \\
+            a_{n \, 1} & \cdots & a_{n \, n}
+        \end{vmatrix}
+    \end{eqnarray*}
+    \item Vertauschung der $i$-ten und der $j$-ten Spalten in der Matrix $A \in M(n \times n, K)$ mit Hilfe von Typ-2- und Typ-3-Spaltenumformungen: analog
+\end{itemize}
+
+\paragraph{Folgerung:} Vertauschung von zwei Zeilen (Spalten) bewirkt eine Vorzeichenänderung der Determinanten.
+
+\paragraph{Folgerung:} Die Determinante kann als Produkt der Diagonalelemente einer oberen Dreiecksmatrix nach elementaren Typ-1- und Typ-3-Zeilenumformungen (Spaltenumformungen) bestimmt werden, wobei für jeden Zeilentausch (Spaltentausch) noch mit $-1$ multipliziert werden muss.
+
+\paragraph{Beispiel:}
+\begin{itemize}
+    \item Matrix $A$:
+    $$ A = \begin{pmatrix}
+      1 & 1 & 2 \\
+      1 & 1 & 3 \\
+      2 & 3 & 3 \\
+    \end{pmatrix} $$
+    \item Subtraktion der ersten Zeile von der zweiten Zeile:
+    $$ \begin{pmatrix}
+      1 & 1 & 2 \\
+      0 & 0 & 1 \\
+      2 & 3 & 3 \\
+    \end{pmatrix} $$
+    \item Subtraktion des zweifachen der ersten Zeile von der dritten Zeile:
+    $$ \begin{pmatrix}
+      1 & 1 & 2 \\
+      0 & 0 & 1 \\
+      0 & 1 & -1 \\
+    \end{pmatrix} $$
+    \item Vertauschung der zweiten und der dritten Zeile: \par
+    $$ \begin{pmatrix}
+      1 & 1 & 2 \\
+      0 & 1 & -1 \\
+      0 & 0 & 1 \\
+    \end{pmatrix} = A' $$
+    Anzahl der Vertauschungen: $i=1$
+    \item Bestimmung der Determinante von $A'$:
+    $$ \text{det } A' = \begin{vmatrix}
+      1 & 1 & 2 \\
+      0 & 1 & -1 \\
+      0 & 0 & 1 \\
+    \end{vmatrix} = 1 \cdot 1 \cdot 1 = 1 $$
+    \item Bestimmung der Determinante von $A$:
+    $$ \text{det } A = (-1)^i \cdot \text{det } A' = -1 \cdot 1 = -1 $$
+\end{itemize}
+
+\paragraph{Beobachtung:} Man kann zeigen, dass die Determinante einer Matrix $A$ nach beliebigen Zeilen und beliebigen Spalten entwickelt werden kann:
+\begin{itemize}
+    \item Entwicklung nach der $k$-ten Zeile:
+    $$ \text{det } A = \sum_{j=1}^n (-1)^{k+j} \cdot \text{det } A_{k \, j} $$
+    \item Entwicklung nach der $l$-ten Spalte:
+    $$ \text{det } A = \sum_{i=1}^n (-1)^{i+l} \cdot \text{det } A_{i \, l} $$
+\end{itemize}
+
+\paragraph{Beispiel:}
+\begin{eqnarray*}
+    \begin{vmatrix}
+      7 & 3 & \mathbf{0} & -1 \\
+      2 & 4 & \mathbf{0} & 5 \\
+      8 & -5 & \mathbf{2} & 4 \\
+      2 & 1 & \mathbf{0} & 0 \\
+    \end{vmatrix} &=&
+    (-1)^{3+3} \cdot 2 \cdot \begin{vmatrix}
+      7 & 3 & -1 \\
+      2 & 4 & 5 \\
+      \mathbf{2} & \mathbf{1} & \mathbf{0} \\
+    \end{vmatrix} \\ \\
+    &=& 2 \cdot \left( 2 \cdot \begin{vmatrix}
+      3 & -1 \\
+      4 & 5 \\
+    \end{vmatrix} - 1 \cdot \begin{vmatrix}
+      7 & -1 \\
+      2 & 5 \\
+    \end{vmatrix} \right) \\ \\
+    &=& 2 \cdot (2 \cdot 19 - 1 \cdot 37) = 2
+\end{eqnarray*}
+
+\paragraph{Beobachtung:} Die Determinanten einer Matrix $A$ und der zu $A$ transponierten Matrix $A^t$ sind gleich:
+$$ \text{det } A = \text{det } A^t $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cramer'sche Regel}
+
+\paragraph{Regel:} Sei $A \in M(n \times n, K)$ eine Matrix mit $\text{rg } A = n$ und $\vec{b} \in K^n$ ein Vektor. Hat das lineare Gleichungssystem aus $A$ und $\vec{b}$ eine \emph{eindeutige} Lösung, dann lässt sich diese Lösung folgermaßen bestimmen:
+$$ \vec{x} = \vecfour{x_1}{x_2}{\vdots}{x_n} \platz \text{mit} \platz x_i = \frac{\text{det } A_i}{\text{det } A} $$
+Dabei ist $A_i$ die Matrix, die man erhält, wenn man die $i$-te Spalte von $A$ durch $\vec{b}$ ersetzt.
+
+\paragraph{Beispiel:} Es ist Lösung des folgenden linearen Gleichungssystem zu bestimmen:
+$$ \begin{array}{rcrcr}
+    2 x_1 &+& 3 x_2 &=& 5 \\
+      x_1 &-& 2 x_2 &=& 2
+\end{array} \platz \leftrightarrow \platz \begin{pmatrix}
+  2 & 3 \\
+  1 & -2 \\
+\end{pmatrix} \cdot \vectwo{x_1}{x_2} = \vectwo{5}{2} $$
+Anwendung der Cramer'schen Regel:
+\begin{eqnarray*}
+    x_1 &=& \frac{\begin{vmatrix}
+        5 & 3 \\
+        2 & -2 \\
+    \end{vmatrix}}{\begin{vmatrix}
+        2 & 3 \\
+        1 & -2 \\
+    \end{vmatrix}} = \frac{-10 - 6}{-4 - 3} = \frac{16}{7} \\ \\
+    x_2 &=& \frac{\begin{vmatrix}
+        2 & 5 \\
+        1 & 2 \\
+    \end{vmatrix}}{\begin{vmatrix}
+        2 & 3 \\
+        1 & -2 \\
+    \end{vmatrix}} = \frac{4 - 5}{-4 - 3} = \frac{1}{7}
+\end{eqnarray*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Anwendungen von Determinanten}
+
+\paragraph{Festlegung:} Im Folgenden werden Punkte wie die Ortsvektoren dieser Punkte behandelt.
+
+\paragraph{Definition:} Es wird eine Funktion $\text{mydet} : K^2 \times K^2 \times K^2 \rightarrow K$ definiert:
+$$ \text{mydet}(\vec{p}, \vec{q}, \vec{r}) = \begin{vmatrix}
+  p_x & q_x & r_x \\
+  p_y & q_y & r_y \\
+  1   & 1   & 1   \\
+\end{vmatrix} $$
+
+\paragraph{Beobachtung:} Jeder Ortsvektor $\vec{t} \in \real^2$ zu einem Punkt $T$ lässt sich eindeutig darstellen als Linearkombination der Ortsvektoren $\vec{p}$, $\vec{q}$ und $\vec{r}$ eines Dreiecks $PQR$:
+$$ \vec{t} = a \cdot \vec{p} + b \cdot \vec{q} + c \cdot \vec{r} \platz \text{mit} \platz a + b + c = 1 $$
+Die Zahlen $a$, $b$ und $c$ heißen die \emph{baryzentrischen Koordinaten}\index{baryzentrischen Koordinaten} oder auch \emph{Schwerpunktskoordinaten}\index{Schwerpunktskoordinaten}. Befinden sich nämlich die Massen $a$, $b$ und $c$ mit Gesamtmasse~$1$ an den Punkten $P$, $Q$ und $R$, dann ist $T$ der Schwerpunkt. Mit der Cramer'schen Regel werden $a$, $b$ und $c$ als Lösung eines linearen Gleichungssystem dann wiefolgt bestimmt:
+\begin{eqnarray*}
+    a &=& \frac{\text{mydet}(\vec{t}, \vec{q}, \vec{r})}{\text{mydet}(\vec{p}, \vec{q}, \vec{r})} \\ \\
+    b &=& \frac{\text{mydet}(\vec{p}, \vec{t}, \vec{r})}{\text{mydet}(\vec{p}, \vec{q}, \vec{r})} \\ \\
+    c &=& \frac{\text{mydet}(\vec{p}, \vec{q}, \vec{t})}{\text{mydet}(\vec{p}, \vec{q}, \vec{r})}
+\end{eqnarray*}
+
+\paragraph{Beobachtung:} Mit Hilfe der baryzentrischen Koordinaten lässt sich in der Computergrafik \emph{Warping}\index{Warping} realisieren:
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-9-3-a}
+\end{center}
+
+\paragraph{Beobachtung:} Seien $\vec{p}, \vec{q}, \vec{r} \in \real^2$ Ortsvektoren der Punkte $P$, $Q$ und $R$.
+\begin{itemize}
+    \item Die Punkte $P$, $Q$ und $R$ liegen genau dann auf einer Linie, wenn
+    $$ \text{mydet}(\vec{p}, \vec{q}, \vec{r}) = 0 $$
+    \item Der Punkt $R$ liegt genau dann links von der gerichteten Geraden $\overrightarrow{PQ}$, wenn
+    $$ \text{mydet}(\vec{p}, \vec{q}, \vec{r}) > 0 $$
+    \item Der Punkt $R$ liegt genau dann rechts von der gerichteten Geraden $\overrightarrow{PQ}$, wenn
+    $$ \text{mydet}(\vec{p}, \vec{q}, \vec{r}) < 0 $$
+    \item Die Fläche es von $P$, $Q$ und $R$ aufgespannten Dreiecks beträgt:
+    $$ \left| \frac{\text{mydet}(\vec{p}, \vec{q}, \vec{r})}{2} \right| $$
+\end{itemize} \pagebreak
+
+\paragraph{Beispiel:} Seien $P = (-2, -3)$, $Q = (3, 5)$ und $R = (8, 14)$ Punkte in $\real^2$:
+\begin{center}
+    \includegraphics{skript/grafiken/lineare-algebra-2-9-3-b}
+\end{center}
+Bestimmung von $\text{mydet}$:
+$$ \begin{vmatrix}
+  -2 & 3 & 8 \\
+  -3 & 5 & 14 \\
+  1 & 1 & 1 \\
+\end{vmatrix} = -10 + 42 - 24 - 40 + 9 + 28 = 5 > 0 $$
+Daraus folgt, dass $(8, 14)$ links von der gerichteten Geraden $\overrightarrow{(-2, -3) (3, 5)}$ liegt und dass die Fläche des von den drei Punkten aufgespannten Dreiecks $2,5$ beträgt.
+
+\paragraph{Beobachtung:} Diese Eigenschaften lassen sich auch auf höhere Dimensionen übertragen. Seien $P$, $Q$, $R$ und $S$ Punkte in $\real^3$, dann ist
+$$ \frac{1}{6} \cdot \begin{vmatrix}
+  p_x & q_x & r_x & s_x \\
+  p_y & q_y & r_y & s_y \\
+  p_z & q_z & r_z & s_z \\
+  1 & 1 & 1 & 1 \\
+\end{vmatrix} $$
+das Volumen des von den vier Punkten aufgespannten Simplexes. Falls die vier Punkte auf einer Ebene liegen, ist der Wert $0$.
+
+\paragraph{Definition:} Für $A \in M(n \times n, K)$ wird die \emph{komplementäre Matrix}\index{komplementäre Matrix} $\tilde{A} = (\tilde{a}_{i \, j})_{(i, j) \in n^2}$ definiert durch:
+$$ \tilde{a}_{i \, j} = (-1)^{i+j} \cdot \text{det } A_{j \, i} $$
+Dabei ist $A_{j \; i}$ die Matrix, die man aus $A$ durch Streichen der $j$-ten Zeile und der $i$-ten Spalte enthält.
+
+\paragraph{Beobachtung:} Man kann leicht nachrechnen, dass auf der Diagonalen von $A \cdot \tilde{A}$ immer $\text{det } A$ steht, denn das is die Zeilenentwicklung von $\text{det } A$. Mit etwas mehr Aufwand kann man zeigen, dass sonst nur Nullen in $A \cdot \tilde{A}$ auftreten:
+$$ A \cdot \tilde{A} = \begin{pmatrix}
+  \text{det } A & 0 & \cdots & \cdots & 0 \\
+  0 & \text{det } A & \ddots & \ddots & \vdots \\
+  \vdots & \ddots & \ddots & \ddots & \vdots \\
+  \vdots & \ddots & \ddots & \text{det } A & 0 \\
+  0 & \cdots & \cdots & 0 & \text{det } A \\
+\end{pmatrix} $$
+
+\paragraph{Folgerung:} Ist $\text{det } A \neq 0$, dann ist $A$ invertierbar und
+$$ A^{-1} = \frac{\tilde{A}}{\text{det } A} $$
+
+\paragraph{Spezialfall:} Für $A \in M(2 \times 2, K)$ gilt:
+$$ \begin{pmatrix}
+  a & b \\
+  c & d \\
+\end{pmatrix}^{-1} = \frac{1}{ad - bc} \cdot \begin{pmatrix}
+  d & -b \\
+  -c & a \\
+\end{pmatrix} \platz \text{für} \platz ad - bc \neq 0 $$
+
+\paragraph{Satz:} Für alle $A, B \in M(n \times n, K)$ gilt:
+$$ \text{det}(A \cdot B) = \text{det } A \cdot \text{det } B $$
+
+\paragraph{Folgerung:} Man kann jeden Endomorphismus $f : K^n \rightarrow K^n$ eindeutig seine Determinante zuordnen als $\text{det } A$ für diese Matrix $A$ von $f$ bezüglich der Standardbasis.
+
+\paragraph{Satz:} Sei $f : K^n \rightarrow K^n$ ein Endomorphismus, $A$ die zu $f$ gehörende Matrix bezüglich der Standardbasis und $B$ eine zu $f$ gehörende Matrix bezüglich einer anderen Basis, dann gilt:
+$$ \text{det } A = \text{det } B $$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hier fortfahren
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\begin{center}
+    ... Vorlesung vom 19.12.2002 (fehlt)
+\end{center} \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Euklidische Vektorräume
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Euklidische Vektorräume}
+
+\paragraph{Definition:} Sei $V$ ein reeller Vektorraum. Ein Skalarprodukt über $V$ ist eine Abbildung $< \; , \; > : V \times V \rightarrow \real$ mit folgenden drei Eigenschaften:
+\begin{enumerate}
+    \item Biliniarität, d.h. für jedes $\vec{v} \in V$ sind die Abbildungen
+    \begin{itemize}
+        \item $< \; , \vec{v} > : V \rightarrow \real$ mit $\vec{w} \mapsto <\vec{w}, \vec{v}>$ oder
+        \item $< \vec{v} , \; > : V \rightarrow \real$ mit $\vec{w} \mapsto <\vec{v}, \vec{w}>$
+    \end{itemize}
+    sind linear.
+    \item Symmetrie, d.h. $<\vec{v}, \vec{w}> = <\vec{w}, \vec{v}>$ für alle $\vec{v}, \vec{w} \in V$.
+    \item Positive Definitheit, d.h. $<\vec{v}, \vec{v}> > 0$ für alle $\vec{v} \neq \vec{0}$.
+\end{enumerate}
+Ein Euklidischer Vekttorraum ist ein reeller Vektorraum mit einem Skalarprodukt.
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item $V = \real^n$, Standardskalarprodukt:
+    $$ \left\langle (\scalarlist{x}{n}), (\scalarlist{y}{n}) \right\rangle = x_1 y_1 \cdot x_2 y_2 + \ldots + x_n y_n $$
+    $$ \left\langle (1, 5, 0, 3), (3, 0, 7, -4) \right\rangle = 3 + 0 + 0 + (-12) = -9 $$
+    \item $V = \{ f : [-1, 1] \rightarrow \real \; | \; \text{stetige Funktion} \}$
+    $$ \langle f, g \rangle := \int_{-1}^1 f(x) g(x) dx $$
+\end{enumerate}
+
+\paragraph{Definition:} Die Norm eines Vektors $\vec{v}$ in einem Euklidischen Raum ist definiert durch
+$$ \| \vec{v} \| = \langle \vec{v}, \vec{v} \rangle $$
+
+\paragraph{Beispiel:}
+$$ \| (1, 2, 0, 2, 4) \| = \sqrt{1+4+0+4+16} = \sqrt{25} = 5 $$
+Das ist auch der Abstand zwischen $(0, 0, \ldots 0)$ und $(1, 2, 0, 2, 4)$ in $\real^5$.
+
+\paragraph{Beispiel:} in $\real^3$
+$\ldots$
+
+\paragraph{Satz (Ungleichung von Cauchy-Schwarz):} In jedem Euklidschen Vektorraum gilt für alle $\vec{u}, \vec{v} \in V$
+$$ | \langle \vec{u}, \vec{v} \rangle | \leq \| \vec{u} \| \cdot \| \vec{v} \| $$
+Speziell für $\real^n$ mit $\vec{u} = (\scalarlist{a}{n})$ und $\vec{v} = (\scalarlist{b}{n})$:
+$$ | a_1 b_1 + a_2 b_2 + \ldots + a_n b_b | \leq \sqrt{\scalarlist{a^2}{n}} \cdot \sqrt{\scalarlist{b^2}{n}} $$
+Für $V = \{ f : [-1, 1] \rightarrow \real \; | \; \text{stetige Funktion} \}$:
+$$ | \int_{-1}^1 f(x) g(x) dx | \leq \sqrt{\int_{-1}^1 (f(x))^2 dx} \cdot \sqrt{\int_{-1}^1 (g(x))^2 dx} $$
+
+\paragraph{Beweis:}
+\begin{enumerate}
+    \item Fall 1: $\vec{v} = \vec{0}$, dann ergibt die Cauchy-Schwarz-Ungleichung $0 = 0$ (also korrekt)
+    \item Fall 2: $\vec{v} \neq \vec{0}$
+    $$ \lambda := \frac{\langle \vec{u}, \vec{v} \rangle}{\langle \vec{v}, \vec{v} \rangle} = \frac{\langle \vec{u}, \vec{v} \rangle}{\| \vec{v} \|^2} $$
+    Nun betrachtet man:
+    \begin{eqnarray*}
+        0 &\leq& \langle \vec{u} - \lambda \vec{v}, \vec{u} - \lambda \vec{v} \rangle \\
+          &=&    \langle \vec{u}, \vec{u} - \lambda \vec{v} \rangle - \lambda \langle \vec{v}, \vec{u} - \lambda \vec{v} \rangle \\
+          &=&    \langle \vec{u}, \vec{u} \rangle - \lambda \langle \vec{u}, \vec{v} \rangle - \lambda \langle \vec{v}, \vec{u} \rangle + \lambda^2 \langle \vec{v}, \vec{v} \rangle \\
+          &=&    \| \vec{u} \|^2 - 2 \cdot \frac{\langle \vec{u}, \vec{v} \rangle^2}{\| \vec{v} \|} + \frac{\langle \vec{u}, \vec{v} \rangle^2 \cdot \| \vec{v} \|^2}{\| \vec{v} \|^4} \\
+          &=&    \| \vec{u} \|^2 - \frac{\langle \vec{u}, \vec{v} \rangle^2}{\| \vec{v} \|^2}
+    \end{eqnarray*}
+    Also:
+    $$ \langle \vec{u}, \vec{v} \rangle^2 \leq \| \vec{u} \|^2 \cdot \| \vec{v} \|^2 \platz \Rightarrow \platz | \langle \vec{u}, \vec{v} \rangle | \leq \| \vec{u} \| \cdot \| \vec{v} \| $$
+\end{enumerate}
+
+\paragraph{Satz:} Die Norm in einem Euklidischen Vektorraum hat die folgenden Eigenschaften:
+\begin{enumerate}
+    \item $\| \vec{v} \| \geq 0$ für alle $\vec{v} \in V$
+    \item $\| \vec{v} \| = 0 \platz \Leftrightarrow \platz \vec{v} = \vec{0}$
+    \item $\| \lambda \vec{v} \| = | \lambda | \| \vec{v} \|$
+    \item $\| \vec{v} + \vec{u} \leq \| \vec{v} \| + \| \vec{u} \| \|$
+\end{enumerate}
+
+\paragraph{Beweis:}
+\begin{enumerate}
+    \item
+    \begin{eqnarray*}
+        \| \lambda \vec{v} \| &=& \sqrt{\langle \lambda \vec{v}, \lambda \vec{v} \rangle} \\
+                              &=& \sqrt{\lambda \langle \vec{v}, \lambda \vec{v} \rangle} \\
+                              &=& \sqrt{\lambda^2 \langle \vec{v}, \vec{v} \rangle} \\
+                              &=& \sqrt{\lambda^2} \cdot \sqrt{\langle \vec{v}, \vec{v} \rangle} \\
+                              &=& |\lambda| \| \vec{v} \|
+    \end{eqnarray*}
+    \item
+    \begin{eqnarray*}
+        (\| \vec{v} \| + \| \vec{u} \|)^2 &=& \| \vec{v} \|^2 + 2 \| \vec{v} \| \| \vec{u} \| + \| \vec{u} \|^2 \\
+                                          &\geq& \| \vec{v} \|^2 + 2 \langle \vec{v}, \vec{u} \rangle + \| \vec{u} \|^2 \\
+                                          &=& \langle \vec{v}, \vec{v} \rangle + 2 \langle \vec{v}, \vec{u} \rangle + \langle \vec{u}, \vec{u} \rangle \\
+                                          &=& \ldots
+    \end{eqnarray*}
+\end{enumerate}
+
+\paragraph{Beispiel:} Normale Dreiecksungleichung aus der Geometrie:
+\begin{center}
+    GRAFIK
+\end{center}
+
+\paragraph{Winkel:} Für $\vec{v}, \vec{w} \in V$ definieren wir den Öffnungswinkel
+$$ \alpha (\vec{v}, \vec{w}) = \arccos \frac{\langle \vec{v}, \vec{w} \rangle}{\| \vec{v} \| \| \vec{w} \|} $$
+
+\begin{center}
+    GRAFIK mit $\vec{v} = (1, 0)$ und $\vec{w} = (2, 2)$
+\end{center}
+\begin{eqnarray*}
+    \sphericalangle(\vec{v}, \vec{w}) &=& \arccos \left( \frac{1 \cdot 2 + 0 \cdot 2}{\sqrt{1 + 0} + \sqrt{2^2}{2^2}} \right) \\
+                                      &=& \arccos \left( \frac{2}{2 \cdot \sqrt{2}} \right) \\
+                                      &=& \frac{\pi}{4} = 45°
+\end{eqnarray*}
+
+In Kosinussatz die Formel einsetzen.
+\begin{eqnarray*}
+    c^2 &=& a^2 + b^2 - 2ab \cos \varphi \\
+    c^2 = \langle \vec{u} - \vec{v}, \vec{u} - \vec{v} \rangle = \langle \vec{u}, \vec{u} \rangle + \langle \vec{v}, \vec{v} \rangle - 2 \langle \vec{u}, \vec{v} \rangle \\
+    &=& \| \vec{u} \|^2 + \| \vec{v} \|^2 - 2 \| \vec{u} \| \| \vec{v} \| \cdot \frac{\langle \vec{u}, \vec{v} \rangle}{\| \vec{u} \| \| \vec{v} \|} \\
+    &=& a^2 + b^2 - 2ab \cos \varphi \\
+    \varphi &=& \arccos \frac{\langle \vec{u}, \vec{v} \rangle}{\| \vec{u} \| \| \vec{v} \|}
+\end{eqnarray*}
+
+\begin{center}
+    GRAFIK: Kosinus- ($0 \rightarrow \pi$) und Arcuskosinus-Funktion
+\end{center}
+
+\paragraph{Definition:} Zwei Vektoren $\vec{u}$ und $\vec{v}$ in einem Euklidischen Vektorraum $(V, \langle \; , \; \rangle)$ heißen orthogonal (senkrecht) zueinander, wenn $\langle \vec{u}, \vec{v} \rangle = 0$ ist.
+$$ \sphericalangle (\vec{u}, \vec{v}) = \frac{\pi}{2} \platz \Leftrightarrow \platz  \langle \vec{u}, \vec{v} \rangle = 0 \platz \Leftrightarrow \platz \text{$\vec{u}$ steht senkrecht auf $\vec{v}$} $$
+Schreibweise:
+$$ \vec{u} \bot \vec{v} $$
+Für eine Teilmenge $M \subseteq V$ schreibt man $M \bot \vec{u}$, falls $\langle \vec{v}, \vec{u} \rangle = 0$ für alle $\vec{v} \in M$.
+
+\paragraph{Definition:} Das orthogonale Komplement $M^{\bot}$ einer Menge $M \subseteq V$ ist definiert als
+$$ M^{\bot} = \{ \vec{u} \in V \; | \; M \bot \vec{u} \} $$
+\begin{center}
+    GRAFIK: einige Vektoren aus $M$ (auf einer Linie) und einige aus $M^{\bot}$ (auch auf einer Linie, aber orthogonal zu den aus $M$)
+\end{center}
+
+\paragraph{Satz:} Die Menge $M^{\bot}$ ist ein Unterraum.
+
+\paragraph{Beweis:}
+\begin{itemize}
+    \item Der Nullvektoren gehört zu $M^{\bot}$.
+    \item Addition:
+    \begin{eqnarray*}
+        \vec{u}, \vec{u'} \in M^{\bot} &\Rightarrow& \langle \vec{u}, \vec{v} \rangle = \langle \vec{u'}, \vec{v} \rangle = 0 \platz \text{für alle $\vec{v} \in M$} \\
+        &=& \langle \vec{u} + \vec{u'}, \vec{v} \rangle = \langle \vec{u}, \vec{v} \rangle + \langle \vec{u'}, \vec{v} \rangle = 0 \\
+        &\Rightarrow& \vec{u} + \vec{u'} \in M^{\bot}
+    \end{eqnarray*}
+    \item Multiplikation: $\ldots$
+\end{itemize}
+
+\paragraph{Definition:} Eine Menge von Vektoren $\veclist{v}{r}$ wird Orthonormalsystem genannt, falls $\| \vec{v}_i \| = 1$ für alle $i = 1, 2, \ldots r$ und $\langle \vec{v}_i, \vec{v}_j \rangle = 0$ für alle $i \neq j$. \par
+kürzer:
+$$ \langle \vec{v}_i, \vec{v}_j \rangle = \delta_{i \, j} = \left\{ \begin{array}{lll} 1 &\text{ falls }& i = j \\ 0 &\text{sonst}& \end{array} \right.$$
+
+\paragraph{Beispiel:} Standardbasis für 4D.
+
+\paragraph{Lemma 1:} Die Vektoren eines Orthogonalsystem sind linear unabhängig.
+
+\paragraph{Beweis:} Angenommen $\veclk{v}{\lambda}{r} = \vec{0}$. \par
+Zeige: $\lambda_1 = \lambda_2 = \ldots = \lambda_r = 0$ \par
+\begin{eqnarray*}
+    0 &=& \langle \vec{0}, \vec{v}_i \rangle \\
+      &=& \langle \veclk{v}{\lambda}{r}, \vec{v}_i \rangle \\
+      &=& \underbrace{\lambda_1 \langle \vec{v}_1, \vec{v}_i \rangle}_{=0} + \ldots + \underbrace{\lambda_i \langle \vec{v}_i, \vec{v}_i \rangle}_{=1} + \ldots + \underbrace{\lambda_r \langle \vec{v}_r, \vec{v}_i \rangle}_{=0} \\
+      &=& \lambda_i
+\end{eqnarray*}
+
+\paragraph{Lemma 2:} Ist $\{ \veclist{v}{n} \ \}$ eine orthonormale Basis von $V$, so gilt für jedes $\vec{v} \in V$ die folgende Entwicklungsformel:
+$$ \vec{v} = \sum_{i=1}^n \langle \vec{v}, \vec{v}_i \rangle \vec{v}_i $$
+
+\paragraph{Beweis:} Nachrechnen
+
+\paragraph{Beispiel:} $\vecthree{1}{0}{0}$, $\vecthree{0}{1}{0}$, $\vecthree{0}{0}{1}$
+$$ \vecthree{2}{3}{0} = (2+0+0) \vecthree{1}{0}{0} + (0+3+0) \vecthree{0}{1}{0} + (0+0+0) \vecthree{0}{0}{1} $$
+
+\paragraph{Lemma 3:} Ist $\veclist{v}{r}$ ein Orthonormalsystem in $V$ und $U = \text{Lin}(\{ \veclist{v}{r} \})$, so hat jedes $\vec{v} \in V$ eine eindeutige Darstellung
+$$ \vec{v} = \vec{u} + \vec{w} \text{ mit } \vec{u} \in U \text{ und } \vec{w} \in U^{\bot} $$
+Dabei ist
+$$ \vec{u} = \sum_{i=0}^r \langle \vec{v}, \vec{v}_i \rangle \vec{v}_i $$
+und
+$$ \vec{w} = \vec{v} - \vec{u} $$
+
+\paragraph{Beispiel:} $V = \real^2$, $r = 1$, $\vec{v}_1 = \vectwo{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}}$, $\| \vec{v}_1 \| = 1$ \par
+$\vec{v} = \vectwo{3}{2} = \vec{u} + \vec{w}$ wobei $\vec{u} \in \text{Lin}(\vec{v}_1)$ und $\vec{w} \bot \vec{v}_1$
+\begin{center}
+    GRAFIK: $U$ mit $\vec{v}_1$ und $U^{\bot}$, außerdem $\vec{v}$, $\vec{v}$ wird auf $U$ und $U^{\bot}$ projiziert
+\end{center}
+\begin{eqnarray*}
+    \vec{u} &=& \langle \vec{v}, \vec{v}_1 \rangle \vec{v}_1 \\
+            &=& \frac{5 \sqrt{2}}{2} \vectwo{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}} \\
+            &=& \vectwo{\frac{5}{2}}{\frac{5}{2}} \\
+    \vec{w} &=& \vectwo{3}{2} - \vectwo{\frac{5}{2}}{\frac{5}{2}} = \vectwo{\frac{1}{2}}{-\frac{1}{2}}
+\end{eqnarray*}
+
+\paragraph{Satz (Erhard Schmidt'sches Orthonormalisierungsverfahren):} Sei $\{ \veclist{v}{r} \}$ linear unabhängig, dann bilden die Vektoren
+\begin{eqnarray*}
+    \tilde{v}_1 &=& \frac{\vec{v}_1}{\| \vec{v}_1 \|} \\
+    \tilde{v}_{k+1} &=& \frac{\vec{v}_{k+1} - \sum_{i=1}^k \langle \vec{v}_{k+1}, \tilde{v}_i \rangle \tilde{v}_i}{\left\| \vec{v}_{k+1} - \sum_{i=1}^k \langle \vec{v}_{k+1}, \tilde{v}_i \rangle \tilde{v}_i \right\|} \platz \text{für $k = 1, 2, \ldots r-1$}
+\end{eqnarray*}
+ein Orthonormalsystem mit den Eigenschaften, dass
+$$ \text{Lin}(\{ \vec{v}_1, \vec{v}_2, \ldots \vec{v}_i \}) = \text{Lin}(\{ \tilde{v}_1, \tilde{v}_2, \ldots \tilde{v}_i \}) $$
+für $i = 1, 2, \ldots r$.
+
+\paragraph{Beispiel:} $\vec{v}_1 = \vecthree{2}{2}{0}$, $\vec{v}_2 = \vecthree{-3}{-1}{0}$, $\vec{v}_3 = \vecthree{1}{2}{3}$
+\begin{eqnarray*}
+    \tilde{v}_1 &=& \frac{1}{\sqrt{8}} \vecthree{2}{2}{0} = \vecthree{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}}{0} \\
+    \tilde{v}_2 - \langle \vec{v}_2, \tilde{v}_1 \rangle \tilde{v}_1 &=& \vecthree{-3}{-1}{0} - (-2 \sqrt{2}) \vecthree{\frac{\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}}{0} \\
+    &=& \vecthree{-3}{-1}{0} + \vecthree{2}{2}{0} \\
+    &=& \vecthree{-1}{1}{0} \\
+    \tilde{v}_2 &=& \frac{\vecthree{-1}{1}{0}}{\left\| \vecthree{-1}{1}{0} \right\|} \\
+    &=& \vecthree{\frac{-\sqrt{2}}{2}}{\frac{\sqrt{2}}{2}}{0} \\
+    \vecthree{1}{2}{3} - \frac{3\sqrt{2}}{2} \tilde{v}_1 - \frac{\sqrt{2}}{2} \tilde{v}_2 \\
+    &=& \vecthree{1}{2}{3} - \vecthree{\frac{3}{2}}{\frac{3}{2}}{0} - \vecthree{-\frac{1}{2}}{\frac{1}{2}}{0} \\
+    &=& \vecthree{.}{.}{.} \\
+    \tilde{v}_3 &=& \ldots \text{Normieren}
+\end{eqnarray*}
+
+\paragraph{Definition:} Orthogonale Projektion von $\vec{v}$ in den Unterraum $U = \text{Lin}(\veclist{v}{r})$
+$$ P_U(\vec{v}) = \langle \vec{v}, \vec{v}_1 \rangle \cdot \vec{v}_1 + \ldots + \langle \vec{v}, \vec{v}_r \rangle \cdot \vec{v}_r \in U $$
+$\vec{w} := \vec{v} - P_U(\vec{v})$ , man kann zeigen, dass $\vec{w} \bot U$, d.h. $\vec{w} \in U^{\bot}$, folglich ist $P_U(\vec{w}) = \vec{0}$
+
+\begin{center}
+    GRAFIK
+\end{center}
+
+Die Orthonormalprojektion $P_U :  V \rightarrow U$ hat die folgenden zwei Eigenschaften:
+\begin{itemize}
+    \item $P_U$ beschränkt auf $U$ ist die identische Abbildung
+\end{itemize}
+
+\paragraph{Beispiel:} $U = \text{Lin}\left( \vectwo{2}{1} \right)$ in $V = \real^2$ \par
+Aufgabe: Berechne die Matrix der Projektion $P_U$.
+\begin{center}
+    GRAFIK: Gerade $y = \frac{1}{2}x$ mit Projektion der Basisvektoren $\vectwo{1}{0}$ und $\vectwo{0}{1}$ auf die Gerade
+\end{center}
+\begin{enumerate}
+    \item Orthonormalbasis für $U$
+    \begin{eqnarray*}
+        \vec{v}_1 &=& \vectwo{2}{1} \\
+        \tilde{v}_1 &=& \frac{\vectwo{2}{1}}{\left\| \vectwo{2}{1} \right\|} = \frac{\vectwo{2}{1}}{\sqrt{5}} = \vectwo{\frac{2}{\sqrt{5}}}{\frac{1}{\sqrt{5}}}
+    \end{eqnarray*}
+    \item Projektion
+    $$ P_U(\vec{v}) = \langle \vec{v}, \tilde{v}_1 \rangle \cdot \tilde{v}_1 $$
+    Setze für $\vec{v}$ die Basisvektoren $\vec{e}_1$ und $\vec{e}_2$ ein:
+    \begin{eqnarray*}
+        P_U \left( \vectwo{1}{0} \right) &=& \left\langle \vectwo{1}{0}, \vectwo{\frac{2}{\sqrt{5}}}{\frac{1}{\sqrt{5}}} \right\rangle \cdot \vectwo{\frac{2}{\sqrt{5}}}{\frac{1}{\sqrt{5}}} = \vectwo{\frac{4}{5}}{\frac{2}{5}} \\
+        P_U \left( \vectwo{0}{1} \right) &=& \left\langle \vectwo{0}{1}, \vectwo{\frac{2}{\sqrt{5}}}{\frac{1}{\sqrt{5}}} \right\rangle \cdot \vectwo{\frac{2}{\sqrt{5}}}{\frac{1}{\sqrt{5}}} = \vectwo{\frac{2}{5}}{\frac{1}{5}}
+    \end{eqnarray*}
+    \item Matrix:
+    $$ \begin{pmatrix}
+      \frac{4}{5} & \frac{2}{5} \\
+      \frac{2}{5} & \frac{1}{5} \\
+    \end{pmatrix} =
+    \begin{pmatrix}
+      0,8 & 0,4 \\
+      0,4 & 0,2 \\
+    \end{pmatrix} $$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Affiner Raum (intuitiver Zugang)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Affiner Raum (intuitiver Zugang)}
+
+\paragraph{Motivation:} Anwendung des Skalarprodukts in der affinen Geometrie
+
+\paragraph{Mengen:}
+\begin{itemize}
+    \item $V$ Vektorraum (hier über $\real$, d.h. $V = \real^2, \real^3$)
+    \item $A$ Punktmenge
+\end{itemize}
+
+\paragraph{Operationen:}
+\begin{itemize}
+    \item $\text{Punkt} + \text{Vektor} \mapsto \text{Punkt}$
+    \item $\text{Punkt} - \text{Punkt} \mapsto \text{Vektor}$
+\end{itemize}
+\begin{center}
+    GRAFIK: zwei Punkte $p$ und $q$ und ein Verbindungsvektor $\vec{v}$ mit
+    \begin{eqnarray*}
+        \vec{q} &=& p + \vec{v} \\
+        \vec{v} &=& q - p
+    \end{eqnarray*}
+    Eigenschaft:
+    \begin{eqnarray*}
+        p + (\vec{v} + \vec{w}) &=& (p + \vec{v}) + \vec{w}
+    \end{eqnarray*}
+\end{center}
+Standardmodell für $A$ ist $V$ selbst.
+
+\paragraph{affiner Unterraum:} $U \subseteq V$ Untervektorraum, $p \in A$
+$$ p + U = \{ p + \vec{u} \; | \; \vec{u} \in U \} $$
+
+\paragraph{Beispiele:}
+\begin{itemize}
+    \item affine Unterräume in $A = \real^2$:
+    \begin{itemize}
+        \item Punkte ($\text{dim } U = 0$)
+        \item Geraden ($\text{dim } U = 1$)
+        \item ganz $\real^2$ ($\text{dim } U = 2$)
+    \end{itemize}
+    \item affine Unterräume in $A = \real^3$:
+    \begin{itemize}
+        \item Punkte ($\text{dim } U = 0$)
+        \item Geraden ($\text{dim } U = 1$)
+        \item Ebenen ($\text{dim } U = 2$)
+        \item ganz $\real^3$ ($\text{dim } U = 3$)
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Geradengleichungen:}
+$V = A = \real^2$
+\begin{enumerate}
+    \item Gerade durch einen Punkt und parallel zu einem Vektorunterraum
+    \begin{itemize}
+        \item $U \subseteq V$ ist ein 1-dimensionaler Vektorunterraum $U = \{ \lambda \vec{u} \; | \; \lambda \in \real \}$
+        \item $p \in A$
+    \end{itemize}
+    Gerade durch $p$ parallel zu $U$ in Parameterdarstellung:
+    $$ L = \{ p + \lambda \vec{u} \; | \; \lambda \in \real \} $$
+    \item Gerade durch zweu Punkte:
+    \begin{itemize}
+        \item $p = (x, y)$
+        \item $p' = (x', y')$
+    \end{itemize}
+    Schreibweisen:
+    \begin{eqnarray*}
+        L &=& \{ p + \lambda (p' - p) \; | \; \lambda \in \real \} \\
+          &=& \{ q = (x_q, y_q) \; | \; x_q = x + \lambda(x' - x), y_q = y + \lambda(y' - y), \lambda \in \real \} \\
+          &=& \{ q = (x_q, y_q) \; | \; \underbrace{x_q (y' - y) - x(y' - y)}_{= \lambda (x' - x) (y' - y)} = \underbrace{y_q (x' - x) - y (x' - x)}_{= \lambda (x' - x) (y' - y)} \} \\
+          &=& \{ q = (x_q, y_q) \; | \; a x_q + b y_q = c \} \hspace{1cm} \text{(Koordinantendarstellung von $L$)}
+    \end{eqnarray*}
+    mit $a = y' - y$, $b = x' - x$ und $c = -y (x' - x) + x (y' - y)$
+\end{enumerate}
+
+\paragraph{HNS:}
+\begin{center}
+    GRAFIK: Gerade $L$ und parallele Gerade $U_L$ durch den Ursprung und Normalenvektor $\vec{n}$, außerdem $P_{U_L}(q - 0)$ und $\vec{w} = d \cdot \vec{n}$
+\end{center}
+
+\begin{itemize}
+    \item Normalenvektor $\vec{n}$ von $L$ ist senkrecht zu $U_L$ und $\| \vec{n} \| = 1$
+    \item Abstand $d$ von $(0, 0)$ zu $L$, d.h. $(0, 0) + d \cdot \vec{n} \in L$
+\end{itemize}
+
+Hesse-Normalform von $L$:
+$$ L = \{ q \; | \; \langle q - 0, \vec{n} \rangle = d \} $$
+
+Das heißt:
+\begin{eqnarray*}
+    \langle q - 0, \vec{n} \rangle &=& \langle P_{U_L}(q - 0), \vec{n} \rangle + \langle \vec{w}, \vec{n} \rangle \\
+                                   &=& 0 + \langle d \vec{n}, \vec{n} \rangle \\
+                                   &=& d \langle \vec{n}, \vec{n} \rangle \\
+                                   &=& d
+\end{eqnarray*}
+
+Bestimmung der Hesse-Normalform aus der Parameterform:
+$$ L = \{ p + \lambda \vec{v} \; | \; \lambda \in \real \} $$
+Aufgabe: Bestimme $\vec{n}$ und $d$!
+\begin{enumerate}
+    \item $\tilde{v} = \frac{\vec{v}}{\| \vec{v} \|}$ Orthonormalbasis von $U_L$
+    \item $\vec{n}' = d \vec{n} = (p-0) - P_{U_L}(p-0) = (p-0) - \langle (p-0), \tilde{v} \rangle \cdot \tilde{v}$
+    \item $d = \| \vec{n}' \|$ und $\vec{n} = \frac{\vec{n}'}{d}$
+\end{enumerate} \pagebreak
+
+\begin{center}
+   ... Vorlesung vom 16.02.2002 (fehlt)
+\end{center} \pagebreak
+
+\begin{center}
+   ... Vorlesung vom 21.02.2002 (fehlt)
+\end{center} \pagebreak

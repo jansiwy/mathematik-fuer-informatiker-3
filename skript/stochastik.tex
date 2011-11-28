@@ -1,0 +1,622 @@
+\chapter{Stochastik}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wahrscheinlichkeitsräume
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wahrscheinlichkeitsräume}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Wiederholung}
+
+\paragraph{Erläuterung:} Ein endlicher diskreter Wahrscheinlichkeitsraum $(\Omega, p)$ besteht aus einer endlichen Menge $\Omega$ von elementaren Ereignissen von einer Verteilungsfunktion $p$:
+$$ p: \Omega \rightarrow [ 0, 1 ] $$
+für die gilt:
+$$ \sum_{a \in \Omega} p(a) = 1 $$
+Jede Teilmenge $A \subseteq \Omega$ ist ein Ereignis. Die Verteilungsfunktion $p$ wird erweitert zu einem Wahrscheinlichkeitsmaß, das ebenfalls mit $p$ bezeichnet wird:
+$$ p : 2^{\Omega} \rightarrow [ 0, 1 ] \platz \text{mit} \platz p(A) = \sum_{a \in A} p(a) $$
+Bemerkung:\; Der Ausdruck $2^{\Omega}$ bezeichnet die Potenzmenge von $\Omega$:
+$$ 2^{\Omega} = \pot (\Omega) $$
+
+\paragraph{Hinweis:} Diese Definitionen sind erweiterbar auf abzählbare Mengen $\Omega$ von Elementarereignissen.
+
+\paragraph{Beispiel:} Es sei gegeben ein Würfel mit den Ereignissraum $\Omega = \{ 1, 2, \ldots 6 \}$ und der gleichverteilten Verteilungsfunktion $p$. Das Ereignis $A$ sei der Wurf einer geraden Zahl
+$$ A = \{ 2, 4, 6 \} $$
+Die Wahrscheinlichkeit für das Ereignis $A$ beträgt:
+$$ p(A) = \frac{1}{6} + \frac{1}{6} + \frac{1}{6} = \frac{1}{2} $$
+
+\paragraph{Eigenschaften:} Für das Verscheinlichkeitsmaß gilt ($\bar{A} = \Omega \backslash A$):
+\begin{eqnarray*}
+    p(\bar{A}) &=& 1 - p(A) \\
+    p(A \cup B) &=& p(A) + p(B)
+\end{eqnarray*}
+für alle $A, B \subseteq \Omega$ mit $A \cap B = \emptyset$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Stetige Wahrscheinlichkeitsräume}
+\paragraph{Verallgemeinerung:} Ergebnisse (eines Experiments) sind reelle Zahlen oder (noch allgemeiner) Elemente einer überabzählbaren Menge (z.B. Punkte in einem Raum, Punkte in einer Kreisscheibe).
+\paragraph{Probleme:} Aus der bisherigen Definition eines diskreten Wahrscheinlichkeitsraumes ergeben sich folgende Probleme:
+\begin{itemize}
+    \item Der Ausdruck
+    $$ \sum_{a \in \Omega} p(a) $$
+    ist nicht sinnvoll, wenn $\Omega$ überabzählbar ist.
+    \item Die Potenzmenge der Ereignisse
+    $$ 2^{\Omega} = \pot (\Omega) $$
+    führt als Ereignismenge zu weiteren Schwierigkeiten.
+\end{itemize}
+
+\paragraph{Modell:}
+\begin{itemize}
+    \item Nicht alle $A \subseteq \Omega$ sind Ereignisse (messbar).
+    \item Die Menge $\bigF$ der Ereignisse ist eine Teilmenge von $2^{\Omega}$ mit den folgenden Eigenschaften:
+    \begin{eqnarray*}
+        A \in \bigF &\Rightarrow& \bar{A} \in \bigF \\
+        A_1, A_2, \ldots \in \bigF &\Rightarrow& \bigcup_{i=1}^{\infty} A_i \in \bigF
+    \end{eqnarray*}
+    Anmekung:\; Eine Mengenfamilie $\bigF$ mit den beiden Eigenschaften nennt man eine \emph{$\sigma$-Algebra}\index{$\sigma$-Algebra}. Ist eine Mengefamilie nur abgeschlossen bezüglich Komplement und \emph{endlichen} Vereinigungen, so nennt man sie eine \emph{Algebra}\index{Algebra}.
+\end{itemize}
+
+\paragraph{Definition:} Ein \emph{Wahrscheinlichkeitsraum}\index{Wahrscheinlichkeitsraum} ist ein Trippel $(\Omega, \bigF, p)$, wobei
+\begin{itemize}
+    \item $\bigF \subseteq 2^{\Omega}$ ist eine $\sigma$-Algebra über $\Omega$
+    \item $p : \bigF \rightarrow [ 0, 1 ]$ ist ein Wahrscheinlichkeitsmaß mit
+    \begin{itemize}
+        \item $p(\bar{A}) = 1 - p(A)$ für alle $A \in \bigF$
+        \item für jede Folge $A_1, A_2, \ldots$ von paarweise disjunkten Ereignissen $A_i \in \bigF$ gilt
+        $$ p \left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} p(A_i) $$
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Eigenschaften und Folgerungen:}
+\begin{itemize}
+    \item $\bigF$ ist abgeschlossen gegen endliche und abzählbare Durchschnitte:
+    \begin{eqnarray*}
+      A, B \in \bigF &\Rightarrow& A \cap B = \overline{\bar{A} \cup \bar{B}} \in \bigF \\
+      A_1, A_2, \ldots \in \bigF &\Rightarrow& \bigcap_{i=1}^{\infty} A_i = \overline{\bigcup_{i=1}^{\infty} \bar{A_i}}\in \bigF
+    \end{eqnarray*}
+    \item $\bigF$ ist abgeschlossen gegen Mengendifferenzen:
+    $$ A \backslash B = A \cap \bar{B} $$
+    \item $p$ ist monoton:
+    \begin{eqnarray*}
+        A \subseteq B &\Rightarrow& p(A) \leq p(B)
+    \end{eqnarray*}
+    Denn aus $A \subseteq B$ folgt:
+    $$ B = A \cup (B \backslash A) $$
+    Die Vereinigung $A \cup (B \backslash A)$ ist disjunkt. Daraus folgt:
+    \begin{eqnarray*}
+        p(A) &\leq & p(A) + p(B \backslash A) = p(B)
+    \end{eqnarray*}
+\end{itemize}
+
+\paragraph{Satz:} Ist $A_1 \subseteq A_2 \subseteq \ldots$ eine aufsteigende Folge von Ereignissen und ist $A$ die Vereinigung dieser Ereignisse
+$$ A = \bigcup_{i=1}^{\infty} A_i $$
+dann gilt die für die Wahrscheinlichkeit von $A$
+$$ p(A) = \lim_{n \to \infty} p(A_n) $$
+\paragraph{Beweis:}
+\begin{itemize}
+    \item Die Folge $p(A_1), p(A_2), \ldots$ ist monoton wachsend und beschränkt. Damit ist sie auch konvergent.
+    \item Aus $A_1 \subseteq A_2 \subseteq \ldots$ folgt
+    $$ A = A_1 \cup \underbrace{(A_2 \backslash A_1)}_{B_2} \cup \underbrace{(A_3 \backslash A_2)}_{B_3} \cup \ldots $$
+    Die Vereinigung ist disjunkt. Damit ergibt sich für die Wahrscheinlichkeit von $A$:
+    \begin{eqnarray*}
+        p(A) &=& p(A_1) + \sum_{i=2}^{\infty} p(B_i) \\
+             &=& p(A_1) + \lim_{n \to \infty} \sum_{i=2}^{n} p(B_i) \\
+             &=& \lim_{n \to \infty} (p(A_1) + (p(A_2) - p(A_ 1)) + (p(A_3) - p(A_2)) + \ldots \\
+             & & + (\underline{p(A_n)} - p(A_{n-1}))) \\ \\
+             &=& \lim_{n \to \infty} p(A_n)
+    \end{eqnarray*}
+\end{itemize}
+
+\paragraph{Hinweis:} Analog gilt für $B_1 \supseteq B_2 \supseteq \ldots$ mit $B$ als Schnitt über diese Ereignisse
+$$ B = \bigcap_{i=1}^{\infty} B_i $$
+die Wahrscheinlichkeit von $B$:
+$$ p(B) = \lim_{n \to \infty} p(B_n) $$
+
+\paragraph{Beispiel:\;} Betrachtet werden zufällige reelle Zahlen aus dem Intervall $[ 0, 1 ]$ mit Gleichverteilung:
+\begin{itemize}
+    \item Jedes Intervall $( a, b ]$ ist Ereignis. Die Wahrscheinlichkeit für dieses Ereignis beträgt
+    $$ p(( a, b ]) = b - a $$
+    \item Aus der $\sigma$-Algebra-Eigenschaft folgt, dass dann auch offene und abgeschlossenen Intervalle in $\bigF$ sein müssen.
+    \begin{itemize}
+        \item abgeschlossene Intervalle:
+        $$ [ a, b ] = \bigcap_{i=1}^{\infty} \left( a - \frac{a}{i}, b \right] $$
+        \item offene Intervalle:
+        $$ ( a, b ) = ( a, 1 ] \backslash [ b, 1 ] $$
+        \item auch jede reelle Zahl aus dem Intervall $[ 0, 1 ]$:
+        $$ \forall x \in [ 0, 1 ] \platz \{ x \} \in \bigF $$
+    \end{itemize}
+\end{itemize}
+Die Ereignismenge $\bigF$ besteht somit aus allen abzählbaren disjunkten Vereinigungen von Intervallen (offen, abgeschlossen, halboffen oder Punkt):
+$$ \bigcup_{i=1}^{\infty} \langle a_i, b_i \rangle \in \bigF $$
+wobei $b_i \geq a_i$ und $\langle \in \{ [, ( \}$ und $\rangle \in \{ ), ] \}$ und $b_i \leq a_{i+1}$. \par \vspace{0.3cm}
+Für die Wahrscheinlichkeit eines solchen Ereignisses gilt somit:
+$$ p \left( \bigcup_{i=1}^{\infty} \langle a_i, b_i \rangle \right) = \sum_{i=1}^{\infty} (b_i - a_i) $$
+
+\paragraph{Beispiel:} Ananlog kann die Gleichverteilung für zufällige Punkte aus dem Einheitsquadrat $[ 0, 1 ] \times [ 0, 1 ]$ definiert werden.
+\begin{center}
+    \includegraphics{skript/grafiken/stochastik-1-1-2-a}
+\end{center}
+$$ p((a, b] \times (c, d]) = (b-a)(d-c) $$
+\pagebreak
+
+\paragraph{Achtung:} Der Begriff Gleichverteilung ist nicht bei jeder Objektklasse so leicht zu beschreiben. Zur Veranschaulichung werden zufällige Geraden betrachtet, die den Einheitskreis $S$ schneiden, und die Länge $l$ der Sehne gemessen.
+\begin{center}
+    \includegraphics{skript/grafiken/stochastik-1-1-2-b}
+\end{center}
+Das Ereignis $A$ besteht aus allen Geraden, die $S$ schneiden, für die gilt, dass $l \geq 1$.
+\begin{itemize}
+    \item \textbf{1. Ansatz:} \par
+    Schnittpunkte von Geraden von $S$ sind gleichverteilt auf $S$. Betrachten nur Geraden durch festen Punkt $P \in S$.
+    \begin{center}
+        \includegraphics{skript/grafiken/stochastik-1-1-2-c}
+    \end{center}
+    Geraden durch $P$ sind gleichverteilt bezüglich des Winkels $\alpha$ zur Tangente ($0 \leq \alpha \leq \pi$).
+    \begin{eqnarray*}
+    l \geq 1 &\Leftrightarrow& \frac{\pi}{6} \leq \alpha \leq \frac{5\pi}{6} \\
+    p(A) &=& \frac{\frac{5\pi}{6} - \frac{\pi}{6}}{\pi} = \frac{2}{3} \approx 0,67
+    \end{eqnarray*}
+
+    \item \textbf{2. Ansatz:} \par
+    Alle Richtungen sind gleichverteilts, deshalb betrahten wir nur Geraden einer bestimmten Richtung, o.B.d.A. nur horizonrale Geraden.
+    \begin{center}
+        \includegraphics{skript/grafiken/stochastik-1-1-2-d}
+    \end{center}
+    Geraden sind gleichverteilt bezüglich $-1 \leq h \leq 1$.
+    \begin{eqnarray*}
+    h^2 + \left( \frac{1}{2} \right)^2 = 1 &\Rightarrow& h = \frac{\sqrt{3}}{2} \\
+    p(A) &=& \frac{2 \cdot \frac{\sqrt{3}}{2}}{2} = \frac{\sqrt{3}}{2} \approx 0,87
+    \end{eqnarray*}
+
+    \item \textbf{3. Ansatz:} \par
+     Jede Gerade ist durch den Mittelpunkt $q$ auf ihrer Sehne bestimmt (außer Durchmesser: sind vernachlässigbar).
+    \begin{center}
+        \includegraphics{skript/grafiken/stochastik-1-1-2-e}
+    \end{center}
+    Annahme: Punkte $q$ sind gleichverteilt auf Kreisscheibe.
+    \begin{eqnarray*}
+        l \geq 1 &\Leftrightarrow& \text{Abstand von $q$ zu $(0, 0)$} \leq \frac{\sqrt{3}}{2} \\
+        p(A) &=& \frac{\text{Fläche von Kreis mit Radius } \frac{\sqrt{3}}{2}}{\text{Fläche von Einheitskreis}} = \frac{\pi \cdot \frac{3}{4}}{\pi \cdot 1} = \frac{3}{4}
+    \end{eqnarray*}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bedingte Wahrscheinlichkeit und Unabhängigkeit}
+
+\paragraph{Definition:} Sei $(\Omega, \bigF, p)$ ein Wahrscheinlichkeitsraum, die Ereignisse $A, B \in \bigF$ und $p(B) > 0$, so ist die \emph{bedingte Wahrscheinlichkeit}\index{bedingte Wahrscheinlichkeit} von Ereignis $A$ unter $B$ gegeben durch
+$$ p(A \, | \,B) = \frac{p(A \cap B)}{p(B)} $$
+
+\paragraph{Beispiel:\;} Sei $\Omega = [0, 1] \times [0, 1]$ eine Menge der Ereignisse mit Gleichverteilung:
+\begin{itemize}
+    \item $A = \{ (x, y) \; | \; x \geq \frac{1}{3} \}$
+    \item $B = \{ (x, y) \; | \; y \geq \frac{1}{3} \}$
+    \item $C = \{ (x, y) \; | \; x \leq \frac{2}{3} \}$
+\end{itemize}
+\begin{center}
+        \includegraphics{skript/grafiken/stochastik-1-1-3-a}
+\end{center}
+\begin{eqnarray*}
+  p(A) = p(B) = p(C) &=& \frac{2}{3} \\
+  p(A \cap B) &=& \frac{4}{9} \\
+  p(A \cap C) &=& \frac{1}{3} \\
+  p(A \, | \, B) &=& \frac{\frac{4}{9}}{\frac{2}{3}} = \frac{2}{3} = p(A) \\
+  p(A \, | \, C) &=& \frac{\frac{1}{3}}{\frac{2}{3}} = \frac{1}{2} \neq p(A)
+\end{eqnarray*}
+\pagebreak
+
+\paragraph{Definition:} Zwei Ereignisse $A$ und $B$ sind \emph{unabhängig}\index{unabhängige Ereginisse}, wenn
+$$ p(A \cap B) = p(A) \cdot p(B) $$
+\paragraph{Folgerung:} Wenn $A$ und $B$ unabhängig und $p(B) > 0$, dann
+$$ p(A \, | \, B) = p(A) $$
+
+\paragraph{Definition:} Eine Familie $\{ A_i \; | \; i \in I \}$ von Ereignissen ist unabhängig, wenn für jede endliche Teilmenge $J \subseteq I$
+$$ p \left( \bigcap_{i \in J} A_i \right) = \prod_{i \in J} p(A_i) $$
+Achtung:\; Es gibt Familien von paarweise unabhängigen Ereignissen, die nicht unabhängig sind.
+
+\paragraph{Beispiel:} Sei $\Omega = \{ a, b, c, d \}$ eine Menge der Elementarereignisse mit den Wahrscheinlichkeiten $p(a) = p(b) = p(c) = p(d) = \frac{1}{4}$. Es seien gegeben die folgenden Ereignisse:
+\begin{itemize}
+    \item $A = \{a, d\}$
+    \item $B = \{b, d\}$
+    \item $C = \{c, d\}$
+\end{itemize}
+\begin{eqnarray*}
+    p(A) = p(B) = p(C) &=& \frac{1}{2} \\
+    p(A \cap B) &=& \frac{1}{4} = p(A) \cdot p(B) \\
+    p(A \cap C) &=& \frac{1}{4} = p(A) \cdot p(C) \\
+    p(B \cap C) &=& \frac{1}{4} = p(B) \cdot p(C) \\
+\end{eqnarray*}
+Das heißt, dass die Ereignisse paarweise unabhängig sind. Dennoch ist die Familie mit den Ereignissen $\{A, B, C \}$ \emph{nicht} unabhängig:
+\begin{eqnarray*}
+  p(A \cap B \cap C) = \frac{1}{4} &\neq& \frac{1}{8} = p(A) \cdot p(B) \cdot p(C)
+\end{eqnarray*}
+
+\paragraph{Satz (Partitionstheorem):} Sei $\{ B_1, B_2, \ldots \}$ eine Partition von $\Omega$, wobei für alle $B_i$ gilt, dass $p(B_i) > 0$. Dann ist
+$$ p(A) = \sum_i p(A \, | \, B_i) \cdot p(B_i) \platz \text{für alle $A \in \bigF$} $$
+
+\paragraph{Beweis:}
+\begin{eqnarray*}
+    p(A) &=& p(A \cap \Omega) \\
+         &=& p \left( A \cap \left( \bigcup_i B_i \right) \right) \\
+         &=& p \left( \bigcup_i \left( A \cap B_i \right) \right) \platz \text{(disjkunte Vereinigung)}\\
+         &=& \sum_i p(A \cap B_i) \\
+         &=& \sum_i \frac{p(A \cap B_i)}{p(B_i)} \cdot p(B_i) \\
+         &=& \sum_i p(A \, | \, B_i) \cdot p(B_i)
+\end{eqnarray*}
+
+\paragraph{Beispiel:} Morgen früh regnet es ($R$) oder schneit ($S$) oder es gibt keinen Niederschlag ($K$).
+\begin{itemize}
+    \item Bei Regen ist die Wahrscheinlichkeit für eine Busverspätung $\frac{1}{3}$.
+    \item Bei Schnee ist die Wahrscheinlichkeit für eine Busverspätung $\frac{2}{3}$.
+    \item Bei Regen ist die Wahrscheinlichkeit für eine Busverspätung $\frac{1}{6}$.
+\end{itemize}
+Die Wettervorhersage:
+\begin{itemize}
+    \item $p(R) = \frac{1}{5}$
+    \item $p(S) = p(K) = \frac{2}{5}$
+\end{itemize}
+$$ p(\text{Busverspätung}) = \frac{1}{3} \cdot \frac{1}{5} + \frac{2}{3} \cdot \frac{2}{5} + \frac{1}{6} \cdot \frac{2}{5} = \frac{2+8+2}{30} = \frac{12}{30} = \frac{2}{5} $$
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Zufallsvariablen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Zufallsvariablen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Diskrete Zufallsvariablen}
+
+\paragraph{Definition:} Sei $(\Omega, \bigF, p)$ ein Wahrscheinlichkeitsraum. Eine Funktion
+$$ X : \Omega \rightarrow \real $$
+ist eine \emph{diskrete Zufallsvariable}\index{Zufallsvariable, diskret}\index{diskrete Zufallsvariable}, falls
+\begin{itemize}
+    \item das Bild der Zufallsvariable
+    $$ \text{Im} \; X = \{ x \in \real \; | \; \exists \; \omega \in \Omega \platz x = X(\omega) \} $$
+    abzählbar ist und
+    \item für alle $x \in \real$:
+    $$ X^{-1}(x) = \{ \omega \; | \; X(\omega) = x \} \in \bigF $$
+\end{itemize}
+
+\paragraph{Konsequenz:} Für alle $T \subseteq \real$ ist
+$$ X^{-1}(T) \in \bigF $$
+denn
+$$ X^{-1}(T) = \bigcup_{x \in (T \; \cap \; \text{Im} \; X)} X^{-1}(x) $$
+
+\paragraph{Definition:} Sei $X$ eine diskrete Zufallsvariable auf $(\Omega, \bigF, p)$. Die \emph{Gewichtsfunktion}\index{Gewichtsfunktion} $p_X : \real \rightarrow [0, 1]$ von $X$ sei wie folgt definiert:
+$$ p_X(x) = p(X^{-1}(x)) $$
+Oft verwendet man für $p_X(x)$ auch die intuitivere Schreibweise $p(X = x)$.
+
+\paragraph{Konsequenz:}
+\begin{eqnarray*}
+    \sum_{x \in \text{Im} \; X} p_X(x) &=& \sum_{x \in \text{Im} \; X} p(\{ \omega \; | \; X(\omega) = x \}) \\
+                                       &=& p \left( \bigcup_{x \in \text{Im} \; X} \{ \omega \; | \; X(\omega) = x \} \right) \\ \\
+                                       &=& p(\Omega) = 1
+\end{eqnarray*}
+Die Funktion $p_X$ charakterisiert die Zufallsvariable $X$ sehr genau, in dem Sinne, dass man für jede solche Beschreibung eine Realisierung durch einen Wahrscheinlichkeitsraum und eine Zufallsvariable finden kann. \par \vspace{0.3cm} \pagebreak
+
+Sei $S \subseteq \real$ abzählbar und für jedes $s \in S$ sei eine Zahl $\pi_s \in [ \, 0, 1 \, ]$ gegeben mit
+$$ \sum_{s \in S} \pi_s = 1 $$
+Konstruktion:
+\begin{itemize}
+    \item $\Omega = S$
+    \item $\bigF = \pot(S)$
+    \item $p(A) = \underset{s \in A}{\sum} \pi_s$ für jedes $A \subseteq S$
+    \item $X: \Omega \rightarrow \real$
+    \item $X(s) = s$
+\end{itemize}
+
+\paragraph{Beispiele:} $p$ ohne Zusatz ist eine Zahl aus $[ \, 0, 1 \, ]$, $q = 1 - p$
+\begin{enumerate}
+    \item \emph{Bernoulli-Verteilung}\index{Bernoulli-Verteilung}: \\
+    Eine Zufallsvariable $X$ mit Bernoulli-Verteilung:
+    \begin{itemize}
+        \item $\text{Im} \; X = \{ 0, 1 \}$
+        \item $p_X(0) = q \platz \text{und} \platz p_X(1) = p$
+    \end{itemize}
+    Probe: $p_X(0) + p_X(1) = p + q = p + (1 - q) = 1$ \par
+    z.B. Münzwurf mit "`unfairer"' Münze:
+    \begin{itemize}
+        \item Wahrscheinlichkeit für Kopf $K$: $p$
+        \item Wahrscheinlichkeit für Zahl $Z$: $q = 1 - p$
+    \end{itemize}
+    Die Zufallsvariable wird folgendermaßen definiert:
+    \begin{eqnarray*}
+        X &:& \{ \text{K}, \text{Z} \} \rightarrow \{ 0, 1 \} \\
+        X(K) &=& 1 \\
+        X(Z) &=& 0
+    \end{eqnarray*}
+    \item \emph{Binominialverteilung}\index{Binominialverteilung} \\
+    Eine Zufallsvariable $X$ mit Binominialverteilung mit den Parametern $n$~und~$p$:
+    \begin{itemize}
+        \item $\text{Im} \; X = \{ 0, 1, \ldots, n \}$ und
+        \item $p_X(k) = \left( {n \atop k} \right) \; p^k \; q^{n-k}$ für alle $k \in \{ 0, 1, \ldots, n \}$
+    \end{itemize}
+    Probe: $ \underset{k=0}{\overset{n}{\sum}} p_X(k) = \underset{k=0}{\overset{n}{\sum}} \left( { n \atop k } \right) \; p^k \; q^{n-k} = (p + q)^n = 1^n = 1 $ \par
+    Binominialverteilung tritt auf z.B. bei $n$-facher Wiederholung eines Bernoulli-Experiments (unabhängig).
+    \begin{itemize}
+        \item $\Omega = \{ \text{K}, \text{Z} \}^n$
+        \item $\omega = (a_1, a_2, \ldots, a_n)$ mit $a_i = \{ \text{K}, \text{Z} \}$
+        \item $p(\omega) = p^{k(\omega)} \cdot q^{z(\omega)}$
+        \item $X(\omega) := k(\omega)$
+    \end{itemize}
+    mit $k(\omega) = $ Anzahl der Köpfe in $\omega$ und $z(\omega) = $ Anzahl der Zahlen in $\omega$ \par \vspace{0.3cm}
+    Wahrscheinlichkeit, dass bei $n$ Münzwürfen genau $k$-mal Kopf fällt:
+    \begin{eqnarray*}
+        p_X(k) &=& p(\{ \omega \; | \; X(\omega) = k \}) \\
+               &=& p(\{ \omega \; | \; k(\omega) = k \}) \\
+               &=& \sum_{\omega \text{ mit} \atop k(w) = k} p(\omega) \\
+               &=& \sum_{\omega \text{ mit} \atop k(w) = k} p^{k} \; q^{n-k} \\
+               &=& \left( { n \atop k } \right) \; p^k \; q^{n-k}
+    \end{eqnarray*}
+    \item \emph{Geometrische Verteilung}\index{geometrische Verteilung}: \\
+    Wiederholung eines Wurfes einer $(p, q)$-Münze so lange, bis zum erstem mal K auftritt:
+    \begin{itemize}
+        \item $\Omega = \{ \text{K}, \text{ZK}, \text{ZZK}, \text{ZZZK}, \text{ZZZZK}, \ldots \}$
+        \item $p((\text{K})) = p$, $p((\text{ZK}) = qp$, $p((\text{Z}^l \text{K})) = q^l \; p$
+        \item $X(\omega) = |\omega|$ (Anzahl der Würfe)
+        \item $\text{Im}(X) = \{ 1, 2, 3, \ldots \}$
+        \item $p_X(k) = p(\{ \omega \; | \; |\omega| = k \}) = p(\text{Z}^{k-1} K) = q^{k-1} \cdot p$
+    \end{itemize}
+    \item \emph{Poisson-Verteilung}\index{Poisson-Verteilung}: \\
+    Eine Zufallsvariable $X$ mit Poisson-Verteilung mit Parameter $\lambda$:
+    \begin{itemize}
+        \item $\text{Im}(X) = \nat$ \platz (inkl. der Null)
+        \item $p_X(k) = \frac{1}{k!} \; \lambda^k \; e^{- \lambda}$
+    \end{itemize}
+    Probe: $\underset{k=0}{\overset{\infty}{\sum}} p_X(k) = \underset{k=0}{\overset{\infty}{\sum}} \frac{1}{k!} \; \lambda^k \; e^{- \lambda} = e^{- \lambda} \cdot \sum_{k=0}^{\infty} \frac{1}{k!} \; \lambda^k = e^{- \lambda} \cdot e^{\lambda} = 1$ \par
+    Die Poisson-Verteilung tritt auf als Grenzwert von Binominialverteilung mit $n$ groß, $p$ klein, $\lambda = n \cdot p$ und $k \ll n$.
+    \begin{eqnarray*}
+        \left( { n \atop k } \right) \cdot p^k \cdot (1-p)^{n-k} &=& \left( { n \atop k } \right) \; \left( \frac{\lambda}{n} \right)^k \; (1-p)^{n-k} \\
+                                                                 &\approx& \frac{n^k}{k!} \cdot \frac{\lambda^k}{n^k} \cdot \left( 1 - \frac{\lambda}{n} \right)^n \cdot \left( 1 - \frac{\lambda}{n} \right)^{-k} \\
+                                                                 &\approx& \frac{\lambda^k}{k!} \cdot e^{- \lambda}
+    \end{eqnarray*}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Stetige Zufallsvariablen}
+
+\paragraph{Definition:} Eine \emph{Zufallsvariable}\index{Zufallsvariable} auf $(\Omega, \bigF, p)$ ist eine Abbildung $X : \Omega \rightarrow \real$, so dass für alle $x \in \real$ gilt:
+$$ \{ \omega \in \Omega \; | \; X(\omega) \leq x \} \in \bigF $$
+\paragraph{Definition:} Die Funktion
+$$ F_X(x) = p(\{ \omega \in \Omega \; | \; X(\omega) \leq x \}) $$
+nennt man die \emph{Verteilungsfunktion}\index{Verteilungsfunktion} von $X$.
+
+\paragraph{Lemma:} Für jede Verteilungsfunktion $F = F_X$ einer Variablen $X : \Omega \rightarrow \real$ gilt:
+\begin{enumerate} \buchstaben
+    \item $x \leq y \platz \Rightarrow \platz F(x) \leq F(y)$
+    \item $\underset{x \to - \infty}{\lim} F(x) = 0$ und $\underset{x \to \infty}{\lim} F(x) = 1$
+    \item $\forall \; x \in \real \platz \underset{h \to 0+}{\lim} F(x+h) = F(x)$
+\end{enumerate}
+
+\paragraph{Beweis:} Sei $A_x = \{ \omega \in \Omega \; | \; X(\omega) \leq x \} \in \bigF$ und $F(x) = p(A_x)$
+\begin{enumerate} \buchstaben
+    \item $x \leq y \platz \Rightarrow \platz A_x \subseteq A_y \platz \Rightarrow \platz \underbrace{p(A_x)}_{F(x)} \leq \underbrace{p(A_y)}_{F(y)}$
+    \item $\emptyset = \underset{x=1}{\overset{\infty}{\bigcap}} A_{-x} \platz \Rightarrow \platz 0 = p(\emptyset) = \underset{x \to \infty}{\lim} p(A_{-x}) = \underset{x \to - \infty}{\lim} F(x)$ \par
+          $\Omega = \underset{x=1}{\overset{\infty}{\bigcup}} A_x \platz \Rightarrow \platz 1 = p(\Omega) = \underset{x \to \infty}{\lim} p(A_n) = \underset{x \to \infty}{\lim} F(x)$
+\end{enumerate}
+
+\paragraph{Achtung:} Die Funktion $F_X$ ist nicht zwingend stetig, z.B. bei geometrischer Verteilung:
+\begin{center}
+    \includegraphics{skript/grafiken/stochastik-1-2-2-a}
+\end{center}
+
+\paragraph{Definition:} Eine Zufallsvariable $X : \Omega \rightarrow \real$ ist \emph{stetig}\index{stetige Zufallsvariable}\index{Zufallsvariable, stetig}, wenn eine Funktion $f: \real \to \real^+$ existiert, so dass
+$$ F_X(x) = \int_{\infty}^{x} f(n) \; dn $$
+$f$ wird \emph{Dichte}\index{Dichte} der Verteilung genannt.
+
+\paragraph{Beispiel:} Gleichverteilung im Intervall $[ \, 1, 3 \, ]$. \par \vspace{0.3cm}
+Ist $1 \leq y \leq x \leq 3$, so ist
+$$ p(\{ \omega \; | \; \omega \in [ \, y, x \, ] \}) = \frac{x-y}{3-1} $$
+$X$ hat die Verteilung
+$$ F_X(x) = p(\{ \omega \; | \; X(\omega) \leq x \}) = \frac{x-1}{3-1} = \frac{x-1}{2} $$ \pagebreak
+
+Suche $f$, so dass
+$$ F_X(x) = \int_{- \infty}^{\infty} f(n) \; dn $$
+\begin{center}
+    \includegraphics{skript/grafiken/stochastik-1-2-2-b}
+\end{center}
+Gesuchte Funktion lautet:
+$$ f(x) = \left\{ \begin{array}{lll}
+  \frac{1}{2} & \text{ falls } & x \in [ \, 1, 3 \, ] \\ \\
+  0           & \text{ sonst}
+\end{array} \right.$$
+
+\paragraph{Vergleich:}
+\begin{itemize}
+    \item diskret
+    \begin{itemize}
+        \item Gewichtsfunktion $p_X$
+        \item Addition der Einzelwahrscheinlichkeiten
+    \end{itemize}
+    \item stetig
+    \begin{itemize}
+        \item Dichtefunktion $f$
+        \item Integrieren über der Dichtefunktion
+    \end{itemize}
+\end{itemize} \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Erwartungswert
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Erwartungswert}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bestimmung des Erwartungswertes}
+
+\paragraph{Definition:} Ist $X : \Omega \rightarrow \real$ eine diskrete Zufallsvariable, so ist der der \emph{Erwartungswert}\index{Erwartungswert} von $X$ definiert durch
+$$ E(X) = \sum_{x \in \text{Im} X} x \cdot p_X(x) = \sum_{x \in \text{Im} X} x \cdot p(\{ \omega \; | \; X(\omega) = x \}) $$
+falls diese Reihe absolut konvergiert.
+
+\paragraph{Definition:} Ist $X : \Omega \rightarrow \real$ eine stetige Zufallsvariable mit der Dichtefunktion~$f$, so ist
+$$ E(X) = \int_{\infty}^{\infty} x \cdot f(x) dx $$
+falls beide uneigentlichen Integrale existieren.
+
+\paragraph{Lemma (Linearität der Erwartungswerte):} Sind $X$ und $Y$ Zufallsvariablen über $(\Omega, \bigF, p)$ mit den Erwartungswerten $E(X)$ und $E(Y)$, dann gilt:
+\begin{itemize}
+    \item $E(X + Y) = E(X) + E(Y)$ \\
+    mit $(X + Y)(\omega) = X(\omega) + Y(\omega)$
+    \item $E(\alpha \cdot X) = \alpha \cdot E(X)$ \\
+    mit $(\alpha \cdot X)(\omega) = \alpha \cdot X(\omega)$ und $\alpha \in \real$
+\end{itemize}
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Zufallsvariable $X$ mit Bernoulli-Verteilung mit Parameter $p$:
+    \begin{itemize}
+        \item $\text{Im} X = \{ 0, 1 \}$
+        \item $p_X(1) = p$ und $p_X(0) = 1 - p$
+        \item $E(X) = 1 \cdot p + 0 \cdot (1 - p) = p$
+    \end{itemize}
+
+    \item Zufallsvariable $X$ mit Binominialverteilung mit den Parametern $n$ und $p$:
+    \begin{itemize}
+        \item $X = X_1 + X_2 + X_3 + \ldots X_n$ \platz mit $X_i = \left\{ \begin{array}{ll} 1 & \text{ falls $i$-ter Wurf $K$ ist} \\ 0 & \text{ falls $i$-ter Wurf $Z$ ist} \end{array} \right.$
+        \item $E(X_i) = p$
+        \item $E(X) = E(X_1) + E(X_2) + E(X_3) + \ldots + E(X_n) = n \cdot p$
+    \end{itemize} \pagebreak[2]
+
+    \item Zufallsvariable $X$ mit geometrischer Verteilung mit Parameter $p$:
+    \begin{itemize}
+        \item $\text{Im} X = \nat^+$
+        \item $p_X(k) = (1 - p)^{k-1} \cdot p = q^{k-1} \cdot p$
+    \end{itemize}
+    Bestimmung des Erwartungswertes:
+    \begin{eqnarray*}
+        E(X) &=& \sum_{k=1}^{\infty} k \cdot (1 - p)^{k-1} \cdot p \\
+             &=& p \cdot \left( \sum_{k=1}^{\infty} q^{k-1} + \sum_{k=2}^{\infty} q^{k-1} + \sum_{k=3}^{\infty} q^{k-1} + \ldots \right) \\
+             &=& p \cdot \left( \sum_{k=0}^{\infty} q^k + q \cdot \sum_{k=0}^{\infty} q^k + q^2 \cdot \sum_{k=0}^{\infty} q^k + \ldots \right) \\
+             &=& p \cdot \left( \frac{1}{1-q} + \frac{q}{1-q} + \frac{q^2}{1-q} + \ldots \right) \\
+             &=& \frac{p}{1-q} \cdot \left( 1 + q + q^2 + \ldots \right) \\
+             &=& 1 \cdot \frac{1}{1-q} \\
+             &=& \frac{1}{p}
+    \end{eqnarray*}
+
+    \item Zufallsvariable $X$ mit Poisson-Verteilung mit Paramter $\lambda$:
+    \begin{itemize}
+        \item $\text{Im} X = \nat$
+        \item $p_X(k) = \frac{1}{k!} \cdot \lambda^k \cdot e^{- \lambda}$
+    \end{itemize}
+    Bestimmung des Erwartungswertes:
+    \begin{eqnarray*}
+        E(X) &=& \sum_{k=0}^{\infty} k \cdot \frac{1}{k!} \cdot \lambda^k \cdot e^{- \lambda} \\
+             &=& \sum_{k=1}^{\infty} k \cdot \frac{1}{(k-1)!} \cdot \lambda^k \cdot e^{- \lambda} \\
+             &=& \lambda \cdot \sum_{k=1}^{\infty} k \cdot \frac{1}{(k-1)!} \cdot \lambda^{k-1} \cdot e^{- \lambda} \\
+             &=& \lambda
+    \end{eqnarray*}
+
+    \item stetige Zufallsvariable $X$ mit Gleichverteilung über einem Intervall $[ \, a, b \, ]$:
+    \begin{eqnarray*}
+        E(X) &=& \int_{\infty}^{\infty} x \cdot f(x) dx \\
+             &=& \int_a^b x \cdot \frac{1}{b-a} \; dx \\
+             &=& \frac{1}{b-a} \cdot \int_a^b x \; dx \\
+             &=& \frac{1}{b-a} \cdot \left[ \frac{1}{2} \; x^2 \right]_a^b \\
+             &=& \frac{1}{b-a} \cdot \left( \frac{1}{2} \; b^2 - \frac{1}{2} \; a^2 \right) \\
+             &=& \frac{b^2 - a^2}{2(b-a)} \\
+             &=& \frac{(b+a)(b-a)}{2(b-a)} \\
+             &=& \frac{a+b}{2}
+    \end{eqnarray*}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abweichungen vom Erwartungswert}
+
+\paragraph{Satz (Markow-Ungleichung):} Sei $X : \Omega \rightarrow \real^{\geq 0}$ eine Zufallsvariable mit dem Erwartungswert $E(X)$ unt $t > 0$, dann gilt:
+$$ p(X \geq t) \leq \frac{E(X)}{t} $$
+
+\paragraph{Beweis für diskrete Variablen:}
+\begin{eqnarray*}
+    E(X) &=& \sum_{x \in \text{Im} X} x \cdot p(X = x) \\
+         &=& \sum_{x \in \text{Im} X \atop x < t} x \cdot p(X = x) + \sum_{x \in \text{Im} X \atop x \geq t} x \cdot p(X = x) \\
+         &\geq& \sum_{x \in \text{Im} X \atop x \geq t} x \cdot p(X = x) \\
+         &\geq& t \cdot \sum_{x \in \text{Im} X \atop x \geq t} p(X = x) \\
+         &=& t \cdot p(X \geq t) \\ \\
+    \frac{E(X)}{t} &\geq& p(X \geq t)
+\end{eqnarray*}
+
+\paragraph{Satz:} Sei $X : \Omega \rightarrow \real$ eine diskrete Zufallsvariable und $g : \real \rightarrow \real$ eine beliebige Funktion, dann ist $Y = gX : \Omega \rightarrow \Omega$ eine Zufallsvariable mit
+$$ Y(\omega) = g(X(\omega)) $$
+und
+$$ E(Y) = \sum_{x \in \text{Im} X} g(x) \cdot p_X(x) $$
+falls diese Reihe absolut konvergiert.
+
+\paragraph{Beispiel:} Sei $X$ eine Zufallsvariable mit geometrischer Verteilung mit dem Parametern $p$ und $g(x) = x^2$ eine Funktion ($q = 1 - p$):
+\begin{eqnarray*}
+    E(gX) &=& E(X^2) \\ \\
+          &=& \sum_{k=1}^{\infty} k^2 \cdot q^{k-1} \cdot p \\ \\
+          &=& \sum_{k=1}^{\infty} 1^2 \cdot q^{k-1} \cdot p + \sum_{k=2}^{\infty} \underbrace{(2^2 - 1^2)}_{(2+1)(2-1)} \cdot q^{k-1} \cdot p + \sum_{k=1}^{\infty} \underbrace{(3^2 - 2^2)}_{(3+2)(3-2)} \cdot q^{k-1} \cdot p + \ldots \\ \\
+          &=& 1 + (1+2) \cdot q \cdot \underbrace{\sum_{k=1}^{\infty} p \cdot q^{k-1}}_{1} + (1+4) \cdot q^2 \cdot \underbrace{\sum_{k=1}^{\infty} p \cdot q^{k-1}}_{1} + (1+6) \cdot q^3 \cdot \ldots \\ \\
+          &=& 1 + q + q^2 + q^3 + \ldots + 2 \cdot q + 4 \cdot q^2 + 6 \cdot q^3 + \ldots \\ \\
+          &=& \frac{1}{1-q} + \frac{2q}{p^2} \cdot \sum_{k=0}^{\infty} k \cdot q^k \cdot p \\ \\
+          &=& \frac{1}{p} + \frac{2q}{p^2} \\ \\
+          &=& \frac{p+2-2p}{p^2} \\ \\
+          &=& \frac{2-p}{p^2} \\
+\end{eqnarray*}
+
+\paragraph{Definition:} Die Erwartungswerte $E(X^i)$ werden $i$-tes \emph{Moment}\index{Moment} von $X$ genannt.
+
+\paragraph{Definition:} Die \emph{Varianz}\index{Varianz} einer Zufallsvariable $X$ mit $E(X) = \mu$ ist
+\begin{eqnarray*}
+    \text{\emph{Var}}(X) &=& E((X - \mu)^2) \\
+                         &=& E((X - E(X))^2) \\
+                         &=& E \left( X^2 - 2 \cdot X \cdot E(X) + (E(X))^2 \right) \\
+                         &=& E(X^2) - 2 \cdot E(X) \cdot E(X) + (E(X))^2 \\
+                         &=& E(X^2) - 2 \cdot (E(X))^2 + (E(X))^2 \\
+                         &=& \underbrace{E(X^2)}_{\text{2. Moment}} - \underbrace{(E(X))^2}_{(\text{1. Moment})^2}
+\end{eqnarray*}
+Die Größe $\sigma = \sqrt{\text{\emph{Var}}(X)}$ wird \emph{Standardabweichung}\index{Standardabweichung} von $X$ genannt.
+
+\paragraph{Beispiele:}
+\begin{enumerate}
+    \item Zufallsvariable $X$ mit Bernoulli-Verteilung mit Parameter $p$:
+    \begin{eqnarray*}
+        \text{\emph{Var}}(X) &=& E(X^2) - (E(X))^2 \\
+                             &=& (1^2 \cdot p + 0^2 \cdot (1-p)) - (1 \cdot p + 0 \cdot (1-p))^2 \\
+                             &=& p - p^2
+    \end{eqnarray*}
+    \item Zufallsvariable $X$ mit Binominialverteilung mit den Parametern $n$ und $p$: \par
+    An der Stelle kann genutzt werden, dass für \emph{unabhängige} Zufallsvariablen gilt:
+    \begin{itemize}
+        \item $\text{\emph{Var}}(X+Y) = \text{\emph{Var}}(X) + \text{\emph{Var}}(Y)$
+        \item $p(X=x \land Y=y) = p(X=x) \cdot p(Y=y)$
+    \end{itemize}
+    Eine Zufallsvariable $X$ mit Binominialverteilung ist eine Summe aus unabhängigen Bernoulli-Variablen:
+    \begin{eqnarray*}
+        X &=& X_1 + X_2 + \ldots + X_n
+    \end{eqnarray*}
+    Damit ergibt sich für die Varianz:
+    \begin{eqnarray*}
+        \text{\emph{Var}}(X) &=& n \cdot (p - p^2)
+    \end{eqnarray*}
+    \item Zufallsvariable $X$ mit geometrischer Verteilung mit Parameter $p$:
+    \begin{eqnarray*}
+        \text{\emph{Var}}(X) &=& E(X^2) - (E(X))^2 \\
+                             &=& \frac{2-p}{p^2} - \left( \frac{1}{p} \right)^2 \\
+                             &=& \frac{1-p}{p^2} \\
+                             &=& \frac{1}{p^2} - \frac{1}{p}
+    \end{eqnarray*}
+\end{enumerate}
+
+\paragraph{Satz (Tschebyscheff-Ungleichung):} Sei $X$ eine Zufallsvariable mit dem Erwartungswert $E(X) = \mu$ und der Varianz $\text{\emph{Var}}(X) = \sigma^2$, dann gilt für alle $c > 0$:
+\begin{eqnarray*}
+    p(|X - \mu| \geq c) &\leq& \frac{\sigma^2}{c^2}
+\end{eqnarray*}
+Spezialfall für $E(X) = \mu = 0$:
+\begin{eqnarray*}
+    p(|X| \geq c) &\leq& \frac{E(X^2)}{c^2}
+\end{eqnarray*}
+
+\paragraph{Beispiel:} Zufallsvariable $X$ mit Binominialverteilung mit den Parametern $n$ und $p = \frac{1}{2}$:
+\begin{eqnarray*}
+    E(X) &=& n \cdot \frac{1}{2} = \frac{n}{2} \\
+    \text{\emph{Var}}(X) &=& n \cdot \left( \frac{1}{2} - \left( \frac{1}{2} \right)^2 \right) = \frac{n}{4} = \sigma^2 \\
+    \text{Wähle: } c &=& \frac{n}{4} \\ \\
+    p\left( \left| X - \frac{n}{2} \right| \geq \frac{n}{4} \right) &\leq& \frac{\frac{n}{4}}{\left( \frac{n}{4} \right)^2} = \frac{4}{n} \\ \\
+    \lim_{n \to \infty} \frac{4}{n} &=& 0
+\end{eqnarray*}
+Das heißt, dass die Wahrscheinlichkeit dafür, dass bei $n$ Würfen weniger als $\frac{1}{4}$ oder mehr als $\frac{3}{4}$ der Ergebnisse Köpfe sind, geht für große $n$ gegen $0$. \par \vspace{0.3cm}
+
+Dagegen die Abschätzung mit der Markow-Ungleichung:
+\begin{eqnarray*}
+    p \left( X \geq \frac{3}{4} \cdot n \right) &\leq& \frac{\frac{n}{2}}{\frac{3}{4} \cdot n} = \frac{2}{3}
+\end{eqnarray*} \pagebreak
+
+\paragraph{Gaus'sche Normalverteilung:}\index{Gaus'sche Normalverteilung} $N(\mu, \sigma^2)$ mit Dichtefunktion $f$
+$$ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} \cdot e^{- \frac{1}{2 \sigma^2} \cdot (x - \mu)^2} $$
+\begin{center}
+    \includegraphics{skript/grafiken/stochastik-1-3-2-b}
+\end{center}
+Hinweis: Der Abstand von $\mu$ zum Wendepunkt von $f(x)$ beträgt $\sigma$.

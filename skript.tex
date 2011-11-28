@@ -1,0 +1,78 @@
+\documentclass[12pt]{report}
+
+% Pakete
+\usepackage{ngerman,a4}
+\usepackage[latin1]{inputenc}
+\usepackage{makeidx}
+\usepackage{exscale,icomma}
+\usepackage{amsbsy,amscd,amsfonts,amsmath,amssymb,amstext,amsthm,amsxtra,eqname}
+\usepackage[pdftex]{graphicx}
+\usepackage[pdftex]{hyperref} \hypersetup{colorlinks,linkcolor=darkblue,filecolor=darkgreen,urlcolor=darkred,citecolor=darkblue}
+
+% Farben
+\usepackage{color}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+
+% Protokollierung eines Indexverzeichnisses
+\makeindex
+
+% Längen festlegen
+\setlength{\parindent}{0pt}
+\setlength{\unitlength}{1cm}
+
+% Kurzbefehle: Indexverzeichnis
+\newcommand{\wichtig}[1]{\emph{#1}\index{#1}}
+
+% Kurzbefehle: Abstand und Nummerierung
+\newcommand{\platz}{\hspace{0.3cm}}
+\newcommand{\abstand}{\vspace{0.3cm}}
+\newcommand{\seite}{\pagebreak[3]}
+\newcommand{\buchstaben}{\renewcommand{\labelenumi}{\alph{enumi})}}
+\newcommand{\punkt}{\renewcommand{\labelitemii}{$\bullet$}}
+
+% Kurzbefehle: Mathematik
+\newcommand{\nat}{\mathbb{N}}   \newcommand{\natpos}{\mathbb{N}^+}
+\newcommand{\ganz}{\mathbb{Z}}  \newcommand{\ganzO}{\mathbb{Z} \backslash 0}
+\newcommand{\rat}{\mathbb{Q}}   \newcommand{\ratO}{\mathbb{Q} \backslash 0}   \newcommand{\ratpos}{\mathbb{Q}^+}
+\newcommand{\real}{\mathbb{R}}  \newcommand{\realO}{\mathbb{R} \backslash 0}  \newcommand{\realpos}{\mathbb{R}^+}
+\newcommand{\comp}{\mathbb{C}}
+\newcommand{\loes}{\mathbb{L}}
+\newcommand{\pot}{\mathcal{P}}
+\newcommand{\bigF}{\mathcal{F}}
+\newcommand{\bigO}{\mathcal{O}}
+
+% Vektoren
+\newcommand{\vectwo}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+\newcommand{\vecthree}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+\newcommand{\vecfour}[4]{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \end{pmatrix}}
+\newcommand{\veclist}[2]{\vec{#1}_1, \vec{#1}_2, \ldots \vec{#1}_{#2}}
+\newcommand{\scalarlist}[2]{#1_1, #1_2, \ldots #1_{#2}}
+\newcommand{\veclk}[3]{#2_1 \vec{#1}_1 + #2_2 \vec{#1}_2 + \ldots + #2_{#3} \vec{#1}_{#3}}
+
+% Restklassen
+\newcommand{\modulo}[1]{\platz (\text{mod } #1 )}
+
+\begin{document}
+
+% Titelseite
+\title{Mathematik für Informatiker III}
+\author{Institut für Informatik \\ Freie Universität Berlin \\ Dozent: Dr. Klaus Kriegel \\ \\ Mitschrift: Jan Sebastian Siwy}
+\date{Wintersemester 2002/03}
+\maketitle
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+
+% Inhalt
+\include{skript/einleitung}
+\include{skript/stochastik}
+\include{skript/lineare-algebra}
+\include{skript/endliche-koerper}
+
+% Indexverzeichnis
+\printindex
+
+\end{document}
