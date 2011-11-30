@@ -6,3 +6,4 @@ skript/
 *.out
 *.synctex.gz
 *.toc
+_site/
